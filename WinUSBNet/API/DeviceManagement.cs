@@ -12,7 +12,6 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
 namespace MadWizard.WinUSBNet.API
