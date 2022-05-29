@@ -20,37 +20,11 @@ namespace MadWizard.WinUSBNet.API
     /// </summary>
     internal static partial class DeviceManagement
     {
-        // from dbt.h
-
-        internal const Int32 DBT_DEVICEARRIVAL = 0X8000;
-        internal const Int32 DBT_DEVICEREMOVECOMPLETE = 0X8004;
-        private const Int32 DBT_DEVTYP_DEVICEINTERFACE = 5;
-        private const Int32 DBT_DEVTYP_HANDLE = 6;
-        private const Int32 DEVICE_NOTIFY_ALL_INTERFACE_CLASSES = 4;
-        private const Int32 DEVICE_NOTIFY_SERVICE_HANDLE = 1;
-        private const Int32 DEVICE_NOTIFY_WINDOW_HANDLE = 0;
-        internal const Int32 WM_DEVICECHANGE = 0X219;
-
         // from setupapi.h
 
         private const Int32 DIGCF_PRESENT = 2;
         private const Int32 DIGCF_DEVICEINTERFACE = 0X10;
 
-
-        internal const UInt32 WS_OVERLAPPEDWINDOW = 0xcf0000;
-        internal const UInt32 WS_VISIBLE = 0x10000000;
-        internal const UInt32 CS_USEDEFAULT = 0x80000000;
-        internal const UInt32 CS_DBLCLKS = 8;
-        internal const UInt32 CS_VREDRAW = 1;
-        internal const UInt32 CS_HREDRAW = 2;
-        internal const UInt32 COLOR_WINDOW = 5;
-        internal const UInt32 COLOR_BACKGROUND = 1;
-        internal const UInt32 IDC_CROSS = 32515;
-        internal const UInt32 WM_DESTROY = 2;
-        internal const UInt32 WM_PAINT = 0x0f;
-        internal const UInt32 WM_LBUTTONUP = 0x0202;
-        internal const UInt32 WM_LBUTTONDBLCLK = 0x0203;
-        
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         internal struct WNDCLASS
@@ -68,40 +42,6 @@ namespace MadWizard.WinUSBNet.API
             public string lpszMenuName;
             [MarshalAs(UnmanagedType.LPWStr)]
             public string lpszClassName;
-        }
-
-        // Two declarations for the DEV_BROADCAST_DEVICEINTERFACE structure.
-
-        // Use this one in the call to RegisterDeviceNotification() and
-        // in checking dbch_devicetype in a DEV_BROADCAST_HDR structure:
-
-        [StructLayout(LayoutKind.Sequential)]
-        private class DEV_BROADCAST_DEVICEINTERFACE
-        {
-            internal Int32 dbcc_size;
-            internal Int32 dbcc_devicetype;
-            internal Int32 dbcc_reserved;
-            internal Guid dbcc_classguid;
-            internal Int16 dbcc_name;
-        }
-
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-        private class DEV_BROADCAST_DEVICEINTERFACE_1
-        {
-            internal Int32 dbcc_size;
-            internal Int32 dbcc_devicetype;
-            internal Int32 dbcc_reserved;
-            internal Guid dbcc_classguid;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 255)]
-            internal Char[] dbcc_name;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        private class DEV_BROADCAST_HDR
-        {
-            internal Int32 dbch_size;
-            internal Int32 dbch_devicetype;
-            internal Int32 dbch_reserved;
         }
 
         private struct SP_DEVICE_INTERFACE_DATA
