@@ -21,57 +21,6 @@ namespace MadWizard.WinUSBNet.API
     ///  </summary>
     internal static partial class DeviceManagement
     {
-
-        // Get device name from notification message.
-        // Also checks checkGuid with the GUID from the message to check the notification
-        // is for a relevant device. Other messages might be received.
-        public static string GetNotifyMessageDeviceName(IntPtr LParam, Guid checkGuid)
-        {
-            int stringSize;
-
-
-            DEV_BROADCAST_DEVICEINTERFACE_1 devBroadcastDeviceInterface = new DEV_BROADCAST_DEVICEINTERFACE_1();
-            DEV_BROADCAST_HDR devBroadcastHeader = new DEV_BROADCAST_HDR();
-
-            // The LParam parameter of Message is a pointer to a DEV_BROADCAST_HDR structure.
-
-            Marshal.PtrToStructure(LParam, devBroadcastHeader);
-
-            if ((devBroadcastHeader.dbch_devicetype == DBT_DEVTYP_DEVICEINTERFACE))
-            {
-                // The dbch_devicetype parameter indicates that the event applies to a device interface.
-                // So the structure in LParam is actually a DEV_BROADCAST_INTERFACE structure,
-                // which begins with a DEV_BROADCAST_HDR.
-
-                // Obtain the number of characters in dbch_name by subtracting the 32 bytes
-                // in the strucutre that are not part of dbch_name and dividing by 2 because there are
-                // 2 bytes per character.
-
-                stringSize = Convert.ToInt32((devBroadcastHeader.dbch_size - 32) / 2);
-
-                // The dbcc_name parameter of devBroadcastDeviceInterface contains the device name.
-                // Trim dbcc_name to match the size of the String.
-
-                devBroadcastDeviceInterface.dbcc_name = new char[stringSize + 1];
-
-                // Marshal data from the unmanaged block pointed to by m.LParam
-                // to the managed object devBroadcastDeviceInterface.
-
-                Marshal.PtrToStructure(LParam, devBroadcastDeviceInterface);
-
-                // Check if message is for the GUID
-                if (devBroadcastDeviceInterface.dbcc_classguid != checkGuid)
-                    return null;
-
-                // Store the device name in a String.
-                string deviceNameString = new String(devBroadcastDeviceInterface.dbcc_name, 0, stringSize);
-
-                return deviceNameString;
-
-            }
-            return null;
-        }
-
         private static byte[] GetProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, SPDRP property, out int regType)
         {
             uint requiredSize;
@@ -262,48 +211,6 @@ namespace MadWizard.WinUSBNet.API
                 }
             }
             return deviceList.ToArray();
-        }
-
-
-        public static void RegisterForDeviceNotifications(IntPtr controlHandle, Guid classGuid, ref IntPtr deviceNotificationHandle)
-        {
-
-            DEV_BROADCAST_DEVICEINTERFACE devBroadcastDeviceInterface = new DEV_BROADCAST_DEVICEINTERFACE();
-            IntPtr devBroadcastDeviceInterfaceBuffer = IntPtr.Zero;
-            try
-            {
-                int size = Marshal.SizeOf(devBroadcastDeviceInterface);
-                devBroadcastDeviceInterface.dbcc_size = size;
-
-                devBroadcastDeviceInterface.dbcc_devicetype = DBT_DEVTYP_DEVICEINTERFACE;
-                devBroadcastDeviceInterface.dbcc_reserved = 0;
-                devBroadcastDeviceInterface.dbcc_classguid = classGuid;
-                devBroadcastDeviceInterfaceBuffer = Marshal.AllocHGlobal(size);
-
-                // Copy the DEV_BROADCAST_DEVICEINTERFACE structure to the buffer.
-                // Set fDeleteOld True to prevent memory leaks.
-                Marshal.StructureToPtr(devBroadcastDeviceInterface, devBroadcastDeviceInterfaceBuffer, true);
-
-                deviceNotificationHandle = RegisterDeviceNotification(controlHandle, devBroadcastDeviceInterfaceBuffer, DEVICE_NOTIFY_WINDOW_HANDLE);
-                if (deviceNotificationHandle == IntPtr.Zero)
-                    throw APIException.Win32("Failed to register device notification");
-
-                // Marshal data from the unmanaged block devBroadcastDeviceInterfaceBuffer to
-                // the managed object devBroadcastDeviceInterface
-                Marshal.PtrToStructure(devBroadcastDeviceInterfaceBuffer, devBroadcastDeviceInterface);
-            }
-            finally
-            {
-                // Free the memory allocated previously by AllocHGlobal.
-                if (devBroadcastDeviceInterfaceBuffer != IntPtr.Zero)
-                    Marshal.FreeHGlobal(devBroadcastDeviceInterfaceBuffer);
-            }
-        }
-
-        public static void StopDeviceDeviceNotifications(IntPtr deviceNotificationHandle)
-        {
-            if (!DeviceManagement.UnregisterDeviceNotification(deviceNotificationHandle))
-                throw APIException.Win32("Failed to unregister device notification");
         }
     }
 }
