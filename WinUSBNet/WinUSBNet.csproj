@@ -4,20 +4,21 @@
     <RootNamespace>MadWizard.WinUSBNet</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageTags>WinUSB USB</PackageTags>
-    <PackageProjectUrl>https://github.com/madwizard-thomas/winusbnet</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/nefarius/Nefarius.Drivers.WinUSB</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Nefarius.Drivers.WinUSB</PackageId>
     <RepositoryUrl>https://github.com/nefarius/Nefarius.Drivers.WinUSB</RepositoryUrl>
-    <Version>2.1.1</Version>
+    <Version>3.0.0</Version>
     <Description>WinUSBNet is a .NET class library that provides easy access to the WinUSB API from C#, VB.NET and other .NET languages.</Description>
     <Copyright>Copyright © 2010 - 2020 by Thomas Bleeker (MadWizard.org), 2022 Benjamin "Nefarius" Höglinger-Stelzer</Copyright>
     <AssemblyVersion>2.1.1.0</AssemblyVersion>
     <FileVersion>2.1.1.0</FileVersion>
     <Company>Madwizard.org</Company>
-    <Authors>Thomas Bleeker</Authors>
+    <Authors>Thomas Bleeker, Benjamin "Nefarius" Höglinger-Stelzer</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Platforms>AnyCPU;x64</Platforms>
+    <OutputPath>$(SolutionDir)bin\</OutputPath>
   </PropertyGroup>
 
 </Project>
