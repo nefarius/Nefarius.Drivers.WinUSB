@@ -1073,6 +1073,16 @@ namespace MadWizard.WinUSBNet
             return USBDevice.GetSingleDevice(new Guid(guidString));
         }
 
+        /// <summary>
+        /// Opens a WinUSB device by provided path (symbolic link).
+        /// </summary>
+        /// <param name="path">The device path (symbolic link) to open.</param>
+        /// <returns>a <see cref="USBDevice"/> object.</returns>
+        public static USBDevice GetSingleDeviceByPath(string path)
+        {
+            return new USBDevice(path);
+        }
+
         private static USBDeviceDescriptor GetDeviceDescriptor(string devicePath)
         {
             try
