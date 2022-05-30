@@ -19,6 +19,15 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Platforms>AnyCPU;x64</Platforms>
     <OutputPath>$(SolutionDir)bin\</OutputPath>
+    <PackageIcon>NSS-128x128.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="assets\NSS-128x128.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
