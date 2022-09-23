@@ -117,9 +117,7 @@ internal partial class WinUSBDevice : IDisposable
 
     private IntPtr InterfaceHandle(int index)
     {
-        if (index == 0)
-            return _winUsbHandle;
-        return _addInterfaces[index - 1];
+        return index == 0 ? _winUsbHandle : _addInterfaces[index - 1];
     }
 
     public unsafe void GetInterfaceInfo(int interfaceIndex, out USB_INTERFACE_DESCRIPTOR descriptor,

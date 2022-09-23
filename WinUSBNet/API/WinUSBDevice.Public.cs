@@ -5,13 +5,11 @@ using System.Threading;
 using Windows.Win32;
 using Windows.Win32.Devices.Usb;
 using Windows.Win32.Storage.FileSystem;
-using JetBrains.Annotations;
 
 namespace Nefarius.Drivers.WinUSB.API;
 
 internal partial class WinUSBDevice
 {
-    [UsedImplicitly]
     public unsafe USB_DEVICE_DESCRIPTOR GetDeviceDescriptor()
     {
         USB_DEVICE_DESCRIPTOR deviceDesc;
@@ -37,7 +35,6 @@ internal partial class WinUSBDevice
         return deviceDesc;
     }
 
-    [UsedImplicitly]
     public ushort[] GetSupportedLanguageIDs()
     {
         var buffer = new byte[256];
@@ -51,11 +48,10 @@ internal partial class WinUSBDevice
         return langIDs;
     }
 
-    [UsedImplicitly]
-    public string GetStringDescriptor(byte index, ushort languageID)
+    public string GetStringDescriptor(byte index, ushort languageId)
     {
         var buffer = new byte[256];
-        var length = ReadStringDescriptor(index, languageID, buffer);
+        var length = ReadStringDescriptor(index, languageId, buffer);
         length -= 2; // Skip length byte and descriptor type
         if (length < 0)
             return null;
@@ -63,7 +59,6 @@ internal partial class WinUSBDevice
         return new string(chars);
     }
 
-    [UsedImplicitly]
     public unsafe int ControlTransfer(byte requestType, byte request, ushort value, ushort index, ushort length,
         byte[] data)
     {
@@ -86,7 +81,6 @@ internal partial class WinUSBDevice
         }
     }
 
-    [UsedImplicitly]
     // ReSharper disable once RedundantUnsafeContext
     public unsafe void OpenDevice(string devicePathName)
     {
@@ -120,7 +114,6 @@ internal partial class WinUSBDevice
         }
     }
 
-    [UsedImplicitly]
     public unsafe void ReadPipe(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToRead,
         out uint bytesRead)
     {
@@ -139,7 +132,6 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to read pipe on WinUSB device.");
     }
 
-    [UsedImplicitly]
     public unsafe void ReadPipeOverlapped(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToRead,
         USBAsyncResult result)
     {
@@ -166,7 +158,6 @@ internal partial class WinUSBDevice
             (int)bytesRead);
     }
 
-    [UsedImplicitly]
     public unsafe void WriteOverlapped(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToWrite,
         USBAsyncResult result)
     {
@@ -194,7 +185,6 @@ internal partial class WinUSBDevice
             (int)bytesWritten);
     }
 
-    [UsedImplicitly]
     public unsafe void ControlTransferOverlapped(byte requestType, byte request, ushort value, ushort index,
         ushort length,
         byte[] data, USBAsyncResult result)
@@ -226,7 +216,6 @@ internal partial class WinUSBDevice
         }
     }
 
-    [UsedImplicitly]
     public unsafe void AbortPipe(int interfaceIndex, byte pipeId)
     {
         var success = PInvoke.WinUsb_AbortPipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId);
@@ -234,7 +223,6 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to abort pipe on WinUSB device.");
     }
 
-    [UsedImplicitly]
     public unsafe void WritePipe(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int length)
     {
         uint bytesWritten;
@@ -251,7 +239,6 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to write pipe on WinUSB device.");
     }
 
-    [UsedImplicitly]
     public unsafe void FlushPipe(int interfaceIndex, byte pipeId)
     {
         var success = PInvoke.WinUsb_FlushPipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId);
@@ -259,7 +246,6 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to flush pipe on WinUSB device.");
     }
 
-    [UsedImplicitly]
     public unsafe void SetPipePolicy(int interfaceIndex, byte pipeId, POLICY_TYPE policyType, bool value)
     {
         var byteVal = (byte)(value ? 1 : 0);
@@ -269,7 +255,6 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to set WinUSB pipe policy.");
     }
 
-    [UsedImplicitly]
     public unsafe void SetPipePolicy(int interfaceIndex, byte pipeId, POLICY_TYPE policyType, uint value)
     {
         var success = PInvoke.WinUsb_SetPipePolicy(InterfaceHandle(interfaceIndex).ToPointer(), pipeId,
@@ -279,7 +264,6 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to set WinUSB pipe policy.");
     }
 
-    [UsedImplicitly]
     public unsafe bool GetPipePolicyBool(int interfaceIndex, byte pipeId, POLICY_TYPE policyType)
     {
         byte result;
@@ -293,7 +277,6 @@ internal partial class WinUSBDevice
         return result != 0;
     }
 
-    [UsedImplicitly]
     public unsafe uint GetPipePolicyUInt(int interfaceIndex, byte pipeId, POLICY_TYPE policyType)
     {
         uint result;
