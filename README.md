@@ -8,7 +8,7 @@ TBD
 
 - Replaced P/Invoke code with [source generators](https://github.com/microsoft/CsWin32)
 - Changed namespace to `Nefarius.Drivers.WinUSB` to avoid conflicts with the origin library
-- Removed device notification listener as my other lib [`Nefarius.Utilities.DeviceManagement`](https://github.com/nefarius/Nefarius.Utilities.DeviceManagement) provides a drop-in replacement
+- Removed device notification listener as my other lib [`Nefarius.Utilities.DeviceManagement`](https://github.com/nefarius/Nefarius.Utilities.DeviceManagement) provides a drop-in replacement without depending on WinForms or WPF
 - Added `USBDevice::GetSingleDeviceByPath` to allow opening a WinUSB device via device path (symbolic link)
 
 ## Features
