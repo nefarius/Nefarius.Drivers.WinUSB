@@ -71,13 +71,5 @@ internal partial class WinUSBDevice
         ref UInt32 ValueLength, out UInt32 Value);
 
     [DllImport("winusb.dll", SetLastError = true)]
-    private static extern unsafe bool WinUsb_WritePipe(IntPtr InterfaceHandle, byte PipeID, byte* pBuffer,
-        uint BufferLength, out uint LengthTransferred, IntPtr Overlapped);
-
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern unsafe bool WinUsb_WritePipe(IntPtr InterfaceHandle, byte PipeID, byte* pBuffer,
-        uint BufferLength, out uint LengthTransferred, NativeOverlapped* pOverlapped);
-
-    [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_FlushPipe(IntPtr InterfaceHandle, byte PipeID);
 }

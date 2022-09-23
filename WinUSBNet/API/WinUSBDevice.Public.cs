@@ -166,7 +166,7 @@ internal partial class WinUSBDevice
     }
 
     [UsedImplicitly]
-    public void WriteOverlapped(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToWrite,
+    public unsafe void WriteOverlapped(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToWrite,
         USBAsyncResult result)
     {
         var overlapped = new Overlapped
@@ -174,24 +174,22 @@ internal partial class WinUSBDevice
             AsyncResult = result
         };
 
-        unsafe
+        NativeOverlapped* pOverlapped = null;
+
+        uint bytesWritten;
+        pOverlapped = overlapped.Pack(PipeIOCallback, buffer);
+
+        bool success;
+        // Buffer is pinned already by overlapped.Pack
+        fixed (byte* pBuffer = buffer)
         {
-            NativeOverlapped* pOverlapped = null;
-
-            uint bytesWritten;
-            pOverlapped = overlapped.Pack(PipeIOCallback, buffer);
-
-            bool success;
-            // Buffer is pinned already by overlapped.Pack
-            fixed (byte* pBuffer = buffer)
-            {
-                success = WinUsb_WritePipe(InterfaceHandle(interfaceIndex), pipeId, pBuffer + offset, (uint)bytesToWrite,
-                    out bytesWritten, pOverlapped);
-            }
-
-            HandleOverlappedAPI(success, "Failed to asynchronously write pipe on WinUSB device.", pOverlapped, result,
-                (int)bytesWritten);
+            success = PInvoke.WinUsb_WritePipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId, pBuffer + offset,
+                (uint)bytesToWrite,
+                &bytesWritten, pOverlapped);
         }
+
+        HandleOverlappedAPI(success, "Failed to asynchronously write pipe on WinUSB device.", pOverlapped, result,
+            (int)bytesWritten);
     }
 
     [UsedImplicitly]
@@ -232,17 +230,16 @@ internal partial class WinUSBDevice
     }
 
     [UsedImplicitly]
-    public void WritePipe(int ifaceIndex, byte pipeID, byte[] buffer, int offset, int length)
+    public unsafe void WritePipe(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int length)
     {
         uint bytesWritten;
         bool success;
-        unsafe
+
+        fixed (byte* pBuffer = buffer)
         {
-            fixed (byte* pBuffer = buffer)
-            {
-                success = WinUsb_WritePipe(InterfaceHandle(ifaceIndex), pipeID, pBuffer + offset, (uint)length,
-                    out bytesWritten, IntPtr.Zero);
-            }
+            success = PInvoke.WinUsb_WritePipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId,
+                pBuffer + offset, (uint)length,
+                &bytesWritten);
         }
 
         if (!success || bytesWritten != length)
@@ -258,10 +255,10 @@ internal partial class WinUSBDevice
     }
 
     [UsedImplicitly]
-    public void SetPipePolicy(int interfaceIndex, byte pipeID, POLICY_TYPE policyType, bool value)
+    public void SetPipePolicy(int interfaceIndex, byte pipeId, POLICY_TYPE policyType, bool value)
     {
         var byteVal = (byte)(value ? 1 : 0);
-        var success = WinUsb_SetPipePolicy(InterfaceHandle(interfaceIndex), pipeID, (uint)policyType, 1, ref byteVal);
+        var success = WinUsb_SetPipePolicy(InterfaceHandle(interfaceIndex), pipeId, (uint)policyType, 1, ref byteVal);
         if (!success)
             throw APIException.Win32("Failed to set WinUSB pipe policy.");
     }
@@ -276,25 +273,25 @@ internal partial class WinUSBDevice
     }
 
     [UsedImplicitly]
-    public bool GetPipePolicyBool(int interfaceIndex, byte pipeID, POLICY_TYPE policyType)
+    public bool GetPipePolicyBool(int interfaceIndex, byte pipeId, POLICY_TYPE policyType)
     {
         byte result;
         uint length = 1;
 
         var success =
-            WinUsb_GetPipePolicy(InterfaceHandle(interfaceIndex), pipeID, (uint)policyType, ref length, out result);
+            WinUsb_GetPipePolicy(InterfaceHandle(interfaceIndex), pipeId, (uint)policyType, ref length, out result);
         if (!success || length != 1)
             throw APIException.Win32("Failed to get WinUSB pipe policy.");
         return result != 0;
     }
 
     [UsedImplicitly]
-    public uint GetPipePolicyUInt(int interfaceIndex, byte pipeID, POLICY_TYPE policyType)
+    public uint GetPipePolicyUInt(int interfaceIndex, byte pipeId, POLICY_TYPE policyType)
     {
         uint result;
         uint length = 4;
         var success =
-            WinUsb_GetPipePolicy(InterfaceHandle(interfaceIndex), pipeID, (uint)policyType, ref length, out result);
+            WinUsb_GetPipePolicy(InterfaceHandle(interfaceIndex), pipeId, (uint)policyType, ref length, out result);
 
         if (!success || length != 4)
             throw APIException.Win32("Failed to get WinUSB pipe policy.");
