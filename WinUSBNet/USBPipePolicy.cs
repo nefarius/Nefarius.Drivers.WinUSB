@@ -6,8 +6,9 @@
  */
 
 using System;
+using Nefarius.Drivers.WinUSB.API;
 
-namespace MadWizard.WinUSBNet
+namespace Nefarius.Drivers.WinUSB
 {
 
     /// <summary>
@@ -54,12 +55,12 @@ namespace MadWizard.WinUSBNet
             get
             {
                 RequireDirectionIn();
-                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, API.POLICY_TYPE.ALLOW_PARTIAL_READS);
+                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.ALLOW_PARTIAL_READS);
             }
             set
             {
                 RequireDirectionIn();
-                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, API.POLICY_TYPE.ALLOW_PARTIAL_READS, value);
+                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.ALLOW_PARTIAL_READS, value);
             }
         }
 
@@ -72,11 +73,11 @@ namespace MadWizard.WinUSBNet
         {
             get
             {
-                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, API.POLICY_TYPE.AUTO_CLEAR_STALL);
+                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.AUTO_CLEAR_STALL);
             }
             set
             {
-                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, API.POLICY_TYPE.AUTO_CLEAR_STALL, value);
+                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.AUTO_CLEAR_STALL, value);
             }
         }
 
@@ -90,12 +91,12 @@ namespace MadWizard.WinUSBNet
             get
             {
                 RequireDirectionIn();
-                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, API.POLICY_TYPE.AUTO_FLUSH);
+                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.AUTO_FLUSH);
             }
             set
             {
                 RequireDirectionIn();
-                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, API.POLICY_TYPE.AUTO_FLUSH, value);
+                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.AUTO_FLUSH, value);
             }
         }
         /// <summary>
@@ -108,12 +109,12 @@ namespace MadWizard.WinUSBNet
             get
             {
                 RequireDirectionIn();
-                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, API.POLICY_TYPE.IGNORE_SHORT_PACKETS); ;
+                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.IGNORE_SHORT_PACKETS); ;
             }
             set
             {
                 RequireDirectionIn();
-                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, API.POLICY_TYPE.IGNORE_SHORT_PACKETS, value);
+                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.IGNORE_SHORT_PACKETS, value);
             }
         }
 
@@ -126,13 +127,13 @@ namespace MadWizard.WinUSBNet
         {
             get
             {
-                return (int)_device.InternalDevice.GetPipePolicyUInt(_interfaceIndex, _pipeID, API.POLICY_TYPE.PIPE_TRANSFER_TIMEOUT);
+                return (int)_device.InternalDevice.GetPipePolicyUInt(_interfaceIndex, _pipeID, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT);
             }
             set
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException(nameof(value), "Pipe transfer timeout cannot be negative.");
-                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, API.POLICY_TYPE.PIPE_TRANSFER_TIMEOUT, (uint)value);
+                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT, (uint)value);
             }
         }
 
@@ -147,11 +148,11 @@ namespace MadWizard.WinUSBNet
         {
             get
             {
-                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, API.POLICY_TYPE.RAW_IO);
+                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.RAW_IO);
             }
             set
             {
-                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, API.POLICY_TYPE.RAW_IO, value);
+                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.RAW_IO, value);
             }
         }
 
@@ -165,12 +166,12 @@ namespace MadWizard.WinUSBNet
             get
             {
                 RequireDirectionOut();
-                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, API.POLICY_TYPE.SHORT_PACKET_TERMINATE); ;
+                return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.SHORT_PACKET_TERMINATE); ;
             }
             set
             {
                 RequireDirectionOut();
-                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, API.POLICY_TYPE.SHORT_PACKET_TERMINATE, value);
+                _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.SHORT_PACKET_TERMINATE, value);
             }
         }
 

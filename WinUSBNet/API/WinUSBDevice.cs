@@ -16,7 +16,7 @@ using System.Text;
 using System.Threading;
 using Microsoft.Win32.SafeHandles;
 
-namespace MadWizard.WinUSBNet.API;
+namespace Nefarius.Drivers.WinUSB.API;
 
 /// <summary>
 ///     Wrapper for a WinUSB device dealing with the WinUSB and additional interface handles

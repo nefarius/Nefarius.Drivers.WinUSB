@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Microsoft.Win32.SafeHandles;
 
-namespace MadWizard.WinUSBNet.API;
+namespace Nefarius.Drivers.WinUSB.API;
 
 [StructLayout(LayoutKind.Sequential)]
 internal struct USB_DEVICE_DESCRIPTOR

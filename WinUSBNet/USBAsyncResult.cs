@@ -8,7 +8,7 @@
 using System;
 using System.Threading;
 
-namespace MadWizard.WinUSBNet
+namespace Nefarius.Drivers.WinUSB
 {
     internal class USBAsyncResult : IAsyncResult, IDisposable
     {

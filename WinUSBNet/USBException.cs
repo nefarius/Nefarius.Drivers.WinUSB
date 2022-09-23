@@ -7,7 +7,7 @@
 
 using System;
 
-namespace MadWizard.WinUSBNet
+namespace Nefarius.Drivers.WinUSB
 {
     /// <summary>
     /// Exception used by WinUSBNet to indicate errors. This is the

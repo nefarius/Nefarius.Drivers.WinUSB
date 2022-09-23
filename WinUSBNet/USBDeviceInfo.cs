@@ -5,7 +5,9 @@
  *  http://www.opensource.org/licenses/mit-license.php
  */
 
-namespace MadWizard.WinUSBNet
+using Nefarius.Drivers.WinUSB.API;
+
+namespace Nefarius.Drivers.WinUSB
 {
     /// <summary>
     /// Gives information about a device. This information is retrieved using the setup API, not the
@@ -14,7 +16,7 @@ namespace MadWizard.WinUSBNet
     /// </summary>
     public class USBDeviceInfo
     {
-        private API.DeviceDetails _details;
+        private DeviceDetails _details;
 
         /// <summary>
         /// Vendor ID (VID) of the USB device
@@ -71,7 +73,7 @@ namespace MadWizard.WinUSBNet
             }
         }
 
-        internal USBDeviceInfo(API.DeviceDetails details)
+        internal USBDeviceInfo(DeviceDetails details)
         {
             _details = details;
         }

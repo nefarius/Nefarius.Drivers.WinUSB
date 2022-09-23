@@ -6,8 +6,9 @@
  */
 
 using System;
+using Nefarius.Drivers.WinUSB.API;
 
-namespace MadWizard.WinUSBNet
+namespace Nefarius.Drivers.WinUSB
 {
     /// <summary>
     /// USB device details
@@ -104,7 +105,7 @@ namespace MadWizard.WinUSBNet
             private set;
         }
 
-        internal USBDeviceDescriptor(string path, API.USB_DEVICE_DESCRIPTOR deviceDesc, string manufacturer, string product, string serialNumber)
+        internal USBDeviceDescriptor(string path, USB_DEVICE_DESCRIPTOR deviceDesc, string manufacturer, string product, string serialNumber)
         {
             PathName = path;
             VID = deviceDesc.idVendor;

@@ -6,7 +6,7 @@
  */
 
 
-namespace MadWizard.WinUSBNet
+namespace Nefarius.Drivers.WinUSB
 {
     /// <summary>
     /// USB base class code enumeration, as defined in the USB specification

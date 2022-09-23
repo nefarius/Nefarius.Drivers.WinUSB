@@ -5,7 +5,7 @@
  *  http://www.opensource.org/licenses/mit-license.php
  */
 
-namespace MadWizard.WinUSBNet.API;
+namespace Nefarius.Drivers.WinUSB.API;
 
 internal struct DeviceDetails
 {

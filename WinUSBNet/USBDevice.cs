@@ -7,17 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using Nefarius.Drivers.WinUSB.API;
 
 [assembly: CLSCompliant(true)]
 
-namespace MadWizard.WinUSBNet
+namespace Nefarius.Drivers.WinUSB
 {
     /// <summary>
     /// The UsbDevice class represents a single WinUSB device.
     /// </summary>
     public class USBDevice : IDisposable
     {
-        private API.WinUSBDevice _wuDevice = null;
+        private WinUSBDevice _wuDevice = null;
         private bool _disposed = false;
 
         /// <summary>
@@ -106,20 +107,20 @@ namespace MadWizard.WinUSBNet
         public USBDevice(string devicePathName)
         {
             Descriptor = GetDeviceDescriptor(devicePathName);
-            _wuDevice = new API.WinUSBDevice();
+            _wuDevice = new WinUSBDevice();
             try
             {
                 _wuDevice.OpenDevice(devicePathName);
                 InitializeInterfaces();
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 _wuDevice.Dispose();
                 throw new USBException("Failed to open device.", e);
             }
         }
 
-        internal API.WinUSBDevice InternalDevice
+        internal WinUSBDevice InternalDevice
         {
             get
             {
@@ -137,8 +138,8 @@ namespace MadWizard.WinUSBNet
             // UsbEndpoint
             for (int i = 0; i < numInterfaces; i++)
             {
-                API.USB_INTERFACE_DESCRIPTOR descriptor;
-                API.WINUSB_PIPE_INFORMATION[] pipesInfo;
+                USB_INTERFACE_DESCRIPTOR descriptor;
+                WINUSB_PIPE_INFORMATION[] pipesInfo;
                 _wuDevice.GetInterfaceInfo(i, out descriptor, out pipesInfo);
                 USBPipe[] interfacePipes = new USBPipe[pipesInfo.Length];
                 for(int k=0;k<pipesInfo.Length;k++)
@@ -178,13 +179,13 @@ namespace MadWizard.WinUSBNet
         {
             get
             {
-                return (int)_wuDevice.GetPipePolicyUInt(0, 0x00, API.POLICY_TYPE.PIPE_TRANSFER_TIMEOUT);
+                return (int)_wuDevice.GetPipePolicyUInt(0, 0x00, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT);
             }
             set
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException(nameof(value), "Control pipe timeout cannot be negative.");
-                _wuDevice.SetPipePolicy(0, 0x00, API.POLICY_TYPE.PIPE_TRANSFER_TIMEOUT, (uint)value);
+                _wuDevice.SetPipePolicy(0, 0x00, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT, (uint)value);
             }
         }
 
@@ -214,7 +215,7 @@ namespace MadWizard.WinUSBNet
             {
                 return _wuDevice.ControlTransfer(requestType, request, (ushort)value, (ushort)index, (ushort)length, buffer);
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 throw new USBException("Control transfer failed", e);
             }
@@ -255,7 +256,7 @@ namespace MadWizard.WinUSBNet
             {
                 _wuDevice.ControlTransferOverlapped(requestType, request, (ushort)value, (ushort)index, (ushort)length, buffer, result);
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 result.Dispose();
                 throw new USBException("Asynchronous control transfer failed", e);
@@ -1032,7 +1033,7 @@ namespace MadWizard.WinUSBNet
         /// returned.</returns>
         public static USBDeviceInfo[] GetDevices(Guid guid)
         {
-            API.DeviceDetails[] detailList = API.DeviceManagement.FindDevicesFromGuid(guid);
+            DeviceDetails[] detailList = DeviceManagement.FindDevicesFromGuid(guid);
 
             USBDeviceInfo[] devices = new USBDeviceInfo[detailList.Length];
 
@@ -1052,7 +1053,7 @@ namespace MadWizard.WinUSBNet
         /// no device with the given GUID could be found null is returned.</returns>
         public static USBDevice GetSingleDevice(Guid guid)
         {
-            API.DeviceDetails[] detailList = API.DeviceManagement.FindDevicesFromGuid(guid);
+            DeviceDetails[] detailList = DeviceManagement.FindDevicesFromGuid(guid);
             if (detailList.Length == 0)
                 return null;
 
@@ -1088,10 +1089,10 @@ namespace MadWizard.WinUSBNet
             try
             {
                 USBDeviceDescriptor descriptor;
-                using (API.WinUSBDevice wuDevice = new API.WinUSBDevice())
+                using (WinUSBDevice wuDevice = new WinUSBDevice())
                 {
                     wuDevice.OpenDevice(devicePath);
-                    API.USB_DEVICE_DESCRIPTOR deviceDesc = wuDevice.GetDeviceDescriptor();
+                    USB_DEVICE_DESCRIPTOR deviceDesc = wuDevice.GetDeviceDescriptor();
 
                     // Get first supported language ID
                     ushort[] langIDs = wuDevice.GetSupportedLanguageIDs();
@@ -1117,7 +1118,7 @@ namespace MadWizard.WinUSBNet
                 return descriptor;
 
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 throw new USBException("Failed to retrieve device descriptor.", e);
             }

@@ -12,7 +12,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace MadWizard.WinUSBNet.API
+namespace Nefarius.Drivers.WinUSB.API
 {
     /// <summary>
     /// API declarations relating to device management (SetupDixxx and

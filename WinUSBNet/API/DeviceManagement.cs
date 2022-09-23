@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MadWizard.WinUSBNet.API;
+namespace Nefarius.Drivers.WinUSB.API;
 
 /// <summary>
 ///     Routines for detecting devices and receiving device notifications.

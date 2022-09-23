@@ -6,8 +6,9 @@
  */
 
 using System;
+using Nefarius.Drivers.WinUSB.API;
 
-namespace MadWizard.WinUSBNet
+namespace Nefarius.Drivers.WinUSB
 {
     /// <summary>
     /// Represents a single USB interface from a USB device
@@ -109,7 +110,7 @@ namespace MadWizard.WinUSBNet
             private set;
         }
 
-        internal USBInterface(USBDevice device, int interfaceIndex, API.USB_INTERFACE_DESCRIPTOR rawDesc, USBPipeCollection pipes)
+        internal USBInterface(USBDevice device, int interfaceIndex, USB_INTERFACE_DESCRIPTOR rawDesc, USBPipeCollection pipes)
         {
             // Set raw class identifiers
             ClassValue = rawDesc.bInterfaceClass;

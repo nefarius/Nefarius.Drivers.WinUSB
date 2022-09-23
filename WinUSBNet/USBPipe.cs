@@ -6,8 +6,9 @@
  */
 
 using System;
+using Nefarius.Drivers.WinUSB.API;
 
-namespace MadWizard.WinUSBNet
+namespace Nefarius.Drivers.WinUSB
 {
     /// <summary>
     /// UsbPipe represents a single pipe on a WinUSB device. A pipe is connected
@@ -15,7 +16,7 @@ namespace MadWizard.WinUSBNet
     /// </summary>
     public class USBPipe
     {
-        private API.WINUSB_PIPE_INFORMATION _pipeInfo;
+        private WINUSB_PIPE_INFORMATION _pipeInfo;
         private USBInterface _interface = null;
         private USBDevice _device;
         private USBPipePolicy _policy;
@@ -126,7 +127,7 @@ namespace MadWizard.WinUSBNet
 
                 return (int)bytesRead;
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 throw new USBException("Failed to read from pipe.", e);
             }
@@ -177,7 +178,7 @@ namespace MadWizard.WinUSBNet
             {
                 _device.InternalDevice.ReadPipeOverlapped(Interface.InterfaceIndex, _pipeInfo.PipeId, buffer, offset, length, result);
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 result.Dispose();
                 throw new USBException("Failed to read from pipe.", e);
@@ -250,7 +251,7 @@ namespace MadWizard.WinUSBNet
             {
                 _device.InternalDevice.WritePipe(Interface.InterfaceIndex, _pipeInfo.PipeId, buffer, offset, length);
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 throw new USBException("Failed to write to pipe.", e);
             }
@@ -278,7 +279,7 @@ namespace MadWizard.WinUSBNet
             {
                 _device.InternalDevice.WriteOverlapped(Interface.InterfaceIndex, _pipeInfo.PipeId, buffer, offset, length, result);
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 result.Dispose();
                 throw new USBException("Failed to write to pipe.", e);
@@ -397,7 +398,7 @@ namespace MadWizard.WinUSBNet
             {
                 _device.InternalDevice.AbortPipe(Interface.InterfaceIndex, _pipeInfo.PipeId);
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 throw new USBException("Failed to abort pipe.", e);
             }
@@ -414,13 +415,13 @@ namespace MadWizard.WinUSBNet
             {
                 _device.InternalDevice.FlushPipe(Interface.InterfaceIndex, _pipeInfo.PipeId);
             }
-            catch (API.APIException e)
+            catch (APIException e)
             {
                 throw new USBException("Failed to flush pipe.", e);
             }
         }
 
-        internal USBPipe(USBDevice device, API.WINUSB_PIPE_INFORMATION pipeInfo)
+        internal USBPipe(USBDevice device, WINUSB_PIPE_INFORMATION pipeInfo)
         {
             _pipeInfo = pipeInfo;
             _device = device;

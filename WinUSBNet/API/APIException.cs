@@ -9,7 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace MadWizard.WinUSBNet.API;
+namespace Nefarius.Drivers.WinUSB.API;
 
 /// <summary>
 ///     Exception used internally to catch Win32 API errors. This exception should
