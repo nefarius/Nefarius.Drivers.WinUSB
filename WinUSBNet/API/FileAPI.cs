@@ -18,6 +18,5 @@ namespace Nefarius.Drivers.WinUSB.API;
 /// </summary>
 internal sealed class FileIO
 {
-    public const Int32 ERROR_IO_PENDING = 997;
     public static readonly IntPtr INVALID_HANDLE_VALUE = new(-1);
 }

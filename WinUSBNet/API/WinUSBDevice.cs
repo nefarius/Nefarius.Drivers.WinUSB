@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using Windows.Win32;
 using Windows.Win32.Devices.Usb;
+using Windows.Win32.Foundation;
 using Windows.Win32.Storage.FileSystem;
 using Microsoft.Win32.SafeHandles;
 
@@ -285,7 +286,7 @@ internal partial class WinUSBDevice : IDisposable
     {
         if (!success)
         {
-            if (Marshal.GetLastWin32Error() != FileIO.ERROR_IO_PENDING)
+            if (Marshal.GetLastWin32Error() != (int)WIN32_ERROR.ERROR_IO_PENDING)
             {
                 Overlapped.Unpack(pOverlapped);
                 Overlapped.Free(pOverlapped);
