@@ -92,10 +92,7 @@ internal enum POLICY_TYPE
 
 internal partial class WinUSBDevice
 {
-    private const UInt32 DEVICE_SPEED = 1;
-
     private const int USB_DEVICE_DESCRIPTOR_TYPE = 0x01;
-    private const int USB_CONFIGURATION_DESCRIPTOR_TYPE = 0x02;
     private const int USB_STRING_DESCRIPTOR_TYPE = 0x03;
 
     private const int ERROR_NO_MORE_ITEMS = 259;
@@ -113,10 +110,6 @@ internal partial class WinUSBDevice
 
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_Initialize(SafeFileHandle DeviceHandle, ref IntPtr InterfaceHandle);
-
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_QueryDeviceInformation(IntPtr InterfaceHandle, UInt32 InformationType,
-        ref UInt32 BufferLength, out byte Buffer);
 
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_QueryInterfaceSettings(IntPtr InterfaceHandle, Byte AlternateInterfaceNumber,
@@ -192,13 +185,6 @@ internal partial class WinUSBDevice
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_GetAssociatedInterface(IntPtr InterfaceHandle, byte AssociatedInterfaceIndex,
         out IntPtr AssociatedInterfaceHandle);
-
-    private enum USB_DEVICE_SPEED
-    {
-        UsbLowSpeed = 1,
-        UsbFullSpeed,
-        UsbHighSpeed
-    }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     private struct WINUSB_SETUP_PACKET
