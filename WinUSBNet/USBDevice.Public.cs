@@ -91,7 +91,6 @@ public partial class USBDevice
         GC.SuppressFinalize(this);
     }
 
-
     /// <summary>
     ///     Initiates a control transfer over the default control endpoint. This method allows both IN and OUT direction
     ///     transfers, depending
@@ -285,8 +284,7 @@ public partial class USBDevice
         return BeginControlTransfer(requestType, request, value, index, buffer, buffer.Length, userCallback,
             stateObject);
     }
-
-
+    
     /// <summary>
     ///     Waits for a pending asynchronous control transfer to complete.
     /// </summary>
