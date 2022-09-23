@@ -33,14 +33,6 @@ internal partial class WinUSBDevice
     private const int ERROR_NO_MORE_ITEMS = 259;
 
     [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_ControlTransfer(IntPtr InterfaceHandle, WINUSB_SETUP_PACKET SetupPacket,
-        Byte[] Buffer, UInt32 BufferLength, ref UInt32 LengthTransferred, IntPtr Overlapped);
-
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern unsafe bool WinUsb_ControlTransfer(IntPtr InterfaceHandle, WINUSB_SETUP_PACKET SetupPacket,
-        Byte[] Buffer, UInt32 BufferLength, ref UInt32 LengthTransferred, NativeOverlapped* pOverlapped);
-
-    [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_Free(IntPtr InterfaceHandle);
 
     [DllImport("winusb.dll", SetLastError = true)]
@@ -96,14 +88,4 @@ internal partial class WinUSBDevice
 
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_FlushPipe(IntPtr InterfaceHandle, byte PipeID);
-
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    private struct WINUSB_SETUP_PACKET
-    {
-        public byte RequestType;
-        public byte Request;
-        public ushort Value;
-        public ushort Index;
-        public ushort Length;
-    }
 }

@@ -163,7 +163,8 @@ internal partial class WinUSBDevice : IDisposable
         return new string(chars);
     }
 
-    public int ControlTransfer(byte requestType, byte request, ushort value, ushort index, ushort length, byte[] data)
+    public unsafe int ControlTransfer(byte requestType, byte request, ushort value, ushort index, ushort length,
+        byte[] data)
     {
         uint bytesReturned = 0;
         WINUSB_SETUP_PACKET setupPacket;
@@ -174,10 +175,14 @@ internal partial class WinUSBDevice : IDisposable
         setupPacket.Index = index;
         setupPacket.Length = length;
 
-        var success = WinUsb_ControlTransfer(_winUsbHandle, setupPacket, data, length, ref bytesReturned, IntPtr.Zero);
-        if (!success) // todo check bytes returned?
-            throw APIException.Win32("Control transfer on WinUSB device failed.");
-        return (int)bytesReturned;
+        fixed (byte* dataPtr = data)
+        {
+            var success = PInvoke.WinUsb_ControlTransfer(_winUsbHandle.ToPointer(), setupPacket, dataPtr, length,
+                &bytesReturned);
+            if (!success) // todo check bytes returned?
+                throw APIException.Win32("Control transfer on WinUSB device failed.");
+            return (int)bytesReturned;
+        }
     }
 
     // ReSharper disable once RedundantUnsafeContext
@@ -377,8 +382,8 @@ internal partial class WinUSBDevice : IDisposable
         }
     }
 
-
-    public void ControlTransferOverlapped(byte requestType, byte request, ushort value, ushort index, ushort length,
+    public unsafe void ControlTransferOverlapped(byte requestType, byte request, ushort value, ushort index,
+        ushort length,
         byte[] data, USBAsyncResult result)
     {
         uint bytesReturned = 0;
@@ -393,12 +398,13 @@ internal partial class WinUSBDevice : IDisposable
         var overlapped = new Overlapped();
         overlapped.AsyncResult = result;
 
-        unsafe
+        fixed (byte* pBuffer = data)
         {
             NativeOverlapped* pOverlapped = null;
             pOverlapped = overlapped.Pack(PipeIOCallback, data);
             var success =
-                WinUsb_ControlTransfer(_winUsbHandle, setupPacket, data, length, ref bytesReturned, pOverlapped);
+                PInvoke.WinUsb_ControlTransfer(_winUsbHandle.ToPointer(), setupPacket, pBuffer, length, &bytesReturned,
+                    pOverlapped);
             HandleOverlappedAPI(success, "Asynchronous control transfer on WinUSB device failed.", pOverlapped, result,
                 (int)bytesReturned);
         }
