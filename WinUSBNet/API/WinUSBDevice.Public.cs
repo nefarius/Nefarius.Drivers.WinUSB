@@ -255,43 +255,47 @@ internal partial class WinUSBDevice
     }
 
     [UsedImplicitly]
-    public void SetPipePolicy(int interfaceIndex, byte pipeId, POLICY_TYPE policyType, bool value)
+    public unsafe void SetPipePolicy(int interfaceIndex, byte pipeId, POLICY_TYPE policyType, bool value)
     {
         var byteVal = (byte)(value ? 1 : 0);
-        var success = WinUsb_SetPipePolicy(InterfaceHandle(interfaceIndex), pipeId, (uint)policyType, 1, ref byteVal);
+        var success = PInvoke.WinUsb_SetPipePolicy(InterfaceHandle(interfaceIndex).ToPointer(), pipeId,
+            (uint)policyType, 1, &byteVal);
         if (!success)
             throw APIException.Win32("Failed to set WinUSB pipe policy.");
     }
 
     [UsedImplicitly]
-    public void SetPipePolicy(int interfaceIndex, byte pipeId, POLICY_TYPE policyType, uint value)
+    public unsafe void SetPipePolicy(int interfaceIndex, byte pipeId, POLICY_TYPE policyType, uint value)
     {
-        var success = WinUsb_SetPipePolicy(InterfaceHandle(interfaceIndex), pipeId, (uint)policyType, 4, ref value);
+        var success = PInvoke.WinUsb_SetPipePolicy(InterfaceHandle(interfaceIndex).ToPointer(), pipeId,
+            (uint)policyType, 4, &value);
 
         if (!success)
             throw APIException.Win32("Failed to set WinUSB pipe policy.");
     }
 
     [UsedImplicitly]
-    public bool GetPipePolicyBool(int interfaceIndex, byte pipeId, POLICY_TYPE policyType)
+    public unsafe bool GetPipePolicyBool(int interfaceIndex, byte pipeId, POLICY_TYPE policyType)
     {
         byte result;
         uint length = 1;
 
         var success =
-            WinUsb_GetPipePolicy(InterfaceHandle(interfaceIndex), pipeId, (uint)policyType, ref length, out result);
+            PInvoke.WinUsb_GetPipePolicy(InterfaceHandle(interfaceIndex).ToPointer(), pipeId, (uint)policyType,
+                &length, &result);
         if (!success || length != 1)
             throw APIException.Win32("Failed to get WinUSB pipe policy.");
         return result != 0;
     }
 
     [UsedImplicitly]
-    public uint GetPipePolicyUInt(int interfaceIndex, byte pipeId, POLICY_TYPE policyType)
+    public unsafe uint GetPipePolicyUInt(int interfaceIndex, byte pipeId, POLICY_TYPE policyType)
     {
         uint result;
         uint length = 4;
         var success =
-            WinUsb_GetPipePolicy(InterfaceHandle(interfaceIndex), pipeId, (uint)policyType, ref length, out result);
+            PInvoke.WinUsb_GetPipePolicy(InterfaceHandle(interfaceIndex).ToPointer(), pipeId, (uint)policyType,
+                &length, &result);
 
         if (!success || length != 4)
             throw APIException.Win32("Failed to get WinUSB pipe policy.");
