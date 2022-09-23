@@ -151,7 +151,7 @@ internal partial class WinUSBDevice
         NativeOverlapped* pOverlapped = null;
         uint bytesRead = 0;
 
-        pOverlapped = overlapped.Pack(PipeIOCallback, buffer);
+        pOverlapped = overlapped.Pack(PipeIoCallback, buffer);
         bool success;
         // Buffer is pinned already by overlapped.Pack
         fixed (byte* pBuffer = buffer)
@@ -177,7 +177,7 @@ internal partial class WinUSBDevice
         NativeOverlapped* pOverlapped = null;
 
         uint bytesWritten;
-        pOverlapped = overlapped.Pack(PipeIOCallback, buffer);
+        pOverlapped = overlapped.Pack(PipeIoCallback, buffer);
 
         bool success;
         // Buffer is pinned already by overlapped.Pack
@@ -212,7 +212,7 @@ internal partial class WinUSBDevice
         fixed (byte* pBuffer = data)
         {
             NativeOverlapped* pOverlapped = null;
-            pOverlapped = overlapped.Pack(PipeIOCallback, data);
+            pOverlapped = overlapped.Pack(PipeIoCallback, data);
             var success =
                 PInvoke.WinUsb_ControlTransfer(_winUsbHandle.ToPointer(), setupPacket, pBuffer, length, &bytesReturned,
                     pOverlapped);

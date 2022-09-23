@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Xml.Serialization;
 using Windows.Win32;
 using Windows.Win32.Devices.Usb;
 using Windows.Win32.Foundation;
@@ -69,16 +70,18 @@ internal partial class WinUSBDevice : IDisposable
         _disposed = true;
     }
 
-    private void FreeWinUSB()
+    private unsafe void FreeWinUSB()
     {
         if (_addInterfaces != null)
         {
-            for (var i = 0; i < _addInterfaces.Length; i++) WinUsb_Free(_addInterfaces[i]);
+            foreach (var entry in _addInterfaces)
+                PInvoke.WinUsb_Free(entry.ToPointer());
+
             _addInterfaces = null;
         }
 
         if (_winUsbHandle != IntPtr.Zero)
-            WinUsb_Free(_winUsbHandle);
+            PInvoke.WinUsb_Free(_winUsbHandle.ToPointer());
         _winUsbHandle = IntPtr.Zero;
     }
 
@@ -146,10 +149,13 @@ internal partial class WinUSBDevice : IDisposable
 
     private unsafe void InitializeDevice()
     {
-        var success = WinUsb_Initialize(_deviceHandle, ref _winUsbHandle);
+        void* handle = null;
+        var success = PInvoke.WinUsb_Initialize(new HANDLE(_deviceHandle.DangerousGetHandle()), &handle);
 
         if (!success)
             throw APIException.Win32("Failed to initialize WinUSB handle. Device might not be connected.");
+
+        _winUsbHandle = new IntPtr(handle);
 
         var interfaces = new List<IntPtr>();
         byte numAddInterfaces = 0;
@@ -211,7 +217,7 @@ internal partial class WinUSBDevice : IDisposable
         }
     }
 
-    private unsafe void PipeIOCallback(uint errorCode, uint numBytes, NativeOverlapped* pOverlapped)
+    private static unsafe void PipeIoCallback(uint errorCode, uint numBytes, NativeOverlapped* pOverlapped)
     {
         try
         {
