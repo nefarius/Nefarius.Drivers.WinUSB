@@ -121,16 +121,18 @@ internal partial class WinUSBDevice
     }
 
     [UsedImplicitly]
-    public void ReadPipe(int interfaceIndex, byte pipeID, byte[] buffer, int offset, int bytesToRead, out uint bytesRead)
+    public unsafe void ReadPipe(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToRead,
+        out uint bytesRead)
     {
         bool success;
-        unsafe
+        uint lengthTransferred = 0;
+        fixed (byte* pBuffer = buffer)
         {
-            fixed (byte* pBuffer = buffer)
-            {
-                success = WinUsb_ReadPipe(InterfaceHandle(interfaceIndex), pipeID, pBuffer + offset, (uint)bytesToRead,
-                    out bytesRead, IntPtr.Zero);
-            }
+            success = PInvoke.WinUsb_ReadPipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId, pBuffer + offset,
+                (uint)bytesToRead,
+                &lengthTransferred);
+
+            bytesRead = lengthTransferred;
         }
 
         if (!success)
@@ -138,38 +140,39 @@ internal partial class WinUSBDevice
     }
 
     [UsedImplicitly]
-    public void ReadPipeOverlapped(int @interface, byte pipeID, byte[] buffer, int offset, int bytesToRead,
+    public unsafe void ReadPipeOverlapped(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToRead,
         USBAsyncResult result)
     {
-        var overlapped = new Overlapped();
-
-        overlapped.AsyncResult = result;
-
-        unsafe
+        var overlapped = new Overlapped
         {
-            NativeOverlapped* pOverlapped = null;
-            uint bytesRead;
+            AsyncResult = result
+        };
 
-            pOverlapped = overlapped.Pack(PipeIOCallback, buffer);
-            bool success;
-            // Buffer is pinned already by overlapped.Pack
-            fixed (byte* pBuffer = buffer)
-            {
-                success = WinUsb_ReadPipe(InterfaceHandle(@interface), pipeID, pBuffer + offset, (uint)bytesToRead,
-                    out bytesRead, pOverlapped);
-            }
+        NativeOverlapped* pOverlapped = null;
+        uint bytesRead = 0;
 
-            HandleOverlappedAPI(success, "Failed to asynchronously read pipe on WinUSB device.", pOverlapped, result,
-                (int)bytesRead);
+        pOverlapped = overlapped.Pack(PipeIOCallback, buffer);
+        bool success;
+        // Buffer is pinned already by overlapped.Pack
+        fixed (byte* pBuffer = buffer)
+        {
+            success = PInvoke.WinUsb_ReadPipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId, pBuffer + offset,
+                (uint)bytesToRead,
+                &bytesRead, pOverlapped);
         }
+
+        HandleOverlappedAPI(success, "Failed to asynchronously read pipe on WinUSB device.", pOverlapped, result,
+            (int)bytesRead);
     }
 
     [UsedImplicitly]
-    public void WriteOverlapped(int @interface, byte pipeID, byte[] buffer, int offset, int bytesToWrite,
+    public void WriteOverlapped(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToWrite,
         USBAsyncResult result)
     {
-        var overlapped = new Overlapped();
-        overlapped.AsyncResult = result;
+        var overlapped = new Overlapped
+        {
+            AsyncResult = result
+        };
 
         unsafe
         {
@@ -182,7 +185,7 @@ internal partial class WinUSBDevice
             // Buffer is pinned already by overlapped.Pack
             fixed (byte* pBuffer = buffer)
             {
-                success = WinUsb_WritePipe(InterfaceHandle(@interface), pipeID, pBuffer + offset, (uint)bytesToWrite,
+                success = WinUsb_WritePipe(InterfaceHandle(interfaceIndex), pipeId, pBuffer + offset, (uint)bytesToWrite,
                     out bytesWritten, pOverlapped);
             }
 
