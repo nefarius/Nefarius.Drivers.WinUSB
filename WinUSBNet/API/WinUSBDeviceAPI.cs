@@ -159,12 +159,6 @@ internal partial class WinUSBDevice
     private static extern unsafe bool WinUsb_WritePipe(IntPtr InterfaceHandle, byte PipeID, byte* pBuffer,
         uint BufferLength, out uint LengthTransferred, NativeOverlapped* pOverlapped);
 
-    [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern bool CancelIo(IntPtr hFile);
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern unsafe bool CancelIoEx(IntPtr hFile, NativeOverlapped* pOverlapped);
-
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_FlushPipe(IntPtr InterfaceHandle, byte PipeID);
 
@@ -175,11 +169,6 @@ internal partial class WinUSBDevice
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_GetDescriptor(IntPtr InterfaceHandle, byte DescriptorType,
         byte Index, UInt16 LanguageID, out USB_DEVICE_DESCRIPTOR deviceDesc, UInt32 BufferLength,
-        out UInt32 LengthTransfered);
-
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_GetDescriptor(IntPtr InterfaceHandle, byte DescriptorType,
-        byte Index, UInt16 LanguageID, out USB_CONFIGURATION_DESCRIPTOR deviceDesc, UInt32 BufferLength,
         out UInt32 LengthTransfered);
 
     [DllImport("winusb.dll", SetLastError = true)]
