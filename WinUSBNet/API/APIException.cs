@@ -15,7 +15,7 @@ namespace Nefarius.Drivers.WinUSB.API;
 ///     Exception used internally to catch Win32 API errors. This exception should
 ///     not be thrown to the library's caller.
 /// </summary>
-internal class APIException : Exception
+internal sealed class APIException : Exception
 {
     public APIException(string message) :
         base(message)

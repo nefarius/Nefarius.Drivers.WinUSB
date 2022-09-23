@@ -14,7 +14,7 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     Collection of UsbPipe objects
 /// </summary>
-public class USBPipeCollection : IEnumerable<USBPipe>
+public sealed class USBPipeCollection : IEnumerable<USBPipe>
 {
     private readonly Dictionary<byte, USBPipe> _pipes;
 

@@ -13,7 +13,7 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     Describes the policy for a specific USB pipe
 /// </summary>
-public class USBPipePolicy
+public sealed class USBPipePolicy
 {
     private readonly USBDevice _device;
     private readonly int _interfaceIndex;

@@ -13,7 +13,7 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     Represents a single USB interface from a USB device
 /// </summary>
-public class USBInterface
+public sealed class USBInterface
 {
     internal USBInterface(USBDevice device, int interfaceIndex, USB_INTERFACE_DESCRIPTOR rawDesc,
         USBPipeCollection pipes)

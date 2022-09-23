@@ -14,7 +14,7 @@ namespace Nefarius.Drivers.WinUSB;
 ///     actual device descriptor. Device description and manufacturer will be the strings specified
 ///     in the .inf file. After a device is opened the actual device descriptor can be read as well.
 /// </summary>
-public class USBDeviceInfo
+public sealed class USBDeviceInfo
 {
     private readonly DeviceDetails _details;
 

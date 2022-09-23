@@ -18,7 +18,7 @@ namespace Nefarius.Drivers.WinUSB;
 ///     UsbPipe represents a single pipe on a WinUSB device. A pipe is connected
 ///     to a certain endpoint on the device and has a fixed direction (IN or OUT)
 /// </summary>
-public class USBPipe
+public sealed class USBPipe
 {
     private readonly WINUSB_PIPE_INFORMATION _pipeInfo;
 

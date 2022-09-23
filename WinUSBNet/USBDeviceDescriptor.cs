@@ -13,7 +13,7 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     USB device details
 /// </summary>
-public class USBDeviceDescriptor
+public sealed class USBDeviceDescriptor
 {
     internal USBDeviceDescriptor(string path, USB_DEVICE_DESCRIPTOR deviceDesc, string manufacturer, string product,
         string serialNumber)

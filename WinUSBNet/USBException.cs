@@ -13,7 +13,7 @@ namespace Nefarius.Drivers.WinUSB;
 ///     Exception used by WinUSBNet to indicate errors. This is the
 ///     main exception to catch when using the library.
 /// </summary>
-public class USBException : Exception
+public sealed class USBException : Exception
 {
     /// <summary>
     ///     Constructs a new USBException with the given message

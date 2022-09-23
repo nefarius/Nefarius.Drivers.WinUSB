@@ -14,7 +14,7 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     Collection of UsbInterface objects
 /// </summary>
-public class USBInterfaceCollection : IEnumerable<USBInterface>
+public sealed class USBInterfaceCollection : IEnumerable<USBInterface>
 {
     private readonly USBInterface[] _interfaces;
 
