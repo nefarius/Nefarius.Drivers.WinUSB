@@ -7,7 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+#if !NET35
 using System.Threading.Tasks;
+#endif
 using Windows.Win32.Devices.Usb;
 using Nefarius.Drivers.WinUSB.API;
 
