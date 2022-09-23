@@ -4,6 +4,13 @@
 
 TBD
 
+## Changes of this fork
+
+- Replaced P/Invoke code with [source generators](https://github.com/microsoft/CsWin32)
+- Changed namespace to `Nefarius.Drivers.WinUSB` to avoid conflicts with the origin library
+- Removed device notification listener as my other lib [`Nefarius.Utilities.DeviceManagement`](https://github.com/nefarius/Nefarius.Utilities.DeviceManagement) provides a drop-in replacement
+- Added `USBDevice::GetSingleDeviceByPath` to allow opening a WinUSB device via device path (symbolic link)
+
 ## Features
 
 - MIT licensed with C# source code available (free for both personal and commercial use)
