@@ -30,8 +30,6 @@ internal enum POLICY_TYPE
 
 internal partial class WinUSBDevice
 {
-    private const int ERROR_NO_MORE_ITEMS = 259;
-
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_Free(IntPtr InterfaceHandle);
 

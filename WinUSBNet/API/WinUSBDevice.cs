@@ -163,7 +163,7 @@ internal partial class WinUSBDevice : IDisposable
                 success = PInvoke.WinUsb_GetAssociatedInterface(_winUsbHandle.ToPointer(), idx, &ifaceHandle);
                 if (!success)
                 {
-                    if (Marshal.GetLastWin32Error() == ERROR_NO_MORE_ITEMS)
+                    if (Marshal.GetLastWin32Error() == (int)WIN32_ERROR.ERROR_NO_MORE_ITEMS)
                         break;
 
                     throw APIException.Win32("Failed to enumerate interfaces for WinUSB device.");
