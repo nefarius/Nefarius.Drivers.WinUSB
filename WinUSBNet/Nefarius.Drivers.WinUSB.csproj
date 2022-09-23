@@ -32,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2022.1.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.2.63-beta">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
