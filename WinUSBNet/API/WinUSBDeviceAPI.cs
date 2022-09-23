@@ -17,23 +17,6 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Nefarius.Drivers.WinUSB.API;
 
-internal enum USBD_PIPE_TYPE
-{
-    UsbdPipeTypeControl,
-    UsbdPipeTypeIsochronous,
-    UsbdPipeTypeBulk,
-    UsbdPipeTypeInterrupt
-}
-
-[StructLayout(LayoutKind.Sequential)]
-internal struct WINUSB_PIPE_INFORMATION
-{
-    public USBD_PIPE_TYPE PipeType;
-    public byte PipeId;
-    public ushort MaximumPacketSize;
-    public byte Interval;
-}
-
 internal enum POLICY_TYPE
 {
     SHORT_PACKET_TERMINATE = 1,
