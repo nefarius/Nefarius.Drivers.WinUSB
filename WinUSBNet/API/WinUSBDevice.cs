@@ -122,10 +122,13 @@ internal partial class WinUSBDevice : IDisposable
     public unsafe void GetInterfaceInfo(int interfaceIndex, out USB_INTERFACE_DESCRIPTOR descriptor,
         out WINUSB_PIPE_INFORMATION[] pipes)
     {
+        USB_INTERFACE_DESCRIPTOR desc;
         var pipeList = new List<WINUSB_PIPE_INFORMATION>();
-        var success = WinUsb_QueryInterfaceSettings(InterfaceHandle(interfaceIndex), 0, out descriptor);
+        var success = PInvoke.WinUsb_QueryInterfaceSettings(InterfaceHandle(interfaceIndex).ToPointer(), 0, &desc);
         if (!success)
             throw APIException.Win32("Failed to get WinUSB device interface descriptor.");
+
+        descriptor = desc;
 
         var interfaceHandle = InterfaceHandle(interfaceIndex);
         for (byte pipeIdx = 0; pipeIdx < descriptor.bNumEndpoints; pipeIdx++)

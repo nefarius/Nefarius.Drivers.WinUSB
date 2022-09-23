@@ -37,9 +37,4 @@ internal partial class WinUSBDevice
 
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_Initialize(SafeFileHandle DeviceHandle, ref IntPtr InterfaceHandle);
-
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_QueryInterfaceSettings(IntPtr InterfaceHandle, Byte AlternateInterfaceNumber,
-        out USB_INTERFACE_DESCRIPTOR UsbAltInterfaceDescriptor);
-
 }
