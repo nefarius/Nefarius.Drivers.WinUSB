@@ -25,25 +25,6 @@ namespace MadWizard.WinUSBNet.API
         private const Int32 DIGCF_PRESENT = 2;
         private const Int32 DIGCF_DEVICEINTERFACE = 0X10;
 
-
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        internal struct WNDCLASS
-        {
-            //[MarshalAs(UnmanagedType.U4)]
-            public uint style;
-            public IntPtr lpfnWndProc;
-            public int cbClsExtra;
-            public int cbWndExtra;
-            public IntPtr hInstance;
-            public IntPtr hIcon;
-            public IntPtr hCursor;
-            public IntPtr hbrBackground;
-            [MarshalAs(UnmanagedType.LPWStr)]
-            public string lpszMenuName;
-            [MarshalAs(UnmanagedType.LPWStr)]
-            public string lpszClassName;
-        }
-
         private struct SP_DEVICE_INTERFACE_DATA
         {
             internal Int32 cbSize;
@@ -108,12 +89,6 @@ namespace MadWizard.WinUSBNet.API
             REG_MULTI_SZ = 7
         }
 
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern IntPtr RegisterDeviceNotification(IntPtr hRecipient, IntPtr NotificationFilter, Int32 Flags);
-
-        //[DllImport("setupapi.dll", SetLastError = true)]
-        //internal static extern Int32 SetupDiCreateDeviceInfoList(ref System.Guid ClassGuid, Int32 hwndParent);
-
         [DllImport("setupapi.dll", SetLastError = true)]
         private static extern Int32 SetupDiDestroyDeviceInfoList(IntPtr DeviceInfoSet);
 
@@ -134,66 +109,6 @@ namespace MadWizard.WinUSBNet.API
 
         [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern bool SetupDiGetDeviceInterfaceDetail(IntPtr DeviceInfoSet, ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData, IntPtr DeviceInterfaceDetailData, Int32 DeviceInterfaceDetailDataSize, ref Int32 RequiredSize, IntPtr DeviceInfoData);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern bool UnregisterDeviceNotification(IntPtr Handle);
-
-
-        [DllImport("user32.dll", SetLastError = true, EntryPoint = "RegisterClass", CharSet = CharSet.Unicode)]
-        internal static extern System.UInt16 RegisterClass([In] ref WNDCLASS lpWndClass);
-
-        [DllImport("kernel32.dll")]
-        internal static extern uint GetLastError();
-
-        [DllImport("user32.dll")]
-        internal static extern IntPtr DefWindowProc(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam);
-
-        [DllImport("user32.dll")]
-        internal static extern void PostQuitMessage(int nExitCode);
-
-        [DllImport("user32.dll")]
-        internal static extern sbyte GetMessage(out MSG lpMsg, IntPtr hWnd, uint wMsgFilterMin,
-           uint wMsgFilterMax);
-
-        [DllImport("user32.dll")]
-        internal static extern sbyte TranslateMessage(out MSG lpMsg);
-
-        [DllImport("user32.dll")]
-        internal static extern IntPtr DispatchMessage(out MSG lpMsg);
-
-        [DllImport("user32.dll")]
-        internal static extern IntPtr LoadCursor(IntPtr hInstance, int lpCursorName);
-
-        [UnmanagedFunctionPointer(CallingConvention.Winapi, SetLastError = true)]
-        internal delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
-        [DllImport("user32.dll")]
-        internal static extern bool UpdateWindow(IntPtr hWnd);
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
-        internal static extern bool DestroyWindow(IntPtr hWnd);
-
-
-        [DllImport("user32.dll", SetLastError = true, EntryPoint = "CreateWindowEx", CharSet = CharSet.Unicode)]
-        internal static extern IntPtr CreateWindowEx(
-           int dwExStyle,
-          //UInt16 regResult,
-          [MarshalAs(UnmanagedType.LPWStr)]
-          string lpClassName,
-        [MarshalAs(UnmanagedType.LPWStr)]
-        string lpWindowName,
-           UInt32 dwStyle,
-           int x,
-           int y,
-           int nWidth,
-           int nHeight,
-           IntPtr hWndParent,
-           IntPtr hMenu,
-           IntPtr hInstance,
-           IntPtr lpParam);
 
         private const int ERROR_NO_MORE_ITEMS = 259;
         private const int ERROR_INSUFFICIENT_BUFFER = 122;
