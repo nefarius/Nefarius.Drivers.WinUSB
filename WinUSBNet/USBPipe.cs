@@ -197,10 +197,10 @@ namespace Nefarius.Drivers.WinUSB
         /// </summary>
         /// <param name="asyncResult">The <see cref="IAsyncResult"/> object representing the asynchronous operation,
         /// as returned by <see cref="BeginRead"/>.</param>
-        /// <returns>The number of bytes transfered during the operation.</returns>
+        /// <returns>The number of bytes transferred during the operation.</returns>
         /// <remarks>Every call to <see cref="BeginRead"/> must have a matching call to <see cref="EndRead"/> to dispose
         /// of any resources used and to retrieve the result of the operation. When the operation was successful the method returns the number
-        /// of bytes that were transfered. If an error occurred during the operation this method will throw the exceptions that would
+        /// of bytes that were transferred. If an error occurred during the operation this method will throw the exceptions that would
         /// otherwise have occurred during the operation. If the operation is not yet finished EndWrite will wait for the
         /// operation to finish before returning.</remarks>
         public int EndRead(IAsyncResult asyncResult)
@@ -298,10 +298,10 @@ namespace Nefarius.Drivers.WinUSB
         /// </summary>
         /// <param name="asyncResult">The <see cref="IAsyncResult"/> object representing the asynchronous operation,
         /// as returned by <see cref="BeginWrite"/>.</param>
-        /// <returns>The number of bytes transfered during the operation.</returns>
+        /// <returns>The number of bytes transferred during the operation.</returns>
         /// <remarks>Every call to <see cref="BeginWrite"/> must have a matching call to <see cref="EndWrite"/> to dispose
         /// of any resources used and to retrieve the result of the operation. When the operation was successful the method returns the number
-        /// of bytes that were transfered. If an error occurred during the operation this method will throw the exceptions that would
+        /// of bytes that were transferred. If an error occurred during the operation this method will throw the exceptions that would
         /// otherwise have occurred during the operation. If the operation is not yet finished EndWrite will wait for the
         /// operation to finish before returning.</remarks>
         public int EndWrite(IAsyncResult asyncResult)
