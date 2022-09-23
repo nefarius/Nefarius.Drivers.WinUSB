@@ -84,37 +84,59 @@ internal partial class WinUSBDevice : IDisposable
         _winUsbHandle = IntPtr.Zero;
     }
 
-    public USB_DEVICE_DESCRIPTOR GetDeviceDescriptor()
+    public unsafe USB_DEVICE_DESCRIPTOR GetDeviceDescriptor()
     {
         USB_DEVICE_DESCRIPTOR deviceDesc;
-        uint transfered;
         var size = (uint)Marshal.SizeOf(typeof(USB_DEVICE_DESCRIPTOR));
-        var success = WinUsb_GetDescriptor(_winUsbHandle, USB_DEVICE_DESCRIPTOR_TYPE,
-            0, 0, out deviceDesc, size, out transfered);
+
+        uint transferred = 0;
+        var success = PInvoke.WinUsb_GetDescriptor(
+            _winUsbHandle.ToPointer(),
+            (byte)PInvoke.USB_DEVICE_DESCRIPTOR_TYPE,
+            0,
+            0,
+            (byte*)&deviceDesc,
+            size,
+            &transferred
+        );
+
         if (!success)
             throw APIException.Win32("Failed to get USB device descriptor.");
 
-        if (transfered != size)
+        if (transferred != size)
             throw APIException.Win32("Incomplete USB device descriptor.");
 
         return deviceDesc;
     }
 
-    private int ReadStringDescriptor(byte index, ushort languageID, byte[] buffer)
+    private unsafe int ReadStringDescriptor(byte index, ushort languageId, byte[] buffer)
     {
-        uint transfered;
-        var success = WinUsb_GetDescriptor(_winUsbHandle, USB_STRING_DESCRIPTOR_TYPE,
-            index, languageID, buffer, (uint)buffer.Length, out transfered);
-        if (!success)
-            throw APIException.Win32("Failed to get USB string descriptor (" + index + ").");
+        fixed (byte* bufferPtr = buffer)
+        {
+            uint transferred = 0;
+            var success = PInvoke.WinUsb_GetDescriptor(
+                _winUsbHandle.ToPointer(),
+                (byte)PInvoke.USB_STRING_DESCRIPTOR_TYPE,
+                index,
+                languageId,
+                bufferPtr,
+                (uint)buffer.Length,
+                &transferred
+            );
+            
+            if (!success)
+                throw APIException.Win32("Failed to get USB string descriptor (" + index + ").");
 
-        if (transfered == 0)
-            throw new APIException("No data returned when reading USB descriptor.");
+            if (transferred == 0)
+                throw new APIException("No data returned when reading USB descriptor.");
 
-        int length = buffer[0];
-        if (length != transfered)
-            throw new APIException("Unexpected length when reading USB descriptor.");
-        return length;
+            int length = buffer[0];
+
+            if (length != transferred)
+                throw new APIException("Unexpected length when reading USB descriptor.");
+
+            return length;
+        }
     }
 
     public ushort[] GetSupportedLanguageIDs()
@@ -157,7 +179,8 @@ internal partial class WinUSBDevice : IDisposable
             throw APIException.Win32("Control transfer on WinUSB device failed.");
         return (int)bytesReturned;
     }
-    
+
+    // ReSharper disable once RedundantUnsafeContext
     public unsafe void OpenDevice(string devicePathName)
     {
         try
@@ -170,7 +193,7 @@ internal partial class WinUSBDevice : IDisposable
                 FILE_CREATION_DISPOSITION.OPEN_EXISTING,
                 FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL
                 | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OVERLAPPED,
-            null
+                null
             );
 
             if (_deviceHandle.IsInvalid)

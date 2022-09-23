@@ -101,15 +101,6 @@ internal partial class WinUSBDevice
     private static extern bool WinUsb_FlushPipe(IntPtr InterfaceHandle, byte PipeID);
 
     [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_GetDescriptor(IntPtr InterfaceHandle, byte DescriptorType,
-        byte Index, UInt16 LanguageID, byte[] Buffer, UInt32 BufferLength, out UInt32 LengthTransfered);
-
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_GetDescriptor(IntPtr InterfaceHandle, byte DescriptorType,
-        byte Index, UInt16 LanguageID, out USB_DEVICE_DESCRIPTOR deviceDesc, UInt32 BufferLength,
-        out UInt32 LengthTransfered);
-
-    [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_GetAssociatedInterface(IntPtr InterfaceHandle, byte AssociatedInterfaceIndex,
         out IntPtr AssociatedInterfaceHandle);
 
