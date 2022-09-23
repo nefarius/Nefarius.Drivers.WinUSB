@@ -7,7 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+using Windows.Win32.Devices.Usb;
 using Nefarius.Drivers.WinUSB.API;
+using WINUSB_PIPE_INFORMATION = Nefarius.Drivers.WinUSB.API.WINUSB_PIPE_INFORMATION;
 
 [assembly: CLSCompliant(true)]
 

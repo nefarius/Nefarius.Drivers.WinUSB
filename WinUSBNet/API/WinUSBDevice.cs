@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using Windows.Win32.Devices.Usb;
 using Microsoft.Win32.SafeHandles;
 
 namespace Nefarius.Drivers.WinUSB.API;

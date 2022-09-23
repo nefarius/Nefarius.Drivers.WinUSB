@@ -6,7 +6,7 @@
  */
 
 using System;
-using Nefarius.Drivers.WinUSB.API;
+using Windows.Win32.Devices.Usb;
 
 namespace Nefarius.Drivers.WinUSB;
 

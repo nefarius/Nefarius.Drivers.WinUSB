@@ -12,55 +12,10 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Windows.Win32.Devices.Usb;
 using Microsoft.Win32.SafeHandles;
 
 namespace Nefarius.Drivers.WinUSB.API;
-
-[StructLayout(LayoutKind.Sequential)]
-internal struct USB_DEVICE_DESCRIPTOR
-{
-    public byte bLength;
-    public byte bDescriptorType;
-    public ushort bcdUSB;
-    public byte bDeviceClass;
-    public byte bDeviceSubClass;
-    public byte bDeviceProtocol;
-    public byte bMaxPacketSize0;
-    public ushort idVendor;
-    public ushort idProduct;
-    public ushort bcdDevice;
-    public byte iManufacturer;
-    public byte iProduct;
-    public byte iSerialNumber;
-    public byte bNumConfigurations;
-}
-
-[StructLayout(LayoutKind.Sequential)]
-internal struct USB_CONFIGURATION_DESCRIPTOR
-{
-    public byte bLength;
-    public byte bDescriptorType;
-    public ushort wTotalLength;
-    public byte bNumInterfaces;
-    public byte bConfigurationValue;
-    public byte iConfiguration;
-    public byte bmAttributes;
-    public byte MaxPower;
-}
-
-[StructLayout(LayoutKind.Sequential)]
-internal struct USB_INTERFACE_DESCRIPTOR
-{
-    public byte bLength;
-    public byte bDescriptorType;
-    public byte bInterfaceNumber;
-    public byte bAlternateSetting;
-    public byte bNumEndpoints;
-    public byte bInterfaceClass;
-    public byte bInterfaceSubClass;
-    public byte bInterfaceProtocol;
-    public byte iInterface;
-}
 
 internal enum USBD_PIPE_TYPE
 {
