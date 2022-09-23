@@ -1,2 +1,9 @@
 ﻿WIN32_ERROR
 CreateFile
+SetupDiDestroyDeviceInfoList
+SetupDiEnumDeviceInterfaces
+SetupDiGetDeviceRegistryProperty
+SetupDiGetDeviceRegistryProperty
+SetupDiGetClassDevs
+SetupDiGetDeviceInterfaceDetail
+SetupDiGetDeviceInterfaceDetail

@@ -17,7 +17,7 @@
     <Company>Madwizard.org</Company>
     <Authors>Thomas Bleeker, Benjamin "Nefarius" Höglinger-Stelzer</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>AnyCPU;x64;x86</Platforms>
     <OutputPath>$(SolutionDir)bin\</OutputPath>
     <PackageIcon>NSS-128x128.png</PackageIcon>
     <PackageIconUrl />
