@@ -14,7 +14,9 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using Windows.Win32;
 using Windows.Win32.Devices.Usb;
+using Windows.Win32.Storage.FileSystem;
 using Microsoft.Win32.SafeHandles;
 
 namespace Nefarius.Drivers.WinUSB.API;
@@ -154,19 +156,22 @@ internal partial class WinUSBDevice : IDisposable
             throw APIException.Win32("Control transfer on WinUSB device failed.");
         return (int)bytesReturned;
     }
-
-
-    public void OpenDevice(string devicePathName)
+    
+    public unsafe void OpenDevice(string devicePathName)
     {
         try
         {
-            _deviceHandle = FileIO.CreateFile(devicePathName,
-                FileIO.GENERIC_WRITE | FileIO.GENERIC_READ,
-                FileIO.FILE_SHARE_READ | FileIO.FILE_SHARE_WRITE,
-                IntPtr.Zero,
-                FileIO.OPEN_EXISTING,
-                FileIO.FILE_ATTRIBUTE_NORMAL | FileIO.FILE_FLAG_OVERLAPPED,
-                0);
+            _deviceHandle = PInvoke.CreateFile(
+                devicePathName,
+                FILE_ACCESS_FLAGS.FILE_GENERIC_READ | FILE_ACCESS_FLAGS.FILE_GENERIC_WRITE,
+                FILE_SHARE_MODE.FILE_SHARE_READ | FILE_SHARE_MODE.FILE_SHARE_WRITE,
+                null,
+                FILE_CREATION_DISPOSITION.OPEN_EXISTING,
+                FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_NORMAL
+                | FILE_FLAGS_AND_ATTRIBUTES.FILE_FLAG_OVERLAPPED,
+            null
+            );
+
             if (_deviceHandle.IsInvalid)
                 throw APIException.Win32("Failed to open WinUSB device handle.");
             InitializeDevice();
