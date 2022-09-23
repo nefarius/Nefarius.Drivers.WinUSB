@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Xml.Serialization;
 using Windows.Win32;
 using Windows.Win32.Devices.Usb;
 using Windows.Win32.Foundation;
