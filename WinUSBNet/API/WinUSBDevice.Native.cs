@@ -42,10 +42,6 @@ internal partial class WinUSBDevice
     private static extern bool WinUsb_QueryInterfaceSettings(IntPtr InterfaceHandle, Byte AlternateInterfaceNumber,
         out USB_INTERFACE_DESCRIPTOR UsbAltInterfaceDescriptor);
 
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_QueryPipe(IntPtr InterfaceHandle, Byte AlternateInterfaceNumber, Byte PipeIndex,
-        out WINUSB_PIPE_INFORMATION PipeInformation);
-
     //  Two declarations for WinUsb_SetPipePolicy.
     //  Use this one when the returned Value is a Byte (all except PIPE_TRANSFER_TIMEOUT):
 

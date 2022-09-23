@@ -111,7 +111,7 @@ internal partial class WinUSBDevice : IDisposable
             return length;
         }
     }
-    
+
     private IntPtr InterfaceHandle(int index)
     {
         if (index == 0)
@@ -119,7 +119,7 @@ internal partial class WinUSBDevice : IDisposable
         return _addInterfaces[index - 1];
     }
 
-    public void GetInterfaceInfo(int interfaceIndex, out USB_INTERFACE_DESCRIPTOR descriptor,
+    public unsafe void GetInterfaceInfo(int interfaceIndex, out USB_INTERFACE_DESCRIPTOR descriptor,
         out WINUSB_PIPE_INFORMATION[] pipes)
     {
         var pipeList = new List<WINUSB_PIPE_INFORMATION>();
@@ -131,7 +131,7 @@ internal partial class WinUSBDevice : IDisposable
         for (byte pipeIdx = 0; pipeIdx < descriptor.bNumEndpoints; pipeIdx++)
         {
             WINUSB_PIPE_INFORMATION pipeInfo;
-            success = WinUsb_QueryPipe(interfaceHandle, 0, pipeIdx, out pipeInfo);
+            success = PInvoke.WinUsb_QueryPipe(interfaceHandle.ToPointer(), 0, pipeIdx, &pipeInfo);
 
             pipeList.Add(pipeInfo);
             if (!success)
@@ -185,7 +185,7 @@ internal partial class WinUSBDevice : IDisposable
         // TODO: bind interface handles as well? doesn't seem to be necessary
     }
 
-    private unsafe void HandleOverlappedAPI(bool success, string errorMessage, NativeOverlapped* pOverlapped,
+    private static unsafe void HandleOverlappedApi(bool success, string errorMessage, NativeOverlapped* pOverlapped,
         USBAsyncResult result, int bytesTransferred)
     {
         if (!success)
@@ -207,7 +207,7 @@ internal partial class WinUSBDevice : IDisposable
             // is the callback still called in this case?? todo
         }
     }
-    
+
     private unsafe void PipeIOCallback(uint errorCode, uint numBytes, NativeOverlapped* pOverlapped)
     {
         try

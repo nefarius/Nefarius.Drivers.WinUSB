@@ -161,7 +161,7 @@ internal partial class WinUSBDevice
                 &bytesRead, pOverlapped);
         }
 
-        HandleOverlappedAPI(success, "Failed to asynchronously read pipe on WinUSB device.", pOverlapped, result,
+        HandleOverlappedApi(success, "Failed to asynchronously read pipe on WinUSB device.", pOverlapped, result,
             (int)bytesRead);
     }
 
@@ -188,7 +188,7 @@ internal partial class WinUSBDevice
                 &bytesWritten, pOverlapped);
         }
 
-        HandleOverlappedAPI(success, "Failed to asynchronously write pipe on WinUSB device.", pOverlapped, result,
+        HandleOverlappedApi(success, "Failed to asynchronously write pipe on WinUSB device.", pOverlapped, result,
             (int)bytesWritten);
     }
 
@@ -216,7 +216,7 @@ internal partial class WinUSBDevice
             var success =
                 PInvoke.WinUsb_ControlTransfer(_winUsbHandle.ToPointer(), setupPacket, pBuffer, length, &bytesReturned,
                     pOverlapped);
-            HandleOverlappedAPI(success, "Asynchronous control transfer on WinUSB device failed.", pOverlapped, result,
+            HandleOverlappedApi(success, "Asynchronous control transfer on WinUSB device failed.", pOverlapped, result,
                 (int)bytesReturned);
         }
     }
