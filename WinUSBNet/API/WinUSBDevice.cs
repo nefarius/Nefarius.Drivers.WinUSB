@@ -276,7 +276,7 @@ internal partial class WinUSBDevice : IDisposable
     }
 
     private unsafe void HandleOverlappedAPI(bool success, string errorMessage, NativeOverlapped* pOverlapped,
-        USBAsyncResult result, int bytesTransfered)
+        USBAsyncResult result, int bytesTransferred)
     {
         if (!success)
         {
@@ -293,7 +293,7 @@ internal partial class WinUSBDevice : IDisposable
             Overlapped.Unpack(pOverlapped);
             Overlapped.Free(pOverlapped);
 
-            result.OnCompletion(true, null, bytesTransfered, false);
+            result.OnCompletion(true, null, bytesTransferred, false);
             // is the callback still called in this case?? todo
         }
     }

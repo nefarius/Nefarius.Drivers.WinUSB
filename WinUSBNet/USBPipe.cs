@@ -6,7 +6,9 @@
  */
 
 using System;
+#if !NET35
 using System.Threading.Tasks;
+#endif
 using Windows.Win32.Devices.Usb;
 using Nefarius.Drivers.WinUSB.API;
 
