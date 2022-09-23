@@ -242,11 +242,9 @@ internal partial class WinUSBDevice : IDisposable
         pipes = pipeList.ToArray();
     }
 
-    private void InitializeDevice()
+    private unsafe void InitializeDevice()
     {
-        bool success;
-
-        success = WinUsb_Initialize(_deviceHandle, ref _winUsbHandle);
+        var success = WinUsb_Initialize(_deviceHandle, ref _winUsbHandle);
 
         if (!success)
             throw APIException.Win32("Failed to initialize WinUSB handle. Device might not be connected.");
@@ -259,8 +257,8 @@ internal partial class WinUSBDevice : IDisposable
         {
             while (true)
             {
-                var ifaceHandle = IntPtr.Zero;
-                success = WinUsb_GetAssociatedInterface(_winUsbHandle, idx, out ifaceHandle);
+                void* ifaceHandle = null;
+                success = PInvoke.WinUsb_GetAssociatedInterface(_winUsbHandle.ToPointer(), idx, &ifaceHandle);
                 if (!success)
                 {
                     if (Marshal.GetLastWin32Error() == ERROR_NO_MORE_ITEMS)
@@ -269,7 +267,7 @@ internal partial class WinUSBDevice : IDisposable
                     throw APIException.Win32("Failed to enumerate interfaces for WinUSB device.");
                 }
 
-                interfaces.Add(ifaceHandle);
+                interfaces.Add(new IntPtr(ifaceHandle));
                 idx++;
                 numAddInterfaces++;
             }

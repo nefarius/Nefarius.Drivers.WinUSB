@@ -97,10 +97,6 @@ internal partial class WinUSBDevice
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_FlushPipe(IntPtr InterfaceHandle, byte PipeID);
 
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_GetAssociatedInterface(IntPtr InterfaceHandle, byte AssociatedInterfaceIndex,
-        out IntPtr AssociatedInterfaceHandle);
-
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     private struct WINUSB_SETUP_PACKET
     {
