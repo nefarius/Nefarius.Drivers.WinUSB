@@ -143,6 +143,7 @@ internal partial class WinUSBDevice
     public unsafe void ReadPipeOverlapped(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToRead,
         USBAsyncResult result)
     {
+        // TODO: heap allocation every call?
         var overlapped = new Overlapped
         {
             AsyncResult = result
@@ -169,6 +170,7 @@ internal partial class WinUSBDevice
     public unsafe void WriteOverlapped(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToWrite,
         USBAsyncResult result)
     {
+        // TODO: heap allocation every call?
         var overlapped = new Overlapped
         {
             AsyncResult = result
@@ -206,8 +208,11 @@ internal partial class WinUSBDevice
         setupPacket.Index = index;
         setupPacket.Length = length;
 
-        var overlapped = new Overlapped();
-        overlapped.AsyncResult = result;
+        // TODO: heap allocation every call?
+        var overlapped = new Overlapped
+        {
+            AsyncResult = result
+        };
 
         fixed (byte* pBuffer = data)
         {
