@@ -17,7 +17,6 @@ TBD
 
 - [Library reference online](http://madwizard-thomas.github.io/winusbnet/docs/)
 - [Online wiki with short howto](https://github.com/madwizard-thomas/winusbnet/wiki)
-- [Changelog](Changelog.md)
 - [WinUSB overview](https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/winusb)
 - [How to Access a USB Device by Using WinUSB Functions](https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/-using-winusb-api-to-communicate-with-a-usb-device)
 - [Jan Axelson's page on WinUSB](http://janaxelson.com/winusb.htm)
