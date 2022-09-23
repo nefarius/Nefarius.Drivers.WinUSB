@@ -30,9 +30,6 @@ internal enum POLICY_TYPE
 
 internal partial class WinUSBDevice
 {
-    private const int USB_DEVICE_DESCRIPTOR_TYPE = 0x01;
-    private const int USB_STRING_DESCRIPTOR_TYPE = 0x03;
-
     private const int ERROR_NO_MORE_ITEMS = 259;
 
     [DllImport("winusb.dll", SetLastError = true)]
