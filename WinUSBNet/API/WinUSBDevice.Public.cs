@@ -222,9 +222,9 @@ internal partial class WinUSBDevice
     }
 
     [UsedImplicitly]
-    public void AbortPipe(int @interface, byte pipeId)
+    public unsafe void AbortPipe(int interfaceIndex, byte pipeId)
     {
-        var success = WinUsb_AbortPipe(InterfaceHandle(@interface), pipeId);
+        var success = PInvoke.WinUsb_AbortPipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId);
         if (!success)
             throw APIException.Win32("Failed to abort pipe on WinUSB device.");
     }
@@ -247,9 +247,9 @@ internal partial class WinUSBDevice
     }
 
     [UsedImplicitly]
-    public void FlushPipe(int interfaceIndex, byte pipeId)
+    public unsafe void FlushPipe(int interfaceIndex, byte pipeId)
     {
-        var success = WinUsb_FlushPipe(InterfaceHandle(interfaceIndex), pipeId);
+        var success = PInvoke.WinUsb_FlushPipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId);
         if (!success)
             throw APIException.Win32("Failed to flush pipe on WinUSB device.");
     }

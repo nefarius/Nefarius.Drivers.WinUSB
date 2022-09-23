@@ -46,9 +46,6 @@ internal partial class WinUSBDevice
     private static extern bool WinUsb_QueryPipe(IntPtr InterfaceHandle, Byte AlternateInterfaceNumber, Byte PipeIndex,
         out WINUSB_PIPE_INFORMATION PipeInformation);
 
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_AbortPipe(IntPtr InterfaceHandle, byte PipeID);
-
     //  Two declarations for WinUsb_SetPipePolicy.
     //  Use this one when the returned Value is a Byte (all except PIPE_TRANSFER_TIMEOUT):
 
@@ -69,7 +66,4 @@ internal partial class WinUSBDevice
     [DllImport("winusb.dll", SetLastError = true)]
     private static extern bool WinUsb_GetPipePolicy(IntPtr InterfaceHandle, Byte PipeID, UInt32 PolicyType,
         ref UInt32 ValueLength, out UInt32 Value);
-
-    [DllImport("winusb.dll", SetLastError = true)]
-    private static extern bool WinUsb_FlushPipe(IntPtr InterfaceHandle, byte PipeID);
 }
