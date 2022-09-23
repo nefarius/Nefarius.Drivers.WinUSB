@@ -325,7 +325,7 @@ namespace Nefarius.Drivers.WinUSB
                 if (result.Error != null)
                     throw new USBException("Asynchronous control transfer from pipe has failed.", result.Error);
 
-                return result.BytesTransfered;
+                return result.BytesTransferred;
             }
             finally
             {

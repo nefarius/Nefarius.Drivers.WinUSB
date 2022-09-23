@@ -219,7 +219,7 @@ namespace Nefarius.Drivers.WinUSB
                 if (result.Error != null)
                     throw new USBException("Asynchronous read from pipe has failed.", result.Error);
 
-                return result.BytesTransfered;
+                return result.BytesTransferred;
             }
             finally
             {
@@ -321,7 +321,7 @@ namespace Nefarius.Drivers.WinUSB
                 if (result.Error != null)
                     throw new USBException("Asynchronous write to pipe has failed.", result.Error);
 
-                return result.BytesTransfered;
+                return result.BytesTransferred;
             }
             finally
             {
