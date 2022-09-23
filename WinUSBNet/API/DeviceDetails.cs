@@ -5,14 +5,13 @@
  *  http://www.opensource.org/licenses/mit-license.php
  */
 
-namespace MadWizard.WinUSBNet.API
+namespace MadWizard.WinUSBNet.API;
+
+internal struct DeviceDetails
 {
-    internal struct DeviceDetails
-    {
-        public string DevicePath;
-        public string Manufacturer;
-        public string DeviceDescription;
-        public ushort VID;
-        public ushort PID;
-    }
+    public string DevicePath;
+    public string Manufacturer;
+    public string DeviceDescription;
+    public ushort VID;
+    public ushort PID;
 }
