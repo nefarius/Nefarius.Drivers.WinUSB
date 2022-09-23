@@ -39,22 +39,7 @@ namespace MadWizard.WinUSBNet.API
             internal Int32 DevInst;
             internal IntPtr Reserved;
         }
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct POINT
-        {
-            long x;
-            long y;
-        }
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct MSG
-        {
-            IntPtr hwnd;
-            uint message;
-            UIntPtr wParam;
-            IntPtr lParam;
-            int time;
-            POINT pt;
-        }
+       
         // from pinvoke.net
         private enum SPDRP : uint
         {
