@@ -25,7 +25,7 @@ namespace Nefarius.Drivers.WinUSB.API;
 /// </summary>
 internal static partial class DeviceManagement
 {
-    private static byte[] GetProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, SPDRP property,
+    private static byte[] GetProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, uint property,
         out int regType)
     {
         uint requiredSize;
@@ -45,7 +45,7 @@ internal static partial class DeviceManagement
     }
 
     // todo: is the queried data always available, or should we check ERROR_INVALID_DATA?
-    private static string GetStringProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, SPDRP property)
+    private static string GetStringProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, uint property)
     {
         int regType;
         var buffer = GetProperty(deviceInfoSet, deviceInfoData, property, out regType);
@@ -56,7 +56,7 @@ internal static partial class DeviceManagement
         return Encoding.Unicode.GetString(buffer, 0, buffer.Length - sizeof(char));
     }
 
-    private static string[] GetMultiStringProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, SPDRP property)
+    private static string[] GetMultiStringProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, uint property)
     {
         int regType;
         var buffer = GetProperty(deviceInfoSet, deviceInfoData, property, out regType);
@@ -73,9 +73,9 @@ internal static partial class DeviceManagement
     {
         var details = new DeviceDetails();
         details.DevicePath = devicePath;
-        details.DeviceDescription = GetStringProperty(deviceInfoSet, deviceInfoData, SPDRP.SPDRP_DEVICEDESC);
-        details.Manufacturer = GetStringProperty(deviceInfoSet, deviceInfoData, SPDRP.SPDRP_MFG);
-        var hardwareIDs = GetMultiStringProperty(deviceInfoSet, deviceInfoData, SPDRP.SPDRP_HARDWAREID);
+        details.DeviceDescription = GetStringProperty(deviceInfoSet, deviceInfoData, PInvoke.SPDRP_DEVICEDESC);
+        details.Manufacturer = GetStringProperty(deviceInfoSet, deviceInfoData, PInvoke.SPDRP_MFG);
+        var hardwareIDs = GetMultiStringProperty(deviceInfoSet, deviceInfoData, PInvoke.SPDRP_HARDWAREID);
 
         var regex = new Regex("^USB\\\\VID_([0-9A-F]{4})&PID_([0-9A-F]{4})", RegexOptions.IgnoreCase);
         var foundVidPid = false;
