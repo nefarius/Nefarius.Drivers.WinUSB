@@ -15,6 +15,8 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 
 namespace Nefarius.Drivers.WinUSB.API;
 
@@ -30,7 +32,7 @@ internal static partial class DeviceManagement
 
         if (!SetupDiGetDeviceRegistryProperty(deviceInfoSet, ref deviceInfoData, property, IntPtr.Zero, IntPtr.Zero, 0,
                 out requiredSize))
-            if (Marshal.GetLastWin32Error() != ERROR_INSUFFICIENT_BUFFER)
+            if (Marshal.GetLastWin32Error() != (int)WIN32_ERROR.ERROR_INSUFFICIENT_BUFFER)
                 throw APIException.Win32("Failed to get buffer size for device registry property.");
 
         var buffer = new byte[requiredSize];
@@ -103,7 +105,7 @@ internal static partial class DeviceManagement
         try
         {
             deviceInfoSet = SetupDiGetClassDevs(ref guid, IntPtr.Zero, IntPtr.Zero,
-                DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
+                (int)(PInvoke.DIGCF_PRESENT | PInvoke.DIGCF_DEVICEINTERFACE));
             if (deviceInfoSet == FileIO.INVALID_HANDLE_VALUE)
                 throw APIException.Win32("Failed to enumerate devices.");
             var memberIndex = 0;
@@ -127,7 +129,7 @@ internal static partial class DeviceManagement
                 if (!success)
                 {
                     var lastError = Marshal.GetLastWin32Error();
-                    if (lastError == ERROR_NO_MORE_ITEMS)
+                    if (lastError == (int)WIN32_ERROR.ERROR_NO_MORE_ITEMS)
                         break;
 
                     throw APIException.Win32("Failed to get device interface.");
@@ -145,7 +147,7 @@ internal static partial class DeviceManagement
                     IntPtr.Zero);
 
                 if (!success)
-                    if (Marshal.GetLastWin32Error() != ERROR_INSUFFICIENT_BUFFER)
+                    if (Marshal.GetLastWin32Error() != (int)WIN32_ERROR.ERROR_INSUFFICIENT_BUFFER)
                         throw APIException.Win32("Failed to get interface details buffer size.");
 
                 var detailDataBuffer = IntPtr.Zero;

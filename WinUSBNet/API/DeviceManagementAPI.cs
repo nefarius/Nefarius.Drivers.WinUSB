@@ -22,9 +22,6 @@ namespace Nefarius.Drivers.WinUSB.API
     {
         // from setupapi.h
 
-        private const Int32 DIGCF_PRESENT = 2;
-        private const Int32 DIGCF_DEVICEINTERFACE = 0X10;
-
         private struct SP_DEVICE_INTERFACE_DATA
         {
             internal Int32 cbSize;
@@ -94,8 +91,5 @@ namespace Nefarius.Drivers.WinUSB.API
 
         [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern bool SetupDiGetDeviceInterfaceDetail(IntPtr DeviceInfoSet, ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData, IntPtr DeviceInterfaceDetailData, Int32 DeviceInterfaceDetailDataSize, ref Int32 RequiredSize, IntPtr DeviceInfoData);
-
-        private const int ERROR_NO_MORE_ITEMS = 259;
-        private const int ERROR_INSUFFICIENT_BUFFER = 122;
     }
 }
