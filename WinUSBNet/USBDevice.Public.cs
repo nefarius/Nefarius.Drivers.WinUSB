@@ -292,12 +292,12 @@ public partial class USBDevice
     ///     The <see cref="IAsyncResult" /> object representing the asynchronous operation,
     ///     as returned by one of the ControlIn, ControlOut or ControlTransfer methods.
     /// </param>
-    /// <returns>The number of bytes transfered during the operation.</returns>
+    /// <returns>The number of bytes transferred during the operation.</returns>
     /// <remarks>
     ///     Every asynchronous control transfer must have a matching call to <see cref="EndControlTransfer" /> to dispose
     ///     of any resources used and to retrieve the result of the operation. When the operation was successful the method
     ///     returns the number
-    ///     of bytes that were transfered. If an error occurred during the operation this method will throw the exceptions that
+    ///     of bytes that were transferred. If an error occurred during the operation this method will throw the exceptions that
     ///     would
     ///     otherwise have occurred during the operation. If the operation is not yet finished EndControlTransfer will wait for
     ///     the
@@ -415,7 +415,7 @@ public partial class USBDevice
     ///     Length of the data to transfer. A buffer will be created with this length and the length member of the setup packet
     ///     will be set to this length.
     /// </param>
-    /// <returns>A buffer containing the data transfered.</returns>
+    /// <returns>A buffer containing the data transferred.</returns>
     /// <remarks>
     ///     This routine initially allocates a buffer to hold the <paramref name="length" /> bytes of data expected from the
     ///     device.
@@ -456,7 +456,7 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    /// <param name="buffer">The buffer that will receive the data transfered.</param>
+    /// <param name="buffer">The buffer that will receive the data transferred.</param>
     /// <param name="length">
     ///     Length of the data to transfer. The length member of the setup packet will be set to this length. The buffer
     ///     specified
@@ -475,7 +475,7 @@ public partial class USBDevice
     ///     by the highest bit
     ///     of the <paramref name="requestType" /> parameter). The length of buffer given by the <paramref name="buffer" />
     ///     parameter will dictate
-    ///     the number of bytes that are transfered and the value of the setup packet's length member.
+    ///     the number of bytes that are transferred and the value of the setup packet's length member.
     /// </summary>
     /// <param name="requestType">
     ///     The setup packet request type. The request type must specify the IN direction (highest bit
@@ -491,7 +491,7 @@ public partial class USBDevice
     ///     zero and 65535 (0xFFFF).
     /// </param>
     /// <param name="buffer">
-    ///     The buffer that will receive the data transfered. The length of this buffer will be the number of
+    ///     The buffer that will receive the data transferred. The length of this buffer will be the number of
     ///     bytes transferred.
     /// </param>
     /// <returns>The number of bytes received from the device.</returns>
@@ -578,7 +578,7 @@ public partial class USBDevice
     ///     zero and 65535 (0xFFFF).
     /// </param>
     /// <param name="buffer">
-    ///     A buffer containing the data to transfer in the data stage. The complete buffer is transfered. The setup packet's
+    ///     A buffer containing the data to transfer in the data stage. The complete buffer is transferred. The setup packet's
     ///     length
     ///     parameter is set to the length of this buffer.
     /// </param>
@@ -686,7 +686,7 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    /// <param name="buffer">The buffer that will receive the data transfered.</param>
+    /// <param name="buffer">The buffer that will receive the data transferred.</param>
     /// <param name="length">
     ///     Length of the data to transfer. Must be equal to or less than the length of
     ///     <paramref name="buffer" />. The setup packet's length member will be set to this length.
@@ -742,7 +742,7 @@ public partial class USBDevice
     ///     zero and 65535 (0xFFFF).
     /// </param>
     /// <param name="buffer">
-    ///     The buffer that will receive the data transfered. The setup packet's length member will be set to
+    ///     The buffer that will receive the data transferred. The setup packet's length member will be set to
     ///     the length of this buffer.
     /// </param>
     /// <param name="userCallback">
@@ -846,7 +846,7 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    /// <param name="buffer">The buffer that contains the data to be transfered.</param>
+    /// <param name="buffer">The buffer that contains the data to be transferred.</param>
     /// <param name="length">
     ///     Length of the data to transfer. Must be equal to or less than the length of
     ///     <paramref name="buffer" />. The setup packet's length member will be set to this length.
@@ -902,7 +902,7 @@ public partial class USBDevice
     ///     zero and 65535 (0xFFFF).
     /// </param>
     /// <param name="buffer">
-    ///     The buffer that contains the data to be transfered. The setup packet's length member will be set
+    ///     The buffer that contains the data to be transferred. The setup packet's length member will be set
     ///     to the length of this buffer.
     /// </param>
     /// <param name="userCallback">
@@ -1250,7 +1250,7 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    /// <param name="buffer">The buffer that will receive the data transfered.</param>
+    /// <param name="buffer">The buffer that will receive the data transferred.</param>
     /// <param name="length">
     ///     Length of the data to transfer. Must be equal to or less than the length of
     ///     <paramref name="buffer" />. The setup packet's length member will be set to this length.
@@ -1297,7 +1297,7 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    /// <param name="buffer">The buffer that will receive the data transfered.</param>
+    /// <param name="buffer">The buffer that will receive the data transferred.</param>
     /// <returns>
     ///     A task that represents the asynchronous input operation.
     ///     The value of the TResult parameter contains the total number of bytes that has been transferred.
@@ -1382,7 +1382,7 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    /// <param name="buffer">The buffer that contains the data to be transfered.</param>
+    /// <param name="buffer">The buffer that contains the data to be transferred.</param>
     /// <param name="length">
     ///     Length of the data to transfer. Must be equal to or less than the length of
     ///     <paramref name="buffer" />. The setup packet's length member will be set to this length.
@@ -1429,7 +1429,7 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    /// <param name="buffer">The buffer that contains the data to be transfered.</param>
+    /// <param name="buffer">The buffer that contains the data to be transferred.</param>
     /// <returns>
     ///     A task that represents the asynchronous output operation.
     ///     The value of the TResult parameter contains the total number of bytes that has been transferred.

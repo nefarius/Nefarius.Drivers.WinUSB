@@ -44,8 +44,9 @@ public partial class USBDevice : IDisposable
             return;
 
         if (disposing)
-            if (InternalDevice != null)
-                InternalDevice.Dispose();
+        {
+            InternalDevice?.Dispose();
+        }
 
         // Clean unmanaged resources here.
         // (none currently)
@@ -97,27 +98,24 @@ public partial class USBDevice : IDisposable
         if (length > ushort.MaxValue)
             throw new ArgumentOutOfRangeException(nameof(length), "Length too large");
     }
-
-
-    private void CheckIn(byte requestType)
+    
+    private static void CheckIn(byte requestType)
     {
         if ((requestType & 0x80) == 0) // Host to device?
             throw new ArgumentException("Request type is not IN.");
     }
 
-    private void CheckOut(byte requestType)
+    private static void CheckOut(byte requestType)
     {
         if ((requestType & 0x80) == 0x80) // Device to host?
             throw new ArgumentException("Request type is not OUT.");
     }
-
 
     private void CheckNotDisposed()
     {
         if (_disposed)
             throw new ObjectDisposedException("USB device object has been disposed.");
     }
-
 
     private static USBDeviceDescriptor GetDeviceDescriptor(string devicePath)
     {
