@@ -4,7 +4,7 @@
 
 > *This is a fork of the fantastic [`MadWizard.WinUSBNet`](https://github.com/snikeguo/winusbnet) project by Thomas Bleeker and contributors.*
 
-TBD
+Managed wrapper for the [WinUSB APIs](https://learn.microsoft.com/en-us/windows-hardware/drivers/usbcon/winusb) on Microsoft Windows.
 
 ## Changes of this fork
 
