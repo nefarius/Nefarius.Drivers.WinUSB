@@ -284,7 +284,7 @@ public partial class USBDevice
         return BeginControlTransfer(requestType, request, value, index, buffer, buffer.Length, userCallback,
             stateObject);
     }
-    
+
     /// <summary>
     ///     Waits for a pending asynchronous control transfer to complete.
     /// </summary>
@@ -389,7 +389,11 @@ public partial class USBDevice
     public void ControlTransfer(byte requestType, byte request, int value, int index)
     {
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
+#if NETSTANDARD2_0_OR_GREATER
+        ControlTransfer(requestType, request, value, index, Array.Empty<byte>(), 0);
+#else
         ControlTransfer(requestType, request, value, index, new byte[0], 0);
+#endif
     }
 
     /// <summary>
@@ -525,7 +529,11 @@ public partial class USBDevice
     {
         CheckIn(requestType);
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
+#if NETSTANDARD2_0_OR_GREATER
+        ControlTransfer(requestType, request, value, index, Array.Empty<byte>());
+#else
         ControlTransfer(requestType, request, value, index, new byte[0]);
+#endif
     }
 
     /// <summary>
@@ -612,7 +620,11 @@ public partial class USBDevice
     {
         CheckOut(requestType);
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
+#if NETSTANDARD2_0_OR_GREATER
+        ControlTransfer(requestType, request, value, index, Array.Empty<byte>());
+#else
         ControlTransfer(requestType, request, value, index, new byte[0]);
+#endif
     }
 
     /// <summary>
@@ -991,7 +1003,11 @@ public partial class USBDevice
     {
         CheckOut(requestType);
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
+#if NETSTANDARD2_0_OR_GREATER
+        return BeginControlTransfer(requestType, request, value, index, Array.Empty<byte>(), userCallback, stateObject);
+#else
         return BeginControlTransfer(requestType, request, value, index, new byte[0], userCallback, stateObject);
+#endif
     }
 
     /// <summary>
