@@ -13,6 +13,8 @@ TBD
 
 ## Features
 
+> *Taken verbatim from [the source repository](https://github.com/snikeguo/winusbnet/blob/master/README.md).*
+
 - MIT licensed with C# source code available (free for both personal and commercial use)
 - CLS compliant library (usable from all .NET languages such as C#, VB.NET and C++.NET)
 - Synchronous and asynchronous data transfers
