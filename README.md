@@ -2,6 +2,8 @@
 
 # Nefarius.Drivers.WinUSB
 
+> *This is a fork of the fantastic [`MadWizard.WinUSBNet`](https://github.com/snikeguo/winusbnet) project by Thomas Bleeker and contributors.*
+
 TBD
 
 ## Changes of this fork
