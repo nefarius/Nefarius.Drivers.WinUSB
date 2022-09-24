@@ -665,7 +665,12 @@ public partial class USBDevice
         AsyncCallback userCallback, object stateObject)
     {
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
+#if NETSTANDARD2_0_OR_GREATER
+        return BeginControlTransfer(requestType, request, value, index, Array.Empty<byte>(), 0, userCallback,
+            stateObject);
+#else
         return BeginControlTransfer(requestType, request, value, index, new byte[0], 0, userCallback, stateObject);
+#endif
     }
 
     /// <summary>
