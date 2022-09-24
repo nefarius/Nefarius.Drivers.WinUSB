@@ -1,31 +1,35 @@
-# WinUSBNet
+<img src="assets/NSS-128x128.png" align="right" />
 
-WinUSBNet is a .NET class library that provides easy access to the WinUSB API from C#, VB.NET and other .NET languages. WinUSB is a user mode API available for Windows XP, Vista and 7 (XP will require an update), allowing low level access to USB devices such as control transfers and reading from and writing to endpoints.
+# Nefarius.Drivers.WinUSB
 
-Please note that there is at least one different project with the same name (at codeplex), this libary is not related.
+> *This is a fork of the fantastic [`MadWizard.WinUSBNet`](https://github.com/snikeguo/winusbnet) project by Thomas Bleeker and contributors.*
 
-## Download
+[![Build status](https://ci.appveyor.com/api/projects/status/rqfsoto1qpd0456f?svg=true)](https://ci.appveyor.com/project/nefarius/nefarius-drivers-winusb)
 
-[Download latest release](https://github.com/madwizard-thomas/winusbnet/releases/latest)
+Managed wrapper for the [WinUSB APIs](https://learn.microsoft.com/en-us/windows-hardware/drivers/usbcon/winusb) on Microsoft Windows.
 
-## Status
+## Changes of this fork
 
-The library is *stable*. If you find any bugs or problems please report them using the issue tracker or add a pull request if you have fixed something yourself.
+- Replaced P/Invoke code with [source generators](https://github.com/microsoft/CsWin32)
+- Changed namespace to `Nefarius.Drivers.WinUSB` to avoid conflicts with the origin library
+- Removed device notification listener as my other lib [`Nefarius.Utilities.DeviceManagement`](https://github.com/nefarius/Nefarius.Utilities.DeviceManagement) provides a drop-in replacement without depending on WinForms or WPF
+- Added `USBDevice::GetSingleDeviceByPath` to allow opening a WinUSB device via device path (symbolic link)
 
 ## Features
 
-  * MIT licensed with C# source code available (free for both personal and commercial use)
-  * CLS compliant library (usable from all .NET languages such as C#, VB.NET and C++.NET)
-  * Synchronous and asynchronous data transfers
-  * Support for 32-bit and 64-bit Windows versions
-  * Notification events for device attachment and removal
-  * Support for multiple interfaces and endpoints
-  * Intellisense documentation
+> *Taken verbatim from [the source repository](https://github.com/snikeguo/winusbnet/blob/master/README.md).*
+
+- MIT licensed with C# source code available (free for both personal and commercial use)
+- CLS compliant library (usable from all .NET languages such as C#, VB.NET and C++.NET)
+- Synchronous and asynchronous data transfers
+- Support for 32-bit and 64-bit Windows versions
+- Support for multiple interfaces and endpoints
+- Intellisense documentation
 
 ## Related documentation
-  * [Library reference online](http://madwizard-thomas.github.io/winusbnet/docs/)
-  * [Online wiki with short howto](https://github.com/madwizard-thomas/winusbnet/wiki)
-  * [Changelog](Changelog.md)
-  * [WinUSB overview](https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/winusb)
-  * [How to Access a USB Device by Using WinUSB Functions](https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/using-winusb-api-to-communicate-with-a-usb-device)
-  * [Jan Axelson's page on WinUSB](http://janaxelson.com/winusb.htm)
+
+- [Library reference online](http://madwizard-thomas.github.io/winusbnet/docs/)
+- [Online wiki with short howto](https://github.com/madwizard-thomas/winusbnet/wiki)
+- [WinUSB overview](https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/winusb)
+- [How to Access a USB Device by Using WinUSB Functions](https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/-using-winusb-api-to-communicate-with-a-usb-device)
+- [Jan Axelson's page on WinUSB](http://janaxelson.com/winusb.htm)
