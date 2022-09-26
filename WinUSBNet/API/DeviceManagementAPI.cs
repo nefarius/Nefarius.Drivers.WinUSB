@@ -45,9 +45,6 @@ namespace Nefarius.Drivers.WinUSB.API
         }
 
         [DllImport("setupapi.dll", SetLastError = true)]
-        private static extern Int32 SetupDiDestroyDeviceInfoList(IntPtr DeviceInfoSet);
-
-        [DllImport("setupapi.dll", SetLastError = true)]
         private static extern bool SetupDiEnumDeviceInterfaces(IntPtr DeviceInfoSet, IntPtr DeviceInfoData, ref System.Guid InterfaceClassGuid, Int32 MemberIndex, ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData);
 
         [DllImport("setupapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -55,9 +52,6 @@ namespace Nefarius.Drivers.WinUSB.API
 
         [DllImport("setupapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern bool SetupDiGetDeviceRegistryProperty(IntPtr DeviceInfoSet, ref SP_DEVINFO_DATA DeviceInfoData, uint Property, IntPtr PropertyRegDataType, IntPtr PropertyBuffer, uint PropertyBufferSize, out UInt32 RequiredSize);
-
-        [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        private static extern IntPtr SetupDiGetClassDevs(ref System.Guid ClassGuid, IntPtr Enumerator, IntPtr hwndParent, Int32 Flags);
 
         [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern bool SetupDiGetDeviceInterfaceDetail(IntPtr DeviceInfoSet, ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData, IntPtr DeviceInterfaceDetailData, Int32 DeviceInterfaceDetailDataSize, ref Int32 RequiredSize, ref SP_DEVINFO_DATA DeviceInfoData);
