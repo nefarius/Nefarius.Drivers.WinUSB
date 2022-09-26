@@ -25,6 +25,8 @@ namespace Nefarius.Drivers.WinUSB.API;
 /// </summary>
 internal static partial class DeviceManagement
 {
+    private static readonly IntPtr INVALID_HANDLE_VALUE = new(-1);
+
     private static byte[] GetProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, uint property,
         out int regType)
     {
@@ -106,7 +108,7 @@ internal static partial class DeviceManagement
         {
             deviceInfoSet = SetupDiGetClassDevs(ref guid, IntPtr.Zero, IntPtr.Zero,
                 (int)(PInvoke.DIGCF_PRESENT | PInvoke.DIGCF_DEVICEINTERFACE));
-            if (deviceInfoSet == FileIO.INVALID_HANDLE_VALUE)
+            if (deviceInfoSet == INVALID_HANDLE_VALUE)
                 throw APIException.Win32("Failed to enumerate devices.");
             var memberIndex = 0;
             while (true)
@@ -207,7 +209,7 @@ internal static partial class DeviceManagement
         }
         finally
         {
-            if (deviceInfoSet != IntPtr.Zero && deviceInfoSet != FileIO.INVALID_HANDLE_VALUE)
+            if (deviceInfoSet != IntPtr.Zero && deviceInfoSet != INVALID_HANDLE_VALUE)
                 SetupDiDestroyDeviceInfoList(deviceInfoSet);
         }
 
