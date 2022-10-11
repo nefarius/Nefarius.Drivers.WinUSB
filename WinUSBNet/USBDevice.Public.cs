@@ -120,7 +120,7 @@ public partial class USBDevice
     /// </param>
     /// <returns>The number of bytes received from the device.</returns>
     [UsedImplicitly]
-    public int ControlTransfer(byte requestType, byte request, int value, int index, byte[] buffer, int length)
+    public int ControlTransfer(byte requestType, byte request, int value, int index, Span<byte> buffer, int length)
     {
         // Parameters are int and not ushort because ushort is not CLS compliant.
         CheckNotDisposed();
@@ -358,7 +358,7 @@ public partial class USBDevice
     /// </param>
     /// <returns>The number of bytes received from the device.</returns>
     [UsedImplicitly]
-    public int ControlTransfer(byte requestType, byte request, int value, int index, byte[] buffer)
+    public int ControlTransfer(byte requestType, byte request, int value, int index, Span<byte> buffer)
     {
         return ControlTransfer(requestType, request, value, index, buffer, buffer.Length);
     }
@@ -387,11 +387,7 @@ public partial class USBDevice
     public void ControlTransfer(byte requestType, byte request, int value, int index)
     {
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
-#if NETSTANDARD2_0_OR_GREATER
         ControlTransfer(requestType, request, value, index, Array.Empty<byte>(), 0);
-#else
-        ControlTransfer(requestType, request, value, index, new byte[0], 0);
-#endif
     }
 
     /// <summary>
@@ -466,7 +462,7 @@ public partial class USBDevice
     /// </param>
     /// <returns>The number of bytes received from the device.</returns>
     [UsedImplicitly]
-    public int ControlIn(byte requestType, byte request, int value, int index, byte[] buffer, int length)
+    public int ControlIn(byte requestType, byte request, int value, int index, Span<byte> buffer, int length)
     {
         CheckIn(requestType);
         return ControlTransfer(requestType, request, value, index, buffer, length);
@@ -498,7 +494,7 @@ public partial class USBDevice
     /// </param>
     /// <returns>The number of bytes received from the device.</returns>
     [UsedImplicitly]
-    public int ControlIn(byte requestType, byte request, int value, int index, byte[] buffer)
+    public int ControlIn(byte requestType, byte request, int value, int index, Span<byte> buffer)
     {
         CheckIn(requestType);
         return ControlTransfer(requestType, request, value, index, buffer);
@@ -527,11 +523,7 @@ public partial class USBDevice
     {
         CheckIn(requestType);
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
-#if NETSTANDARD2_0_OR_GREATER
         ControlTransfer(requestType, request, value, index, Array.Empty<byte>());
-#else
-        ControlTransfer(requestType, request, value, index, new byte[0]);
-#endif
     }
 
     /// <summary>
@@ -559,7 +551,7 @@ public partial class USBDevice
     ///     The setup packet's length parameter is set to this length.
     /// </param>
     [UsedImplicitly]
-    public void ControlOut(byte requestType, byte request, int value, int index, byte[] buffer, int length)
+    public void ControlOut(byte requestType, byte request, int value, int index, Span<byte> buffer, int length)
     {
         CheckOut(requestType);
         ControlTransfer(requestType, request, value, index, buffer, length);
@@ -589,7 +581,7 @@ public partial class USBDevice
     ///     parameter is set to the length of this buffer.
     /// </param>
     [UsedImplicitly]
-    public void ControlOut(byte requestType, byte request, int value, int index, byte[] buffer)
+    public void ControlOut(byte requestType, byte request, int value, int index, Span<byte> buffer)
     {
         CheckOut(requestType);
         ControlTransfer(requestType, request, value, index, buffer);
@@ -618,11 +610,7 @@ public partial class USBDevice
     {
         CheckOut(requestType);
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
-#if NETSTANDARD2_0_OR_GREATER
         ControlTransfer(requestType, request, value, index, Array.Empty<byte>());
-#else
-        ControlTransfer(requestType, request, value, index, new byte[0]);
-#endif
     }
 
     /// <summary>
@@ -675,12 +663,8 @@ public partial class USBDevice
         AsyncCallback userCallback, object stateObject)
     {
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
-#if NETSTANDARD2_0_OR_GREATER
         return BeginControlTransfer(requestType, request, value, index, Array.Empty<byte>(), 0, userCallback,
             stateObject);
-#else
-        return BeginControlTransfer(requestType, request, value, index, new byte[0], 0, userCallback, stateObject);
-#endif
     }
 
     /// <summary>
@@ -1001,11 +985,7 @@ public partial class USBDevice
     {
         CheckOut(requestType);
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
-#if NETSTANDARD2_0_OR_GREATER
         return BeginControlTransfer(requestType, request, value, index, Array.Empty<byte>(), userCallback, stateObject);
-#else
-        return BeginControlTransfer(requestType, request, value, index, new byte[0], userCallback, stateObject);
-#endif
     }
 
     /// <summary>

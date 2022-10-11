@@ -86,11 +86,11 @@ public partial class USBDevice : IDisposable
         Interfaces = new USBInterfaceCollection(interfaces);
     }
 
-    private void CheckControlParams(int value, int index, byte[] buffer, int length)
+    private static void CheckControlParams(int value, int index, Span<byte> buffer, int length)
     {
-        if (value < ushort.MinValue || value > ushort.MaxValue)
+        if (value is < ushort.MinValue or > ushort.MaxValue)
             throw new ArgumentOutOfRangeException(nameof(value), "Value parameter out of range.");
-        if (index < ushort.MinValue || index > ushort.MaxValue)
+        if (index is < ushort.MinValue or > ushort.MaxValue)
             throw new ArgumentOutOfRangeException(nameof(index), "Index parameter out of range.");
         if (length > buffer.Length)
             throw new ArgumentOutOfRangeException(nameof(length),

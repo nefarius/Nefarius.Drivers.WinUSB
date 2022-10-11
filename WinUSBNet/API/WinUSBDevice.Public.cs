@@ -60,7 +60,7 @@ internal partial class WinUSBDevice
     }
 
     public unsafe int ControlTransfer(byte requestType, byte request, ushort value, ushort index, ushort length,
-        byte[] data)
+        Span<byte> data)
     {
         uint bytesReturned = 0;
         WINUSB_SETUP_PACKET setupPacket;
@@ -114,7 +114,7 @@ internal partial class WinUSBDevice
         }
     }
 
-    public unsafe void ReadPipe(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int bytesToRead,
+    public unsafe void ReadPipe(int interfaceIndex, byte pipeId, Span<byte> buffer, int offset, int bytesToRead,
         out uint bytesRead)
     {
         bool success;
@@ -223,7 +223,7 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to abort pipe on WinUSB device.");
     }
 
-    public unsafe void WritePipe(int interfaceIndex, byte pipeId, byte[] buffer, int offset, int length)
+    public unsafe void WritePipe(int interfaceIndex, byte pipeId, Span<byte> buffer, int offset, int length)
     {
         uint bytesWritten;
         bool success;
