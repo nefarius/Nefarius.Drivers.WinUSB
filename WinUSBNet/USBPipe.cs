@@ -6,9 +6,7 @@
  */
 
 using System;
-#if !NET35
 using System.Threading.Tasks;
-#endif
 using Windows.Win32.Devices.Usb;
 using Nefarius.Drivers.WinUSB.API;
 
@@ -74,7 +72,7 @@ public sealed class USBPipe
     ///     length of the buffer.
     /// </param>
     /// <returns>The number of bytes read from the pipe.</returns>
-    public int Read(byte[] buffer)
+    public int Read(Span<byte> buffer)
     {
         return Read(buffer, 0, buffer.Length);
     }
@@ -86,7 +84,7 @@ public sealed class USBPipe
     /// <param name="offset">The byte offset in <paramref name="buffer" /> from which to begin writing data read from the pipe.</param>
     /// <param name="length">The maximum number of bytes to read, starting at offset</param>
     /// <returns>The number of bytes read from the pipe.</returns>
-    public int Read(byte[] buffer, int offset, int length)
+    public int Read(Span<byte> buffer, int offset, int length)
     {
         CheckReadParams(buffer, offset, length);
 
@@ -105,7 +103,7 @@ public sealed class USBPipe
         }
     }
 
-    private void CheckReadParams(byte[] buffer, int offset, int length)
+    private void CheckReadParams(Span<byte> buffer, int offset, int length)
     {
         if (!IsIn)
             throw new NotSupportedException("Cannot read from a pipe with OUT direction.");
@@ -119,7 +117,7 @@ public sealed class USBPipe
                 "Length of data to read is outside the buffer boundaries.");
     }
 
-    private void CheckWriteParams(byte[] buffer, int offset, int length)
+    private void CheckWriteParams(Span<byte> buffer, int offset, int length)
     {
         if (!IsOut)
             throw new NotSupportedException("Cannot write to a pipe with IN direction.");
@@ -228,7 +226,7 @@ public sealed class USBPipe
     ///     Writes data from a buffer to the pipe.
     /// </summary>
     /// <param name="buffer">The buffer to write data from. The complete buffer will be written to the device.</param>
-    public void Write(byte[] buffer)
+    public void Write(Span<byte> buffer)
     {
         Write(buffer, 0, buffer.Length);
     }
@@ -239,7 +237,7 @@ public sealed class USBPipe
     /// <param name="buffer">The buffer to write data from.</param>
     /// <param name="offset">The byte offset in <paramref name="buffer" /> from which to begin writing.</param>
     /// <param name="length">The number of bytes to write, starting at offset</param>
-    public void Write(byte[] buffer, int offset, int length)
+    public void Write(Span<byte> buffer, int offset, int length)
     {
         CheckWriteParams(buffer, offset, length);
 
@@ -386,7 +384,6 @@ public sealed class USBPipe
         Policy = new USBPipePolicy(Device, Interface.InterfaceIndex, _pipeInfo.PipeId);
     }
 
-#if !NET35
     /// <summary>Asynchronously reads a sequence of bytes from the USB pipe.</summary>
     /// <param name="buffer">Buffer that will receive the data read from the pipe.</param>
     /// <param name="offset">Byte offset within the buffer at which to begin writing the data received.</param>
@@ -446,5 +443,4 @@ public sealed class USBPipe
 
         return tcs.Task;
     }
-#endif
 }
