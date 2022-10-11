@@ -1,7 +1,5 @@
 using System;
-#if !NET35
 using System.Threading.Tasks;
-#endif
 using JetBrains.Annotations;
 using Nefarius.Drivers.WinUSB.API;
 
@@ -1095,7 +1093,6 @@ public partial class USBDevice
         return new USBDevice(path);
     }
 
-#if !NET35
     /// <summary>
     ///     Asynchronously issue a sequence of bytes IO over the default control endpoint.
     ///     This method allows both IN and OUT direction transfers, depending on the highest bit of the
@@ -1519,5 +1516,4 @@ public partial class USBDevice
 
         return tcs.Task;
     }
-#endif
 }

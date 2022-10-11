@@ -6,9 +6,7 @@
  */
 
 using System;
-#if !NET35
 using System.Threading.Tasks;
-#endif
 using Windows.Win32.Devices.Usb;
 using Nefarius.Drivers.WinUSB.API;
 
@@ -386,7 +384,6 @@ public sealed class USBPipe
         Policy = new USBPipePolicy(Device, Interface.InterfaceIndex, _pipeInfo.PipeId);
     }
 
-#if !NET35
     /// <summary>Asynchronously reads a sequence of bytes from the USB pipe.</summary>
     /// <param name="buffer">Buffer that will receive the data read from the pipe.</param>
     /// <param name="offset">Byte offset within the buffer at which to begin writing the data received.</param>
@@ -446,5 +443,4 @@ public sealed class USBPipe
 
         return tcs.Task;
     }
-#endif
 }
