@@ -15,6 +15,11 @@ Managed wrapper for the [WinUSB APIs](https://learn.microsoft.com/en-us/windows-
 - Removed device notification listener as my other lib [`Nefarius.Utilities.DeviceManagement`](https://github.com/nefarius/Nefarius.Utilities.DeviceManagement) provides a drop-in replacement without depending on WinForms or WPF
 - Added `USBDevice::GetSingleDeviceByPath` to allow opening a WinUSB device via device path (symbolic link)
 
+## TO-DOs
+
+- Migrate all buffers to Spans where possible
+- Migrate the ols asynchronous APIs to `async`/`await` and Tasks
+
 ## Features
 
 > *Taken verbatim from [the source repository](https://github.com/snikeguo/winusbnet/blob/master/README.md).*
