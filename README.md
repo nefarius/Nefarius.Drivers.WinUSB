@@ -18,7 +18,7 @@ Managed wrapper for the [WinUSB APIs](https://learn.microsoft.com/en-us/windows-
 ## TO-DOs
 
 - Migrate all buffers to Spans where possible
-- Migrate the ols asynchronous APIs to `async`/`await` and Tasks
+- Migrate the old asynchronous APIs to `async`/`await` and Tasks
 
 ## Features
 
