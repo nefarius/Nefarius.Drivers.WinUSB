@@ -1498,16 +1498,22 @@ public partial class USBDevice
     }
 
     /// <summary>
-    /// Synchronously reads the string descriptor.
+    ///     Synchronously reads the string descriptor.
     /// </summary>
-    /// <param name="index">The descriptor index. For an explanation of the descriptor index, see the Universal Serial Bus specification (<see href="www.usb.org"/>).</param>
-    /// <param name="languageID">A value that specifies the language identifier. languageID should be between zero and 65535 (0xFFFF).</param>
-    /// <returns></returns>
-    public string GetStringDescriptor(byte index, int languageID)
+    /// <param name="index">
+    ///     The descriptor index. For an explanation of the descriptor index, see the Universal Serial Bus
+    ///     specification (<see href="www.usb.org" />).
+    /// </param>
+    /// <param name="languageId">
+    ///     A value that specifies the language identifier. languageID should be between zero and 65535
+    ///     (0xFFFF).
+    /// </param>
+    /// <returns>The string descriptor content.</returns>
+    public string GetStringDescriptor(byte index, int languageId)
     {
         try
         {
-            return InternalDevice.GetStringDescriptor(index, (ushort)languageID);
+            return InternalDevice.GetStringDescriptor(index, (ushort)languageId);
         }
         catch (APIException e)
         {
