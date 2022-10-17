@@ -175,6 +175,17 @@ public sealed class USBPipePolicy
         }
     }
 
+    /// <summary>
+    /// Gets the maximum size of a USB transfer supported by WinUSB.
+    /// </summary>
+    /// <seealso href="https://support.microsoft.com/en-us/help/832430/maximum-size-of-usb-transfers-on-various-operating-systems"/>
+    public int MaximumPacketSize
+    {
+        get
+        {
+            return (int)_device.InternalDevice.GetPipePolicyUInt(_interfaceIndex, _pipeID, POLICY_TYPE.MAXIMUM_TRANSFER_SIZE);
+        }
+    }
 
     private void RequireDirectionOut()
     {
