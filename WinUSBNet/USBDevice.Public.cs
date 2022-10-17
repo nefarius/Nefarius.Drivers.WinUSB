@@ -1511,7 +1511,7 @@ public partial class USBDevice
         }
         catch (APIException e)
         {
-            throw new USBException("Failed to retrieve device descriptor.", e);
+            throw new USBException("Failed to retrieve string descriptor.", e);
         }
     }
 }
