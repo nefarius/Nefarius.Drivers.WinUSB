@@ -1496,4 +1496,22 @@ public partial class USBDevice
 
         return tcs.Task;
     }
+
+    /// <summary>
+    /// Synchronously reads the string descriptor.
+    /// </summary>
+    /// <param name="index">The descriptor index. For an explanation of the descriptor index, see the Universal Serial Bus specification (<see href="www.usb.org"/>).</param>
+    /// <param name="languageID">A value that specifies the language identifier. languageID should be between zero and 65535 (0xFFFF).</param>
+    /// <returns></returns>
+    public string GetStringDescriptor(byte index, int languageID)
+    {
+        try
+        {
+            return InternalDevice.GetStringDescriptor(index, (ushort)languageID);
+        }
+        catch (APIException e)
+        {
+            throw new USBException("Failed to retrieve string descriptor.", e);
+        }
+    }
 }
