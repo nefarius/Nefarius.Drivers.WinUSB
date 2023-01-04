@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6-windows</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net472-windows;net48-windows</TargetFrameworks>
     <RootNamespace>Nefarius.Drivers.WinUSB</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageTags>WinUSB USB</PackageTags>
