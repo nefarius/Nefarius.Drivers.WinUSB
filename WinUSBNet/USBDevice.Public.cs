@@ -93,8 +93,8 @@ public partial class USBDevice
     ///     Initiates a control transfer over the default control endpoint. This method allows both IN and OUT direction
     ///     transfers, depending
     ///     on the highest bit of the <paramref name="requestType" /> parameter. Alternatively,
-    ///     <see cref="ControlIn(byte,byte,int,int,byte[],int)" /> and
-    ///     <see cref="ControlOut(byte,byte,int,int,byte[],int)" /> can be used for control transfers in a specific direction,
+    ///     <see cref="ControlIn(byte,byte,int,int,Span{byte},int)" /> and
+    ///     <see cref="ControlOut(byte,byte,int,int,Span{byte},int)" /> can be used for control transfers in a specific direction,
     ///     which is the recommended way because
     ///     it prevents using the wrong direction accidentally. Use the ControlTransfer method when the direction is not known
     ///     at compile time.
@@ -332,8 +332,8 @@ public partial class USBDevice
     ///     Initiates a control transfer over the default control endpoint. This method allows both IN and OUT direction
     ///     transfers, depending
     ///     on the highest bit of the <paramref name="requestType" /> parameter). Alternatively,
-    ///     <see cref="ControlIn(byte,byte,int,int,byte[])" /> and
-    ///     <see cref="ControlOut(byte,byte,int,int,byte[])" /> can be used for control transfers in a specific direction,
+    ///     <see cref="ControlIn(byte,byte,int,int,Span{byte})" /> and
+    ///     <see cref="ControlOut(byte,byte,int,int,Span{byte})" /> can be used for control transfers in a specific direction,
     ///     which is the recommended way because
     ///     it prevents using the wrong direction accidentally. Use the ControlTransfer method when the direction is not known
     ///     at compile time.
