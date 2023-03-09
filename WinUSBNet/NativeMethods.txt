@@ -35,6 +35,7 @@ WinUsb_ControlTransfer
 WinUsb_FlushPipe
 WinUsb_Free
 WinUsb_GetAssociatedInterface
+WinUsb_GetCurrentAlternateSetting
 WinUsb_GetDescriptor
 WinUsb_GetPipePolicy
 WinUsb_GetPowerPolicy
@@ -43,6 +44,7 @@ WinUsb_QueryDeviceInformation
 WinUsb_QueryInterfaceSettings
 WinUsb_QueryPipe
 WinUsb_ReadPipe
+WinUsb_SetCurrentAlternateSetting
 WinUsb_SetPipePolicy
 WinUsb_SetPowerPolicy
 WinUsb_WritePipe

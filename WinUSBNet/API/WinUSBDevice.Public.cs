@@ -326,4 +326,20 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to get WinUSB power policy.");
         return result;
     }
+
+    public unsafe byte GetCurrentAlternateSetting(int interfaceIndex)
+    {
+        byte result;
+        var success = PInvoke.WinUsb_GetCurrentAlternateSetting(InterfaceHandle(interfaceIndex).ToPointer(), &result);
+        if (!success)
+            throw APIException.Win32("Failed to get WinUSB alternate setting.");
+        return result;
+    }
+
+    public unsafe void SetCurrentAlternateSetting(int interfaceIndex, byte setting)
+    {
+        var success = PInvoke.WinUsb_SetCurrentAlternateSetting(InterfaceHandle(interfaceIndex).ToPointer(), setting);
+        if (!success)
+            throw APIException.Win32("Failed to set WinUSB alternate setting.");
+    }
 }
