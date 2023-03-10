@@ -1,6 +1,7 @@
 ﻿ALLOW_PARTIAL_READS
 AUTO_CLEAR_STALL
 AUTO_FLUSH
+AUTO_SUSPEND
 CreateFile
 DIGCF_DEVICEINTERFACE
 DIGCF_PRESENT
@@ -13,6 +14,7 @@ SHORT_PACKET_TERMINATE
 SPDRP_DEVICEDESC
 SPDRP_HARDWAREID
 SPDRP_MFG
+SUSPEND_DELAY
 SetupDiDestroyDeviceInfoList
 SetupDiEnumDeviceInterfaces
 SetupDiGetClassDevs
@@ -35,10 +37,12 @@ WinUsb_Free
 WinUsb_GetAssociatedInterface
 WinUsb_GetDescriptor
 WinUsb_GetPipePolicy
+WinUsb_GetPowerPolicy
 WinUsb_Initialize
 WinUsb_QueryDeviceInformation
 WinUsb_QueryInterfaceSettings
 WinUsb_QueryPipe
 WinUsb_ReadPipe
 WinUsb_SetPipePolicy
+WinUsb_SetPowerPolicy
 WinUsb_WritePipe

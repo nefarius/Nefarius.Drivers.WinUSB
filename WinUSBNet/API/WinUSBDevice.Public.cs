@@ -289,4 +289,41 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to get WinUSB pipe policy.");
         return result;
     }
+
+    public unsafe void SetPowerPolicy(POWER_POLICY_TYPE policyType, bool value)
+    {
+        var byteVal = (byte)(value ? 1 : 0);
+        var success = PInvoke.WinUsb_SetPowerPolicy(_winUsbHandle.ToPointer(), (uint)policyType, 1, &byteVal);
+        if (!success)
+            throw APIException.Win32("Failed to set WinUSB power policy.");
+    }
+
+    public unsafe void SetPowerPolicy(POWER_POLICY_TYPE policyType, uint value)
+    {
+        var success = PInvoke.WinUsb_SetPowerPolicy(_winUsbHandle.ToPointer(), (uint)policyType, 4, &value);
+        if (!success)
+            throw APIException.Win32("Failed to set WinUSB power policy.");
+    }
+
+    public unsafe bool GetPowerPolicyBool(POWER_POLICY_TYPE policyType)
+    {
+        byte result;
+        uint length = 1;
+
+        var success = PInvoke.WinUsb_GetPowerPolicy(_winUsbHandle.ToPointer(), (uint)policyType, &length, &result);
+        if (!success || length != 1)
+            throw APIException.Win32("Failed to get WinUSB power policy.");
+        return result != 0;
+    }
+
+    public unsafe uint GetPowerPolicyUInt(POWER_POLICY_TYPE policyType)
+    {
+        uint result;
+        uint length = 4;
+
+        var success = PInvoke.WinUsb_GetPowerPolicy(_winUsbHandle.ToPointer(), (uint)policyType, &length, &result);
+        if (!success || length != 4)
+            throw APIException.Win32("Failed to get WinUSB power policy.");
+        return result;
+    }
 }

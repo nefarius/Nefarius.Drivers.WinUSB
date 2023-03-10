@@ -30,6 +30,7 @@ public partial class USBDevice
         {
             InternalDevice.OpenDevice(devicePathName);
             InitializeInterfaces();
+            PowerPolicy = new USBPowerPolicy(this);
         }
         catch (APIException e)
         {
@@ -55,6 +56,12 @@ public partial class USBDevice
     /// </summary>
     [UsedImplicitly]
     public USBDeviceDescriptor Descriptor { get; }
+
+    /// <summary>
+    ///     The power policy settings for this device
+    /// </summary>
+    [UsedImplicitly]
+    public USBPowerPolicy PowerPolicy { get; }
 
     /// <summary>
     ///     Specifies the timeout in milliseconds for control pipe operations. If a control transfer does not finish within the
