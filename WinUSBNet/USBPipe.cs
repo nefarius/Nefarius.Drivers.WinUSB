@@ -13,6 +13,24 @@ using Nefarius.Drivers.WinUSB.API;
 namespace Nefarius.Drivers.WinUSB;
 
 /// <summary>
+///     USB transfer type enumeration
+/// </summary>
+public enum USBTransferType
+{
+    /// <summary>The pipe is a control transfer pipe</summary>
+    Control = USBD_PIPE_TYPE.UsbdPipeTypeControl,
+
+    /// <summary>The pipe is an isochronous transfer pipe</summary>
+    Isochronous = USBD_PIPE_TYPE.UsbdPipeTypeIsochronous,
+
+    /// <summary>The pipe is a bulk transfer pipe</summary>
+    Bulk = USBD_PIPE_TYPE.UsbdPipeTypeBulk,
+
+    /// <summary>The pipe is an interrupt transfer pipe</summary>
+    Interrupt = USBD_PIPE_TYPE.UsbdPipeTypeInterrupt,
+}
+
+/// <summary>
 ///     UsbPipe represents a single pipe on a WinUSB device. A pipe is connected
 ///     to a certain endpoint on the device and has a fixed direction (IN or OUT)
 /// </summary>
@@ -53,6 +71,11 @@ public sealed class USBPipe
     ///     The pipe policy settings for this pipe
     /// </summary>
     public USBPipePolicy Policy { get; private set; }
+
+    /// <summary>
+    ///     The transfer method used for this pipe
+    /// </summary>
+    public USBTransferType TransferType => (USBTransferType)_pipeInfo.PipeType;
 
     /// <summary>
     ///     True if the pipe has direction OUT (host to device), false otherwise.
