@@ -1505,6 +1505,21 @@ public partial class USBDevice
     }
 
     /// <summary>
+    ///     Gets available language IDs from the device.
+    /// </summary>
+    public int[] GetSupportedLanguageIDs()
+    {
+        try
+        {
+            return InternalDevice.GetSupportedLanguageIDs_CLS();
+        }
+        catch (APIException e)
+        {
+            throw new USBException("Failed to retrieve language IDs.", e);
+        }
+    }
+
+    /// <summary>
     ///     Synchronously reads the string descriptor.
     /// </summary>
     /// <param name="index">

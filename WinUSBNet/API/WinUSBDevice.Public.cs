@@ -48,6 +48,29 @@ internal partial class WinUSBDevice
         return langIDs;
     }
 
+    // CLS-compliant version of the above
+    public unsafe int[] GetSupportedLanguageIDs_CLS()
+    {
+        var buffer = new byte[256];
+        var length = ReadStringDescriptor(0, 0, buffer);
+        length -= 2; // Skip length byte and descriptor type
+        if (length < 0 || length % 2 != 0)
+            throw new APIException("Unexpected length when reading supported languages.");
+
+        var langIDs = new int[length / 2];
+        fixed (byte* ptr = buffer)
+        {
+            var ids = (ushort*)(ptr + 2);
+            for (int i = 0; i < langIDs.Length; i++)
+            {
+                langIDs[i] = ids[i];
+            }
+        }
+
+        Buffer.BlockCopy(buffer, 2, langIDs, 0, length);
+        return langIDs;
+    }
+
     public string GetStringDescriptor(byte index, ushort languageId)
     {
         var buffer = new byte[256];
