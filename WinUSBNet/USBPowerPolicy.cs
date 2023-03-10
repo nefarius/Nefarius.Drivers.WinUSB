@@ -33,7 +33,7 @@ public sealed class USBPowerPolicy
     public bool AutoSuspend
     {
         get => _device.InternalDevice.GetPowerPolicyBool(POWER_POLICY_TYPE.AUTO_SUSPEND);
-        set =>_device.InternalDevice.SetPowerPolicy(POWER_POLICY_TYPE.AUTO_SUSPEND, value);
+        set => _device.InternalDevice.SetPowerPolicy(POWER_POLICY_TYPE.AUTO_SUSPEND, value);
     }
 
     /// <summary>
