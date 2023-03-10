@@ -246,6 +246,13 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to flush pipe on WinUSB device.");
     }
 
+    public unsafe void ResetPipe(int interfaceIndex, byte pipeId)
+    {
+        var success = PInvoke.WinUsb_ResetPipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId);
+        if (!success)
+            throw APIException.Win32("Failed to reset pipe on WinUSB device.");
+    }
+
     public unsafe void SetPipePolicy(int interfaceIndex, byte pipeId, POLICY_TYPE policyType, bool value)
     {
         var byteVal = (byte)(value ? 1 : 0);

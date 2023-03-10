@@ -399,6 +399,21 @@ public sealed class USBPipe
         }
     }
 
+    /// <summary>
+    ///     Resets the pipe to clear a stall condition.
+    /// </summary>
+    public void Reset()
+    {
+        try
+        {
+            Device.InternalDevice.ResetPipe(Interface.InterfaceIndex, _pipeInfo.PipeId);
+        }
+        catch (APIException e)
+        {
+            throw new USBException("Failed to reset pipe.", e);
+        }
+    }
+
     internal void AttachInterface(USBInterface usbInterface)
     {
         Interface = usbInterface;

@@ -44,6 +44,7 @@ WinUsb_QueryDeviceInformation
 WinUsb_QueryInterfaceSettings
 WinUsb_QueryPipe
 WinUsb_ReadPipe
+WinUsb_ResetPipe
 WinUsb_SetCurrentAlternateSetting
 WinUsb_SetPipePolicy
 WinUsb_SetPowerPolicy
