@@ -55,6 +55,11 @@ public sealed class USBPipe
     public USBPipePolicy Policy { get; private set; }
 
     /// <summary>
+    ///     The transfer method used for this pipe
+    /// </summary>
+    public USBTransferType TransferType => (USBTransferType)_pipeInfo.PipeType;
+
+    /// <summary>
     ///     True if the pipe has direction OUT (host to device), false otherwise.
     /// </summary>
     public bool IsOut => (_pipeInfo.PipeId & 0x80) == 0;
@@ -373,6 +378,21 @@ public sealed class USBPipe
         catch (APIException e)
         {
             throw new USBException("Failed to flush pipe.", e);
+        }
+    }
+
+    /// <summary>
+    ///     Resets the pipe to clear a stall condition.
+    /// </summary>
+    public void Reset()
+    {
+        try
+        {
+            Device.InternalDevice.ResetPipe(Interface.InterfaceIndex, _pipeInfo.PipeId);
+        }
+        catch (APIException e)
+        {
+            throw new USBException("Failed to reset pipe.", e);
         }
     }
 

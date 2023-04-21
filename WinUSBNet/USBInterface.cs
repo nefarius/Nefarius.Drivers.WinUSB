@@ -99,6 +99,15 @@ public sealed class USBInterface
     /// </summary>
     public byte Protocol { get; }
 
+    /// <summary>
+    ///     Interface alternate setting
+    /// </summary>
+    public byte AlternateSetting
+    {
+        get => Device.InternalDevice.GetCurrentAlternateSetting(InterfaceIndex);
+        set => Device.InternalDevice.SetCurrentAlternateSetting(InterfaceIndex, value);
+    }
+
     /// Zero based interface index in WinUSB.
     /// Note that this is not necessarily the same as the interface *number*
     /// from the interface descriptor. There might be interfaces within the

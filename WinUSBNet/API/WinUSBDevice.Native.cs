@@ -24,3 +24,9 @@ internal enum POLICY_TYPE : uint
     RAW_IO = PInvoke.RAW_IO,
     MAXIMUM_TRANSFER_SIZE = PInvoke.MAXIMUM_TRANSFER_SIZE
 }
+
+internal enum POWER_POLICY_TYPE : uint
+{
+    AUTO_SUSPEND = PInvoke.AUTO_SUSPEND,
+    SUSPEND_DELAY = PInvoke.SUSPEND_DELAY,
+}

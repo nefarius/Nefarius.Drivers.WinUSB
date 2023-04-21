@@ -4,7 +4,7 @@
 
 > *This is a fork of the fantastic [`MadWizard.WinUSBNet`](https://github.com/snikeguo/winusbnet) project by Thomas Bleeker and contributors.*
 
-[![Build status](https://ci.appveyor.com/api/projects/status/rqfsoto1qpd0456f?svg=true)](https://ci.appveyor.com/project/nefarius/nefarius-drivers-winusb) ![Nuget](https://img.shields.io/nuget/dt/Nefarius.Drivers.WinUSB)
+[![Build status](https://ci.appveyor.com/api/projects/status/rqfsoto1qpd0456f?svg=true)](https://ci.appveyor.com/project/nefarius/nefarius-drivers-winusb) [![NuGet](https://img.shields.io/nuget/dt/Nefarius.Drivers.WinUSB)](https://www.nuget.org/packages/Nefarius.Drivers.WinUSB/)
 
 Managed wrapper for the [WinUSB APIs](https://learn.microsoft.com/en-us/windows-hardware/drivers/usbcon/winusb) on Microsoft Windows.
 

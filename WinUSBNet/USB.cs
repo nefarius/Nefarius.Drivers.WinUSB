@@ -5,6 +5,7 @@
  *  http://www.opensource.org/licenses/mit-license.php
  */
 
+using Windows.Win32.Devices.Usb;
 
 namespace Nefarius.Drivers.WinUSB;
 
@@ -75,4 +76,22 @@ public enum USBBaseClass
 
     /// <summary>Vendor specific base class (0xFF)</summary>
     VendorSpecific = 0xFF
+}
+
+/// <summary>
+///     USB transfer type enumeration
+/// </summary>
+public enum USBTransferType
+{
+    /// <summary>The pipe is a control transfer pipe</summary>
+    Control = USBD_PIPE_TYPE.UsbdPipeTypeControl,
+
+    /// <summary>The pipe is an isochronous transfer pipe</summary>
+    Isochronous = USBD_PIPE_TYPE.UsbdPipeTypeIsochronous,
+
+    /// <summary>The pipe is a bulk transfer pipe</summary>
+    Bulk = USBD_PIPE_TYPE.UsbdPipeTypeBulk,
+
+    /// <summary>The pipe is an interrupt transfer pipe</summary>
+    Interrupt = USBD_PIPE_TYPE.UsbdPipeTypeInterrupt,
 }
