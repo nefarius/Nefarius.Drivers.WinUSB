@@ -48,6 +48,29 @@ internal partial class WinUSBDevice
         return langIDs;
     }
 
+    // CLS-compliant version of the above
+    public unsafe int[] GetSupportedLanguageIDs_CLS()
+    {
+        var buffer = new byte[256];
+        var length = ReadStringDescriptor(0, 0, buffer);
+        length -= 2; // Skip length byte and descriptor type
+        if (length < 0 || length % 2 != 0)
+            throw new APIException("Unexpected length when reading supported languages.");
+
+        var langIDs = new int[length / 2];
+        fixed (byte* ptr = buffer)
+        {
+            var ids = (ushort*)(ptr + 2);
+            for (int i = 0; i < langIDs.Length; i++)
+            {
+                langIDs[i] = ids[i];
+            }
+        }
+
+        Buffer.BlockCopy(buffer, 2, langIDs, 0, length);
+        return langIDs;
+    }
+
     public string GetStringDescriptor(byte index, ushort languageId)
     {
         var buffer = new byte[256];
@@ -246,6 +269,13 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to flush pipe on WinUSB device.");
     }
 
+    public unsafe void ResetPipe(int interfaceIndex, byte pipeId)
+    {
+        var success = PInvoke.WinUsb_ResetPipe(InterfaceHandle(interfaceIndex).ToPointer(), pipeId);
+        if (!success)
+            throw APIException.Win32("Failed to reset pipe on WinUSB device.");
+    }
+
     public unsafe void SetPipePolicy(int interfaceIndex, byte pipeId, POLICY_TYPE policyType, bool value)
     {
         var byteVal = (byte)(value ? 1 : 0);
@@ -288,5 +318,58 @@ internal partial class WinUSBDevice
         if (!success || length != 4)
             throw APIException.Win32("Failed to get WinUSB pipe policy.");
         return result;
+    }
+
+    public unsafe void SetPowerPolicy(POWER_POLICY_TYPE policyType, bool value)
+    {
+        var byteVal = (byte)(value ? 1 : 0);
+        var success = PInvoke.WinUsb_SetPowerPolicy(_winUsbHandle.ToPointer(), (uint)policyType, 1, &byteVal);
+        if (!success)
+            throw APIException.Win32("Failed to set WinUSB power policy.");
+    }
+
+    public unsafe void SetPowerPolicy(POWER_POLICY_TYPE policyType, uint value)
+    {
+        var success = PInvoke.WinUsb_SetPowerPolicy(_winUsbHandle.ToPointer(), (uint)policyType, 4, &value);
+        if (!success)
+            throw APIException.Win32("Failed to set WinUSB power policy.");
+    }
+
+    public unsafe bool GetPowerPolicyBool(POWER_POLICY_TYPE policyType)
+    {
+        byte result;
+        uint length = 1;
+
+        var success = PInvoke.WinUsb_GetPowerPolicy(_winUsbHandle.ToPointer(), (uint)policyType, &length, &result);
+        if (!success || length != 1)
+            throw APIException.Win32("Failed to get WinUSB power policy.");
+        return result != 0;
+    }
+
+    public unsafe uint GetPowerPolicyUInt(POWER_POLICY_TYPE policyType)
+    {
+        uint result;
+        uint length = 4;
+
+        var success = PInvoke.WinUsb_GetPowerPolicy(_winUsbHandle.ToPointer(), (uint)policyType, &length, &result);
+        if (!success || length != 4)
+            throw APIException.Win32("Failed to get WinUSB power policy.");
+        return result;
+    }
+
+    public unsafe byte GetCurrentAlternateSetting(int interfaceIndex)
+    {
+        byte result;
+        var success = PInvoke.WinUsb_GetCurrentAlternateSetting(InterfaceHandle(interfaceIndex).ToPointer(), &result);
+        if (!success)
+            throw APIException.Win32("Failed to get WinUSB alternate setting.");
+        return result;
+    }
+
+    public unsafe void SetCurrentAlternateSetting(int interfaceIndex, byte setting)
+    {
+        var success = PInvoke.WinUsb_SetCurrentAlternateSetting(InterfaceHandle(interfaceIndex).ToPointer(), setting);
+        if (!success)
+            throw APIException.Win32("Failed to set WinUSB alternate setting.");
     }
 }
