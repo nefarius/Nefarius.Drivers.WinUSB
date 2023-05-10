@@ -15,6 +15,16 @@ Managed wrapper for the [WinUSB APIs](https://learn.microsoft.com/en-us/windows-
 - Removed device notification listener as my other lib [`Nefarius.Utilities.DeviceManagement`](https://github.com/nefarius/Nefarius.Utilities.DeviceManagement) provides a drop-in replacement without depending on WinForms or WPF
 - Added `USBDevice::GetSingleDeviceByPath` to allow opening a WinUSB device via device path (symbolic link)
 
+## Documentation
+
+[Link to API docs](docs/index.md).
+
+### Generating documentation
+
+- `dotnet build -c:Release`
+- `dotnet tool install -g XMLDoc2Markdown`
+- `xmldoc2md .\bin\net6.0-windows\Nefarius.Drivers.WinUSB.dll .\docs\`
+
 ## TO-DOs
 
 - Migrate all buffers to Spans where possible
