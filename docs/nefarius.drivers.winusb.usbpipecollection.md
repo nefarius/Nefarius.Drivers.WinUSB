@@ -1,0 +1,39 @@
+# USBPipeCollection
+
+Namespace: Nefarius.Drivers.WinUSB
+
+Collection of UsbPipe objects
+
+```csharp
+public sealed class USBPipeCollection : System.Collections.Generic.IEnumerable`1[[Nefarius.Drivers.WinUSB.USBPipe, Nefarius.Drivers.WinUSB, Version=2.1.1.0, Culture=neutral, PublicKeyToken=null]], System.Collections.IEnumerable
+```
+
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBPipeCollection](./nefarius.drivers.winusb.usbpipecollection.md)<br>
+Implements [IEnumerable&lt;USBPipe&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1), [IEnumerable](https://docs.microsoft.com/en-us/dotnet/api/system.collections.ienumerable)
+
+## Properties
+
+### **Item**
+
+```csharp
+public USBPipe Item { get; }
+```
+
+#### Property Value
+
+[USBPipe](./nefarius.drivers.winusb.usbpipe.md)<br>
+
+## Methods
+
+### **GetEnumerator()**
+
+Returns a typed enumerator that iterates through a collection.
+
+```csharp
+public IEnumerator<USBPipe> GetEnumerator()
+```
+
+#### Returns
+
+[IEnumerator&lt;USBPipe&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerator-1)<br>
+The enumerator object that can be used to iterate through the collection.
