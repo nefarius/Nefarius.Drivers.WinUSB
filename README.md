@@ -1,6 +1,4 @@
-<img src="assets/NSS-128x128.png" align="right" />
-
-# Nefarius.Drivers.WinUSB
+# <img src="assets/NSS-128x128.png" align="left" />Nefarius.Drivers.WinUSB
 
 > *This is a fork of the fantastic [`MadWizard.WinUSBNet`](https://github.com/snikeguo/winusbnet) project by Thomas Bleeker and contributors.*
 
