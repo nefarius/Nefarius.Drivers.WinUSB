@@ -55,3 +55,4 @@ Microsoft Windows.
 - [WinUSB overview](https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/winusb)
 - [How to Access a USB Device by Using WinUSB Functions](https://learn.microsoft.com/en-us/windows-hardware/drivers/usbcon/using-winusb-api-to-communicate-with-a-usb-device)
 - [Jan Axelson's page on WinUSB](http://janaxelson.com/winusb.htm)
+- [C#/Win32 P/Invoke Source Generator](https://github.com/microsoft/CsWin32)
