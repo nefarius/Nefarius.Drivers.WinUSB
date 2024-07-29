@@ -12,7 +12,7 @@ Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) 
 
 ## Properties
 
-### **AutoSuspend**
+### <a id="properties-autosuspend"/>**AutoSuspend**
 
 When true, the device is auto-suspended when either no transfers are pending, or only In transfers on an
  interrupt or bulk endpoint are pending.
@@ -26,7 +26,7 @@ public bool AutoSuspend { get; set; }
 
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 
-### **SuspendDelay**
+### <a id="properties-suspenddelay"/>**SuspendDelay**
 
 The minimum amount of milliseconds that must pass before the device can be suspended.
 

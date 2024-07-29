@@ -12,92 +12,21 @@ Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) 
 
 ## Properties
 
-### **PathName**
+### <a id="properties-baseclass"/>**BaseClass**
 
-Windows path name for the USB device
+Device class code. If the device class does
+ not match any of the USBBaseClass enumeration values
+ the value will be USBBaseClass.Unknown
 
 ```csharp
-public string PathName { get; }
+public USBBaseClass BaseClass { get; }
 ```
 
 #### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+[USBBaseClass](./nefarius.drivers.winusb.usbbaseclass.md)<br>
 
-### **VID**
-
-USB vendor ID (VID) of the device
-
-```csharp
-public int VID { get; }
-```
-
-#### Property Value
-
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-
-### **PID**
-
-USB product ID (PID) of the device
-
-```csharp
-public int PID { get; }
-```
-
-#### Property Value
-
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-
-### **Manufacturer**
-
-Manufacturer name, or null if not available
-
-```csharp
-public string Manufacturer { get; }
-```
-
-#### Property Value
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
-### **Product**
-
-Product name, or null if not available
-
-```csharp
-public string Product { get; }
-```
-
-#### Property Value
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
-### **SerialNumber**
-
-Device serial number, or null if not available
-
-```csharp
-public string SerialNumber { get; }
-```
-
-#### Property Value
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
-### **FullName**
-
-Friendly device name, or path name when no
- further device information is available
-
-```csharp
-public string FullName { get; }
-```
-
-#### Property Value
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
-### **ClassValue**
+### <a id="properties-classvalue"/>**ClassValue**
 
 Device class code as defined in the interface descriptor
  This property can be used if the class type is not defined
@@ -111,19 +40,68 @@ public byte ClassValue { get; }
 
 [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
 
-### **SubClass**
+### <a id="properties-fullname"/>**FullName**
 
-Device subclass code
+Friendly device name, or path name when no
+ further device information is available
 
 ```csharp
-public byte SubClass { get; }
+public string FullName { get; }
 ```
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
-### **Protocol**
+### <a id="properties-manufacturer"/>**Manufacturer**
+
+Manufacturer name, or null if not available
+
+```csharp
+public string Manufacturer { get; }
+```
+
+#### Property Value
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### <a id="properties-pathname"/>**PathName**
+
+Windows path name for the USB device
+
+```csharp
+public string PathName { get; }
+```
+
+#### Property Value
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### <a id="properties-pid"/>**PID**
+
+USB product ID (PID) of the device
+
+```csharp
+public int PID { get; }
+```
+
+#### Property Value
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+
+### <a id="properties-product"/>**Product**
+
+Product name, or null if not available
+
+```csharp
+public string Product { get; }
+```
+
+#### Property Value
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### <a id="properties-protocol"/>**Protocol**
 
 Device protocol code
 
@@ -135,16 +113,38 @@ public byte Protocol { get; }
 
 [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
 
-### **BaseClass**
+### <a id="properties-serialnumber"/>**SerialNumber**
 
-Device class code. If the device class does
- not match any of the USBBaseClass enumeration values
- the value will be USBBaseClass.Unknown
+Device serial number, or null if not available
 
 ```csharp
-public USBBaseClass BaseClass { get; }
+public string SerialNumber { get; }
 ```
 
 #### Property Value
 
-[USBBaseClass](./nefarius.drivers.winusb.usbbaseclass.md)<br>
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### <a id="properties-subclass"/>**SubClass**
+
+Device subclass code
+
+```csharp
+public byte SubClass { get; }
+```
+
+#### Property Value
+
+[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+
+### <a id="properties-vid"/>**VID**
+
+USB vendor ID (VID) of the device
+
+```csharp
+public int VID { get; }
+```
+
+#### Property Value
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
