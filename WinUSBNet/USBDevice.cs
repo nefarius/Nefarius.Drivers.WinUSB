@@ -70,9 +70,11 @@ public partial class USBDevice : IDisposable
         // UsbEndpoint
         for (int i = 0; i < numInterfaces; i++)
         {
-            USB_INTERFACE_DESCRIPTOR descriptor;
-            WINUSB_PIPE_INFORMATION[] pipesInfo;
-            InternalDevice.GetInterfaceInfo(i, out descriptor, out pipesInfo);
+            InternalDevice.GetInterfaceInfo(
+                i,
+                out USB_INTERFACE_DESCRIPTOR descriptor,
+                out WINUSB_PIPE_INFORMATION[] pipesInfo
+            );
             USBPipe[] interfacePipes = new USBPipe[pipesInfo.Length];
             for (int k = 0; k < pipesInfo.Length; k++)
             {
@@ -144,42 +146,39 @@ public partial class USBDevice : IDisposable
     {
         try
         {
-            USBDeviceDescriptor descriptor;
-            using (WinUSBDevice wuDevice = new())
+            using WinUSBDevice wuDevice = new();
+            wuDevice.OpenDevice(devicePath);
+            USB_DEVICE_DESCRIPTOR deviceDesc = wuDevice.GetDeviceDescriptor();
+
+            // Get first supported language ID
+            ushort[] langIDs = wuDevice.GetSupportedLanguageIDs();
+            ushort langID = 0;
+            if (langIDs.Length > 0)
             {
-                wuDevice.OpenDevice(devicePath);
-                USB_DEVICE_DESCRIPTOR deviceDesc = wuDevice.GetDeviceDescriptor();
-
-                // Get first supported language ID
-                ushort[] langIDs = wuDevice.GetSupportedLanguageIDs();
-                ushort langID = 0;
-                if (langIDs.Length > 0)
-                {
-                    langID = langIDs[0];
-                }
-
-                string manufacturer = null, product = null, serialNumber = null;
-                byte idx = 0;
-                idx = deviceDesc.iManufacturer;
-                if (idx > 0)
-                {
-                    manufacturer = wuDevice.GetStringDescriptor(idx, langID);
-                }
-
-                idx = deviceDesc.iProduct;
-                if (idx > 0)
-                {
-                    product = wuDevice.GetStringDescriptor(idx, langID);
-                }
-
-                idx = deviceDesc.iSerialNumber;
-                if (idx > 0)
-                {
-                    serialNumber = wuDevice.GetStringDescriptor(idx, langID);
-                }
-
-                descriptor = new USBDeviceDescriptor(devicePath, deviceDesc, manufacturer, product, serialNumber);
+                langID = langIDs[0];
             }
+
+            string manufacturer = null, product = null, serialNumber = null;
+            byte idx = 0;
+            idx = deviceDesc.iManufacturer;
+            if (idx > 0)
+            {
+                manufacturer = wuDevice.GetStringDescriptor(idx, langID);
+            }
+
+            idx = deviceDesc.iProduct;
+            if (idx > 0)
+            {
+                product = wuDevice.GetStringDescriptor(idx, langID);
+            }
+
+            idx = deviceDesc.iSerialNumber;
+            if (idx > 0)
+            {
+                serialNumber = wuDevice.GetStringDescriptor(idx, langID);
+            }
+
+            USBDeviceDescriptor descriptor = new(devicePath, deviceDesc, manufacturer, product, serialNumber);
 
             return descriptor;
         }
