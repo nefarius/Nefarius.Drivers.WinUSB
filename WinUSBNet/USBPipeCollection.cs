@@ -26,6 +26,7 @@ public sealed class USBPipeCollection : IEnumerable<USBPipe>
         _pipes = new Dictionary<byte, USBPipe>(pipes.Length);
         foreach (var pipe in pipes)
         {
+            // ReSharper disable once CanSimplifyDictionaryLookupWithTryAdd
             if (_pipes.ContainsKey(pipe.Address))
                 throw new USBException("Duplicate pipe address in endpoint.");
             _pipes[pipe.Address] = pipe;
