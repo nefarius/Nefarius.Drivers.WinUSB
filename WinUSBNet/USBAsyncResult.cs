@@ -6,16 +6,18 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
 namespace Nefarius.Drivers.WinUSB;
 
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 internal class USBAsyncResult : IAsyncResult, IDisposable
 {
+    private readonly AsyncCallback _userCallback;
     private bool _completed;
     private bool _completedSynchronously;
     private Exception _error;
-    private readonly AsyncCallback _userCallback;
     private ManualResetEvent _waitEvent;
 
     public USBAsyncResult(AsyncCallback userCallback, object stateObject)
@@ -92,16 +94,19 @@ internal class USBAsyncResult : IAsyncResult, IDisposable
             _completed = true;
             _error = error;
             BytesTransferred = bytesTransfered;
-            if (_waitEvent != null)
-                _waitEvent.Set();
+            _waitEvent?.Set();
         }
 
         if (_userCallback != null)
         {
             if (synchronousCallback)
+            {
                 RunCallback(null);
+            }
             else
+            {
                 ThreadPool.QueueUserWorkItem(RunCallback);
+            }
         }
     }
 
@@ -114,10 +119,14 @@ internal class USBAsyncResult : IAsyncResult, IDisposable
     {
         if (disposing)
             // Cleanup managed resources
+        {
             lock (this)
             {
                 if (_waitEvent != null)
+                {
                     _waitEvent.Close();
+                }
             }
+        }
     }
 }
