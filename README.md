@@ -3,7 +3,7 @@
 > *This is a fork of the fantastic [`MadWizard.WinUSBNet`](https://github.com/snikeguo/winusbnet) project by Thomas
 Bleeker and contributors.*
 
-[![Build status](https://ci.appveyor.com/api/projects/status/rqfsoto1qpd0456f?svg=true)](https://ci.appveyor.com/project/nefarius/nefarius-drivers-winusb)
+[![.NET](https://github.com/nefarius/Nefarius.Drivers.WinUSB/actions/workflows/build.yml/badge.svg)](https://github.com/nefarius/Nefarius.Drivers.WinUSB/actions/workflows/build.yml)
 ![.NET 4.7.2](https://img.shields.io/badge/.NET-4.7.2-blue)
 ![.NET 4.8](https://img.shields.io/badge/.NET-4.8-blue)
 ![.NET 6/7/8](https://img.shields.io/badge/.NET-6%2F7%2F8-blue)
