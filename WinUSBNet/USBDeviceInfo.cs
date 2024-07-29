@@ -17,6 +17,7 @@ namespace Nefarius.Drivers.WinUSB;
 ///     in the .inf file. After a device is opened the actual device descriptor can be read as well.
 /// </summary>
 [SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public sealed class USBDeviceInfo
 {
     private readonly DeviceDetails _details;
