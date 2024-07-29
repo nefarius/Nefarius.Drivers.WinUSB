@@ -33,7 +33,7 @@ public sealed class USBDeviceInfo
     public int VID => _details.VID;
 
     /// <summary>
-    ///     Product ID (VID) of the USB device
+    ///     Product ID (PID) of the USB device
     /// </summary>
     public int PID => _details.PID;
 
