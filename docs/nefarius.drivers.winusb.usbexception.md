@@ -93,35 +93,3 @@ public MethodBase TargetSite { get; }
 #### Property Value
 
 [MethodBase](https://docs.microsoft.com/en-us/dotnet/api/system.reflection.methodbase)<br>
-
-## Constructors
-
-### <a id="constructors-.ctor"/>**USBException(String)**
-
-Constructs a new USBException with the given message
-
-```csharp
-public USBException(string message)
-```
-
-#### Parameters
-
-`message` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The message describing the exception
-
-### <a id="constructors-.ctor"/>**USBException(String, Exception)**
-
-Constructs a new USBException with the given message and underlying exception
- that caused the USBException.
-
-```csharp
-public USBException(string message, Exception innerException)
-```
-
-#### Parameters
-
-`message` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The message describing the exception
-
-`innerException` [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-The underlying exception causing the USBException
