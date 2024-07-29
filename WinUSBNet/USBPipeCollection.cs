@@ -45,8 +45,7 @@ public sealed class USBPipeCollection : IEnumerable<USBPipe>
     {
         get
         {
-            USBPipe pipe;
-            if (!_pipes.TryGetValue(pipeAddress, out pipe))
+            if (!_pipes.TryGetValue(pipeAddress, out USBPipe pipe))
                 throw new IndexOutOfRangeException();
             return pipe;
         }
