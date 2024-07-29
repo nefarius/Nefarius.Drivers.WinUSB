@@ -130,7 +130,10 @@ public sealed class USBPipePolicy
         set
         {
             if (value < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(value), "Pipe transfer timeout cannot be negative.");
+            }
+
             _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT,
                 (uint)value);
         }
@@ -170,7 +173,6 @@ public sealed class USBPipePolicy
             RequireDirectionOut();
             return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID,
                 POLICY_TYPE.SHORT_PACKET_TERMINATE);
-            ;
         }
         set
         {
@@ -180,22 +182,20 @@ public sealed class USBPipePolicy
     }
 
     /// <summary>
-    /// Gets the maximum size of a USB transfer supported by WinUSB.
+    ///     Gets the maximum size of a USB transfer supported by WinUSB.
     /// </summary>
-    /// <seealso href="https://support.microsoft.com/en-us/help/832430/maximum-size-of-usb-transfers-on-various-operating-systems"/>
-    public int MaximumPacketSize
-    {
-        get
-        {
-            return (int)_device.InternalDevice.GetPipePolicyUInt(_interfaceIndex, _pipeID, POLICY_TYPE.MAXIMUM_TRANSFER_SIZE);
-        }
-    }
+    /// <seealso
+    ///     href="https://support.microsoft.com/en-us/help/832430/maximum-size-of-usb-transfers-on-various-operating-systems" />
+    public int MaximumPacketSize =>
+        (int)_device.InternalDevice.GetPipePolicyUInt(_interfaceIndex, _pipeID, POLICY_TYPE.MAXIMUM_TRANSFER_SIZE);
 
     private void RequireDirectionOut()
     {
         // Some policy types only apply specifically to OUT direction pipes
         if ((_pipeID & 0x80) != 0)
+        {
             throw new NotSupportedException("This policy type is only allowed on OUT direction pipes.");
+        }
     }
 
     private void RequireDirectionIn()
@@ -203,6 +203,8 @@ public sealed class USBPipePolicy
         // Some policy types only apply specifically to IN  direction pipes
         // This function checks for this.
         if ((_pipeID & 0x80) == 0)
+        {
             throw new NotSupportedException("This policy type is only allowed on IN direction pipes.");
+        }
     }
 }
