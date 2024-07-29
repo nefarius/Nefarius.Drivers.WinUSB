@@ -8,6 +8,8 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
+using Windows.Win32.Devices.Usb;
+
 using Nefarius.Drivers.WinUSB.API;
 
 namespace Nefarius.Drivers.WinUSB;
@@ -36,8 +38,8 @@ public sealed class USBPowerPolicy
     /// </seealso>
     public bool AutoSuspend
     {
-        get => _device.InternalDevice.GetPowerPolicyBool(POWER_POLICY_TYPE.AUTO_SUSPEND);
-        set => _device.InternalDevice.SetPowerPolicy(POWER_POLICY_TYPE.AUTO_SUSPEND, value);
+        get => _device.InternalDevice.GetPowerPolicyBool(WINUSB_POWER_POLICY.AUTO_SUSPEND);
+        set => _device.InternalDevice.SetPowerPolicy(WINUSB_POWER_POLICY.AUTO_SUSPEND, value);
     }
 
     /// <summary>
@@ -48,12 +50,12 @@ public sealed class USBPowerPolicy
     /// </seealso>
     public int SuspendDelay
     {
-        get => (int)_device.InternalDevice.GetPowerPolicyUInt(POWER_POLICY_TYPE.SUSPEND_DELAY);
+        get => (int)_device.InternalDevice.GetPowerPolicyUInt(WINUSB_POWER_POLICY.SUSPEND_DELAY);
         set
         {
             if (value < 0)
                 throw new ArgumentOutOfRangeException(nameof(value), "Suspend delay cannot be negative.");
-            _device.InternalDevice.SetPowerPolicy(POWER_POLICY_TYPE.SUSPEND_DELAY, (uint)value);
+            _device.InternalDevice.SetPowerPolicy(WINUSB_POWER_POLICY.SUSPEND_DELAY, (uint)value);
         }
     }
 }

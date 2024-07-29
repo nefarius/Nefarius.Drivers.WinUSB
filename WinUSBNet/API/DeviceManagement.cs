@@ -15,7 +15,8 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using Windows.Win32;
+
+using Windows.Win32.Devices.DeviceAndDriverInstallation;
 using Windows.Win32.Foundation;
 
 namespace Nefarius.Drivers.WinUSB.API;
@@ -27,45 +28,58 @@ internal static partial class DeviceManagement
 {
     private static readonly IntPtr INVALID_HANDLE_VALUE = new(-1);
 
-    private static byte[] GetProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, uint property,
+    private static byte[] GetProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData,
+        SETUP_DI_REGISTRY_PROPERTY property,
         out int regType)
     {
         uint requiredSize;
 
         if (!SetupDiGetDeviceRegistryProperty(deviceInfoSet, ref deviceInfoData, property, IntPtr.Zero, IntPtr.Zero, 0,
                 out requiredSize))
+        {
             if (Marshal.GetLastWin32Error() != (int)WIN32_ERROR.ERROR_INSUFFICIENT_BUFFER)
+            {
                 throw APIException.Win32("Failed to get buffer size for device registry property.");
+            }
+        }
 
-        var buffer = new byte[requiredSize];
+        byte[] buffer = new byte[requiredSize];
 
         if (!SetupDiGetDeviceRegistryProperty(deviceInfoSet, ref deviceInfoData, property, out regType, buffer,
                 (uint)buffer.Length, out requiredSize))
+        {
             throw APIException.Win32("Failed to get device registry property.");
+        }
 
         return buffer;
     }
 
     // todo: is the queried data always available, or should we check ERROR_INVALID_DATA?
-    private static string GetStringProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, uint property)
+    private static string GetStringProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData,
+        SETUP_DI_REGISTRY_PROPERTY property)
     {
         int regType;
-        var buffer = GetProperty(deviceInfoSet, deviceInfoData, property, out regType);
+        byte[] buffer = GetProperty(deviceInfoSet, deviceInfoData, property, out regType);
         if (regType != (int)RegTypes.REG_SZ)
+        {
             throw new APIException("Invalid registry type returned for device property.");
+        }
 
         // sizof(char), 2 bytes, are removed to leave out the string terminator
         return Encoding.Unicode.GetString(buffer, 0, buffer.Length - sizeof(char));
     }
 
-    private static string[] GetMultiStringProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData, uint property)
+    private static string[] GetMultiStringProperty(IntPtr deviceInfoSet, SP_DEVINFO_DATA deviceInfoData,
+        SETUP_DI_REGISTRY_PROPERTY property)
     {
         int regType;
-        var buffer = GetProperty(deviceInfoSet, deviceInfoData, property, out regType);
+        byte[] buffer = GetProperty(deviceInfoSet, deviceInfoData, property, out regType);
         if (regType != (int)RegTypes.REG_MULTI_SZ)
+        {
             throw new APIException("Invalid registry type returned for device property.");
+        }
 
-        var fullString = Encoding.Unicode.GetString(buffer);
+        string fullString = Encoding.Unicode.GetString(buffer);
 
         return fullString.Split(new[] { '\0' }, StringSplitOptions.RemoveEmptyEntries);
     }
@@ -73,17 +87,19 @@ internal static partial class DeviceManagement
     private static DeviceDetails GetDeviceDetails(string devicePath, IntPtr deviceInfoSet,
         SP_DEVINFO_DATA deviceInfoData)
     {
-        var details = new DeviceDetails();
+        DeviceDetails details = new();
         details.DevicePath = devicePath;
-        details.DeviceDescription = GetStringProperty(deviceInfoSet, deviceInfoData, PInvoke.SPDRP_DEVICEDESC);
-        details.Manufacturer = GetStringProperty(deviceInfoSet, deviceInfoData, PInvoke.SPDRP_MFG);
-        var hardwareIDs = GetMultiStringProperty(deviceInfoSet, deviceInfoData, PInvoke.SPDRP_HARDWAREID);
+        details.DeviceDescription =
+            GetStringProperty(deviceInfoSet, deviceInfoData, SETUP_DI_REGISTRY_PROPERTY.SPDRP_DEVICEDESC);
+        details.Manufacturer = GetStringProperty(deviceInfoSet, deviceInfoData, SETUP_DI_REGISTRY_PROPERTY.SPDRP_MFG);
+        string[] hardwareIDs =
+            GetMultiStringProperty(deviceInfoSet, deviceInfoData, SETUP_DI_REGISTRY_PROPERTY.SPDRP_HARDWAREID);
 
-        var regex = new Regex("^USB\\\\VID_([0-9A-F]{4})&PID_([0-9A-F]{4})", RegexOptions.IgnoreCase);
-        var foundVidPid = false;
-        foreach (var hardwareID in hardwareIDs)
+        Regex regex = new("^USB\\\\VID_([0-9A-F]{4})&PID_([0-9A-F]{4})", RegexOptions.IgnoreCase);
+        bool foundVidPid = false;
+        foreach (string hardwareID in hardwareIDs)
         {
-            var match = regex.Match(hardwareID);
+            Match match = regex.Match(hardwareID);
             if (match.Success)
             {
                 details.VID = ushort.Parse(match.Groups[1].Value, NumberStyles.AllowHexSpecifier);
@@ -94,7 +110,9 @@ internal static partial class DeviceManagement
         }
 
         if (!foundVidPid)
+        {
             throw new APIException("Failed to find VID and PID for USB device. No hardware ID could be parsed.");
+        }
 
         return details;
     }
@@ -102,20 +120,24 @@ internal static partial class DeviceManagement
 
     public static DeviceDetails[] FindDevicesFromGuid(Guid guid)
     {
-        var deviceInfoSet = IntPtr.Zero;
-        var deviceList = new List<DeviceDetails>();
+        IntPtr deviceInfoSet = IntPtr.Zero;
+        List<DeviceDetails> deviceList = new();
         try
         {
             deviceInfoSet = SetupDiGetClassDevs(ref guid, IntPtr.Zero, IntPtr.Zero,
-                (int)(PInvoke.DIGCF_PRESENT | PInvoke.DIGCF_DEVICEINTERFACE));
+                (int)(SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PRESENT |
+                      SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_DEVICEINTERFACE));
             if (deviceInfoSet == INVALID_HANDLE_VALUE)
+            {
                 throw APIException.Win32("Failed to enumerate devices.");
-            var memberIndex = 0;
+            }
+
+            int memberIndex = 0;
             while (true)
             {
                 // Begin with 0 and increment through the device information set until
                 // no more devices are available.
-                var deviceInterfaceData = new SP_DEVICE_INTERFACE_DATA();
+                SP_DEVICE_INTERFACE_DATA deviceInterfaceData = new();
 
                 // The cbSize element of the deviceInterfaceData structure must be set to
                 // the structure's size in bytes.
@@ -130,15 +152,17 @@ internal static partial class DeviceManagement
                 // Find out if a device information set was retrieved.
                 if (!success)
                 {
-                    var lastError = Marshal.GetLastWin32Error();
+                    int lastError = Marshal.GetLastWin32Error();
                     if (lastError == (int)WIN32_ERROR.ERROR_NO_MORE_ITEMS)
+                    {
                         break;
+                    }
 
                     throw APIException.Win32("Failed to get device interface.");
                 }
                 // A device is present.
 
-                var bufferSize = 0;
+                int bufferSize = 0;
 
                 success = SetupDiGetDeviceInterfaceDetail
                 (deviceInfoSet,
@@ -149,10 +173,14 @@ internal static partial class DeviceManagement
                     IntPtr.Zero);
 
                 if (!success)
+                {
                     if (Marshal.GetLastWin32Error() != (int)WIN32_ERROR.ERROR_INSUFFICIENT_BUFFER)
+                    {
                         throw APIException.Win32("Failed to get interface details buffer size.");
+                    }
+                }
 
-                var detailDataBuffer = IntPtr.Zero;
+                IntPtr detailDataBuffer = IntPtr.Zero;
                 try
                 {
                     // Allocate memory for the SP_DEVICE_INTERFACE_DETAIL_DATA structure using the returned buffer size.
@@ -167,7 +195,7 @@ internal static partial class DeviceManagement
                     // and the returned required buffer size.
 
                     // build a DevInfo Data structure
-                    var da = new SP_DEVINFO_DATA();
+                    SP_DEVINFO_DATA da = new();
                     da.cbSize = Marshal.SizeOf(da);
 
 
@@ -180,17 +208,19 @@ internal static partial class DeviceManagement
                         ref da);
 
                     if (!success)
+                    {
                         throw APIException.Win32("Failed to get device interface details.");
+                    }
 
 
                     // Skip over cbsize (4 bytes) to get the address of the devicePathName.
 
-                    var pDevicePathName = new IntPtr(detailDataBuffer.ToInt64() + 4);
-                    var pathName = Marshal.PtrToStringUni(pDevicePathName);
+                    IntPtr pDevicePathName = new(detailDataBuffer.ToInt64() + 4);
+                    string pathName = Marshal.PtrToStringUni(pDevicePathName);
 
                     // Get the String containing the devicePathName.
 
-                    var details = GetDeviceDetails(pathName, deviceInfoSet, da);
+                    DeviceDetails details = GetDeviceDetails(pathName, deviceInfoSet, da);
 
 
                     deviceList.Add(details);
@@ -210,7 +240,9 @@ internal static partial class DeviceManagement
         finally
         {
             if (deviceInfoSet != IntPtr.Zero && deviceInfoSet != INVALID_HANDLE_VALUE)
+            {
                 SetupDiDestroyDeviceInfoList(deviceInfoSet);
+            }
         }
 
         return deviceList.ToArray();

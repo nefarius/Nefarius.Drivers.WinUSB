@@ -2,6 +2,8 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
+using Windows.Win32.Devices.Usb;
+
 using Nefarius.Drivers.WinUSB.API;
 
 namespace Nefarius.Drivers.WinUSB;
@@ -74,7 +76,7 @@ public partial class USBDevice
     /// </seealso>
     public int ControlPipeTimeout
     {
-        get => (int)InternalDevice.GetPipePolicyUInt(0, 0x00, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT);
+        get => (int)InternalDevice.GetPipePolicyUInt(0, 0x00, WINUSB_PIPE_POLICY.PIPE_TRANSFER_TIMEOUT);
         set
         {
             if (value < 0)
@@ -82,7 +84,7 @@ public partial class USBDevice
                 throw new ArgumentOutOfRangeException(nameof(value), "Control pipe timeout cannot be negative.");
             }
 
-            InternalDevice.SetPipePolicy(0, 0x00, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT, (uint)value);
+            InternalDevice.SetPipePolicy(0, 0x00, WINUSB_PIPE_POLICY.PIPE_TRANSFER_TIMEOUT, (uint)value);
         }
     }
 

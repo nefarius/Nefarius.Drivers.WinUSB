@@ -14,10 +14,14 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Threading;
+
 using Windows.Win32;
 using Windows.Win32.Devices.Usb;
 using Windows.Win32.Foundation;
+
 using Microsoft.Win32.SafeHandles;
+
+using Nefarius.Drivers.WinUSB.Util;
 
 namespace Nefarius.Drivers.WinUSB.API;
 
@@ -27,10 +31,10 @@ namespace Nefarius.Drivers.WinUSB.API;
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 internal partial class WinUSBDevice : IDisposable
 {
-    private IntPtr[] _addInterfaces;
+    private WINUSB_INTERFACE_HANDLE[] _addInterfaces;
     private SafeFileHandle _deviceHandle;
     private bool _disposed;
-    private IntPtr _winUsbHandle = IntPtr.Zero;
+    private SafeHandle _winUsbHandle;
 
     public int InterfaceCount => 1 + (_addInterfaces == null ? 0 : _addInterfaces.Length);
 
@@ -48,7 +52,9 @@ internal partial class WinUSBDevice : IDisposable
     private void CheckNotDisposed()
     {
         if (_disposed)
+        {
             throw new ObjectDisposedException("USB device object has been disposed.");
+        }
     }
 
     // TODO: check if not disposed on methods (although this is already checked by USBDevice)
@@ -56,13 +62,18 @@ internal partial class WinUSBDevice : IDisposable
     protected virtual void Dispose(bool disposing)
     {
         if (_disposed)
+        {
             return;
+        }
 
         if (disposing)
         {
             // Dispose managed resources
-            if (_deviceHandle != null && !_deviceHandle.IsInvalid)
+            if (_deviceHandle is { IsInvalid: false })
+            {
                 _deviceHandle.Dispose();
+            }
+
             _deviceHandle = null;
         }
 
@@ -71,19 +82,24 @@ internal partial class WinUSBDevice : IDisposable
         _disposed = true;
     }
 
-    private unsafe void FreeWinUSB()
+    private void FreeWinUSB()
     {
         if (_addInterfaces != null)
         {
-            foreach (var entry in _addInterfaces)
-                PInvoke.WinUsb_Free(entry.ToPointer());
+            foreach (WINUSB_INTERFACE_HANDLE entry in _addInterfaces)
+            {
+                PInvoke.WinUsb_Free(entry);
+            }
 
             _addInterfaces = null;
         }
 
-        if (_winUsbHandle != IntPtr.Zero)
-            PInvoke.WinUsb_Free(_winUsbHandle.ToPointer());
-        _winUsbHandle = IntPtr.Zero;
+        if (!_winUsbHandle.IsInvalid)
+        {
+            PInvoke.WinUsb_Free(_winUsbHandle.AsInterfaceHandle());
+        }
+
+        _winUsbHandle = null;
     }
 
     private unsafe int ReadStringDescriptor(byte index, ushort languageId, byte[] buffer)
@@ -91,8 +107,8 @@ internal partial class WinUSBDevice : IDisposable
         fixed (byte* bufferPtr = buffer)
         {
             uint transferred = 0;
-            var success = PInvoke.WinUsb_GetDescriptor(
-                _winUsbHandle.ToPointer(),
+            BOOL success = PInvoke.WinUsb_GetDescriptor(
+                _winUsbHandle.AsInterfaceHandle(),
                 (byte)PInvoke.USB_STRING_DESCRIPTOR_TYPE,
                 index,
                 languageId,
@@ -102,45 +118,55 @@ internal partial class WinUSBDevice : IDisposable
             );
 
             if (!success)
+            {
                 throw APIException.Win32("Failed to get USB string descriptor (" + index + ").");
+            }
 
             if (transferred == 0)
+            {
                 throw new APIException("No data returned when reading USB descriptor.");
+            }
 
             int length = buffer[0];
 
             if (length != transferred)
+            {
                 throw new APIException("Unexpected length when reading USB descriptor.");
+            }
 
             return length;
         }
     }
 
-    private IntPtr InterfaceHandle(int index)
+    private WINUSB_INTERFACE_HANDLE InterfaceHandle(int index)
     {
-        return index == 0 ? _winUsbHandle : _addInterfaces[index - 1];
+        return index == 0 ? _winUsbHandle.AsInterfaceHandle() : _addInterfaces[index - 1];
     }
 
     public unsafe void GetInterfaceInfo(int interfaceIndex, out USB_INTERFACE_DESCRIPTOR descriptor,
         out WINUSB_PIPE_INFORMATION[] pipes)
     {
         USB_INTERFACE_DESCRIPTOR desc;
-        var pipeList = new List<WINUSB_PIPE_INFORMATION>();
-        var success = PInvoke.WinUsb_QueryInterfaceSettings(InterfaceHandle(interfaceIndex).ToPointer(), 0, &desc);
+        List<WINUSB_PIPE_INFORMATION> pipeList = new List<WINUSB_PIPE_INFORMATION>();
+        BOOL success = PInvoke.WinUsb_QueryInterfaceSettings(InterfaceHandle(interfaceIndex), 0, &desc);
         if (!success)
+        {
             throw APIException.Win32("Failed to get WinUSB device interface descriptor.");
+        }
 
         descriptor = desc;
 
-        var interfaceHandle = InterfaceHandle(interfaceIndex);
+        WINUSB_INTERFACE_HANDLE interfaceHandle = InterfaceHandle(interfaceIndex);
         for (byte pipeIdx = 0; pipeIdx < descriptor.bNumEndpoints; pipeIdx++)
         {
             WINUSB_PIPE_INFORMATION pipeInfo;
-            success = PInvoke.WinUsb_QueryPipe(interfaceHandle.ToPointer(), 0, pipeIdx, &pipeInfo);
+            success = PInvoke.WinUsb_QueryPipe(interfaceHandle, 0, pipeIdx, &pipeInfo);
 
             pipeList.Add(pipeInfo);
             if (!success)
+            {
                 throw APIException.Win32("Failed to get WinUSB device pipe information.");
+            }
         }
 
         pipes = pipeList.ToArray();
@@ -148,35 +174,37 @@ internal partial class WinUSBDevice : IDisposable
 
     private unsafe void InitializeDevice()
     {
-        void* handle = null;
-        var success = PInvoke.WinUsb_Initialize(new HANDLE(_deviceHandle.DangerousGetHandle()), &handle);
+        WINUSB_INTERFACE_HANDLE handle;
+        BOOL success = PInvoke.WinUsb_Initialize(new HANDLE(_deviceHandle.DangerousGetHandle()), &handle);
 
         if (!success)
+        {
             throw APIException.Win32("Failed to initialize WinUSB handle. Device might not be connected.");
+        }
 
-        _winUsbHandle = new IntPtr(handle);
+        _winUsbHandle = new SafeFileHandle(new IntPtr(handle.Value), false);
 
-        var interfaces = new List<IntPtr>();
-        byte numAddInterfaces = 0;
+        List<WINUSB_INTERFACE_HANDLE> interfaces = new();
         byte idx = 0;
 
         try
         {
             while (true)
             {
-                void* ifaceHandle = null;
-                success = PInvoke.WinUsb_GetAssociatedInterface(_winUsbHandle.ToPointer(), idx, &ifaceHandle);
+                WINUSB_INTERFACE_HANDLE ifaceHandle;
+                success = PInvoke.WinUsb_GetAssociatedInterface(_winUsbHandle.AsInterfaceHandle(), idx, &ifaceHandle);
                 if (!success)
                 {
                     if (Marshal.GetLastWin32Error() == (int)WIN32_ERROR.ERROR_NO_MORE_ITEMS)
+                    {
                         break;
+                    }
 
                     throw APIException.Win32("Failed to enumerate interfaces for WinUSB device.");
                 }
 
-                interfaces.Add(new IntPtr(ifaceHandle));
+                interfaces.Add(ifaceHandle);
                 idx++;
-                numAddInterfaces++;
             }
         }
         finally
@@ -222,9 +250,12 @@ internal partial class WinUSBDevice : IDisposable
         {
             Exception error = null;
             if (errorCode != 0)
+            {
                 error = APIException.Win32("Asynchronous operation on WinUSB device failed.", (int)errorCode);
-            var overlapped = Overlapped.Unpack(pOverlapped);
-            var result = (USBAsyncResult)overlapped.AsyncResult;
+            }
+
+            Overlapped overlapped = Overlapped.Unpack(pOverlapped);
+            USBAsyncResult result = (USBAsyncResult)overlapped.AsyncResult;
             Overlapped.Free(pOverlapped);
             pOverlapped = null;
 
