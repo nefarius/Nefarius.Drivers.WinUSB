@@ -1,10 +1,14 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
+
 using Nefarius.Drivers.WinUSB.API;
 
 namespace Nefarius.Drivers.WinUSB;
 
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public partial class USBDevice
 {
     /// <summary>
@@ -21,7 +25,6 @@ public partial class USBDevice
     ///     Constructs a new USB device
     /// </summary>
     /// <param name="devicePathName">Device path name of the USB device to create</param>
-    [UsedImplicitly]
     public USBDevice(string devicePathName)
     {
         Descriptor = GetDeviceDescriptor(devicePathName);
@@ -42,25 +45,21 @@ public partial class USBDevice
     /// <summary>
     ///     Collection of all pipes available on the USB device
     /// </summary>
-    [UsedImplicitly]
     public USBPipeCollection Pipes { get; private set; }
 
     /// <summary>
     ///     Collection of all interfaces available on the USB device
     /// </summary>
-    [UsedImplicitly]
     public USBInterfaceCollection Interfaces { get; private set; }
 
     /// <summary>
     ///     Device descriptor with information about the device
     /// </summary>
-    [UsedImplicitly]
     public USBDeviceDescriptor Descriptor { get; }
 
     /// <summary>
     ///     The power policy settings for this device
     /// </summary>
-    [UsedImplicitly]
     public USBPowerPolicy PowerPolicy { get; }
 
     /// <summary>
@@ -72,14 +71,16 @@ public partial class USBDevice
     ///     WinUSB_GetPipePolicy for a more detailed
     ///     description
     /// </seealso>
-    [UsedImplicitly]
     public int ControlPipeTimeout
     {
         get => (int)InternalDevice.GetPipePolicyUInt(0, 0x00, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT);
         set
         {
             if (value < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(value), "Control pipe timeout cannot be negative.");
+            }
+
             InternalDevice.SetPipePolicy(0, 0x00, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT, (uint)value);
         }
     }
@@ -101,7 +102,8 @@ public partial class USBDevice
     ///     transfers, depending
     ///     on the highest bit of the <paramref name="requestType" /> parameter. Alternatively,
     ///     <see cref="ControlIn(byte,byte,int,int,Span{byte},int)" /> and
-    ///     <see cref="ControlOut(byte,byte,int,int,Span{byte},int)" /> can be used for control transfers in a specific direction,
+    ///     <see cref="ControlOut(byte,byte,int,int,Span{byte},int)" /> can be used for control transfers in a specific
+    ///     direction,
     ///     which is the recommended way because
     ///     it prevents using the wrong direction accidentally. Use the ControlTransfer method when the direction is not known
     ///     at compile time.
@@ -126,7 +128,6 @@ public partial class USBDevice
     ///     The setup packet's length member will be set to this length.
     /// </param>
     /// <returns>The number of bytes received from the device.</returns>
-    [UsedImplicitly]
     public int ControlTransfer(byte requestType, byte request, int value, int index, Span<byte> buffer, int length)
     {
         // Parameters are int and not ushort because ushort is not CLS compliant.
@@ -200,7 +201,6 @@ public partial class USBDevice
     ///     also provides an event handle (<see cref="IAsyncResult.AsyncWaitHandle" />) that will be triggered when the
     ///     operation is complete as well.
     /// </remarks>
-    [UsedImplicitly]
     public IAsyncResult BeginControlTransfer(byte requestType, byte request, int value, int index, byte[] buffer,
         int length, AsyncCallback userCallback, object stateObject)
     {
@@ -208,7 +208,7 @@ public partial class USBDevice
         CheckNotDisposed();
         CheckControlParams(value, index, buffer, length);
 
-        var result = new USBAsyncResult(userCallback, stateObject);
+        USBAsyncResult result = new(userCallback, stateObject);
 
         try
         {
@@ -282,7 +282,6 @@ public partial class USBDevice
     ///     also provides an event handle (<see cref="IAsyncResult.AsyncWaitHandle" />) that will be triggered when the
     ///     operation is complete as well.
     /// </remarks>
-    [UsedImplicitly]
     public IAsyncResult BeginControlTransfer(byte requestType, byte request, int value, int index, byte[] buffer,
         AsyncCallback userCallback, object stateObject)
     {
@@ -302,30 +301,39 @@ public partial class USBDevice
     ///     Every asynchronous control transfer must have a matching call to <see cref="EndControlTransfer" /> to dispose
     ///     of any resources used and to retrieve the result of the operation. When the operation was successful the method
     ///     returns the number
-    ///     of bytes that were transferred. If an error occurred during the operation this method will throw the exceptions that
+    ///     of bytes that were transferred. If an error occurred during the operation this method will throw the exceptions
+    ///     that
     ///     would
     ///     otherwise have occurred during the operation. If the operation is not yet finished EndControlTransfer will wait for
     ///     the
     ///     operation to finish before returning.
     /// </remarks>
-    [UsedImplicitly]
     public int EndControlTransfer(IAsyncResult asyncResult)
     {
         if (asyncResult == null)
+        {
             throw new NullReferenceException("asyncResult cannot be null");
+        }
+
         if (!(asyncResult is USBAsyncResult))
+        {
             throw new ArgumentException(
                 "AsyncResult object was not created by calling one of the BeginControl* methods on this class.");
+        }
 
         // todo: check duplicate end control
-        var result = (USBAsyncResult)asyncResult;
+        USBAsyncResult result = (USBAsyncResult)asyncResult;
         try
         {
             if (!result.IsCompleted)
+            {
                 result.AsyncWaitHandle.WaitOne();
+            }
 
             if (result.Error != null)
+            {
                 throw new USBException("Asynchronous control transfer from pipe has failed.", result.Error);
+            }
 
             return result.BytesTransferred;
         }
@@ -364,7 +372,6 @@ public partial class USBDevice
     ///     length as well.
     /// </param>
     /// <returns>The number of bytes received from the device.</returns>
-    [UsedImplicitly]
     public int ControlTransfer(byte requestType, byte request, int value, int index, Span<byte> buffer)
     {
         return ControlTransfer(requestType, request, value, index, buffer, buffer.Length);
@@ -390,7 +397,6 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    [UsedImplicitly]
     public void ControlTransfer(byte requestType, byte request, int value, int index)
     {
         // TODO: null instead of empty buffer. But overlapped code would have to be fixed for this (no buffer to pin)
@@ -427,15 +433,14 @@ public partial class USBDevice
     ///     If the device responds with less data than expected, this routine will allocate a smaller buffer to copy and return
     ///     only the bytes actually received.
     /// </remarks>
-    [UsedImplicitly]
     public byte[] ControlIn(byte requestType, byte request, int value, int index, int length)
     {
         CheckIn(requestType);
-        var buffer = new byte[length];
-        var actuallyReceived = ControlTransfer(requestType, request, value, index, buffer, buffer.Length);
+        byte[] buffer = new byte[length];
+        int actuallyReceived = ControlTransfer(requestType, request, value, index, buffer, buffer.Length);
         if (actuallyReceived < length)
         {
-            var outBuffer = new byte[actuallyReceived];
+            byte[] outBuffer = new byte[actuallyReceived];
             Array.Copy(buffer, 0, outBuffer, 0, actuallyReceived);
             return outBuffer;
         }
@@ -468,7 +473,6 @@ public partial class USBDevice
     ///     by the <paramref name="buffer" /> parameter should have at least this length.
     /// </param>
     /// <returns>The number of bytes received from the device.</returns>
-    [UsedImplicitly]
     public int ControlIn(byte requestType, byte request, int value, int index, Span<byte> buffer, int length)
     {
         CheckIn(requestType);
@@ -500,7 +504,6 @@ public partial class USBDevice
     ///     bytes transferred.
     /// </param>
     /// <returns>The number of bytes received from the device.</returns>
-    [UsedImplicitly]
     public int ControlIn(byte requestType, byte request, int value, int index, Span<byte> buffer)
     {
         CheckIn(requestType);
@@ -525,7 +528,6 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    [UsedImplicitly]
     public void ControlIn(byte requestType, byte request, int value, int index)
     {
         CheckIn(requestType);
@@ -557,7 +559,6 @@ public partial class USBDevice
     ///     be transferred.
     ///     The setup packet's length parameter is set to this length.
     /// </param>
-    [UsedImplicitly]
     public void ControlOut(byte requestType, byte request, int value, int index, Span<byte> buffer, int length)
     {
         CheckOut(requestType);
@@ -587,7 +588,6 @@ public partial class USBDevice
     ///     length
     ///     parameter is set to the length of this buffer.
     /// </param>
-    [UsedImplicitly]
     public void ControlOut(byte requestType, byte request, int value, int index, Span<byte> buffer)
     {
         CheckOut(requestType);
@@ -612,7 +612,6 @@ public partial class USBDevice
     ///     The index member in the setup packet. Its meaning depends on the request. Index should be between
     ///     zero and 65535 (0xFFFF).
     /// </param>
-    [UsedImplicitly]
     public void ControlOut(byte requestType, byte request, int value, int index)
     {
         CheckOut(requestType);
@@ -665,7 +664,6 @@ public partial class USBDevice
     ///     also provides an event handle (<see cref="IAsyncResult.AsyncWaitHandle" />) that will be triggered when the
     ///     operation is complete as well.
     /// </remarks>
-    [UsedImplicitly]
     public IAsyncResult BeginControlTransfer(byte requestType, byte request, int value, int index,
         AsyncCallback userCallback, object stateObject)
     {
@@ -721,7 +719,6 @@ public partial class USBDevice
     ///     also provides an event handle (<see cref="IAsyncResult.AsyncWaitHandle" />) that will be triggered when the
     ///     operation is complete as well.
     /// </remarks>
-    [UsedImplicitly]
     public IAsyncResult BeginControlIn(byte requestType, byte request, int value, int index, byte[] buffer, int length,
         AsyncCallback userCallback, object stateObject)
     {
@@ -775,7 +772,6 @@ public partial class USBDevice
     ///     also provides an event handle (<see cref="IAsyncResult.AsyncWaitHandle" />) that will be triggered when the
     ///     operation is complete as well.
     /// </remarks>
-    [UsedImplicitly]
     public IAsyncResult BeginControlIn(byte requestType, byte request, int value, int index, byte[] buffer,
         AsyncCallback userCallback, object stateObject)
     {
@@ -826,7 +822,6 @@ public partial class USBDevice
     ///     also provides an event handle (<see cref="IAsyncResult.AsyncWaitHandle" />) that will be triggered when the
     ///     operation is complete as well.
     /// </remarks>
-    [UsedImplicitly]
     public IAsyncResult BeginControlIn(byte requestType, byte request, int value, int index, AsyncCallback userCallback,
         object stateObject)
     {
@@ -881,7 +876,6 @@ public partial class USBDevice
     ///     also provides an event handle (<see cref="IAsyncResult.AsyncWaitHandle" />) that will be triggered when the
     ///     operation is complete as well.
     /// </remarks>
-    [UsedImplicitly]
     public IAsyncResult BeginControlOut(byte requestType, byte request, int value, int index, byte[] buffer, int length,
         AsyncCallback userCallback, object stateObject)
     {
@@ -935,7 +929,6 @@ public partial class USBDevice
     ///     also provides an event handle (<see cref="IAsyncResult.AsyncWaitHandle" />) that will be triggered when the
     ///     operation is complete as well.
     /// </remarks>
-    [UsedImplicitly]
     public IAsyncResult BeginControlOut(byte requestType, byte request, int value, int index, byte[] buffer,
         AsyncCallback userCallback, object stateObject)
     {
@@ -986,7 +979,6 @@ public partial class USBDevice
     ///     also provides an event handle (<see cref="IAsyncResult.AsyncWaitHandle" />) that will be triggered when the
     ///     operation is complete as well.
     /// </remarks>
-    [UsedImplicitly]
     public IAsyncResult BeginControlOut(byte requestType, byte request, int value, int index,
         AsyncCallback userCallback, object stateObject)
     {
@@ -1008,7 +1000,6 @@ public partial class USBDevice
     ///     devices found. When no devices are found an empty array is
     ///     returned.
     /// </returns>
-    [UsedImplicitly]
     public static USBDeviceInfo[] GetDevices(string guidString)
     {
         return GetDevices(new Guid(guidString));
@@ -1023,14 +1014,17 @@ public partial class USBDevice
     ///     devices found. When no devices are found an empty array is
     ///     returned.
     /// </returns>
-    [UsedImplicitly]
     public static USBDeviceInfo[] GetDevices(Guid guid)
     {
-        var detailList = DeviceManagement.FindDevicesFromGuid(guid);
+        DeviceDetails[] detailList = DeviceManagement.FindDevicesFromGuid(guid);
 
-        var devices = new USBDeviceInfo[detailList.Length];
+        USBDeviceInfo[] devices = new USBDeviceInfo[detailList.Length];
 
-        for (var i = 0; i < detailList.Length; i++) devices[i] = new USBDeviceInfo(detailList[i]);
+        for (int i = 0; i < detailList.Length; i++)
+        {
+            devices[i] = new USBDeviceInfo(detailList[i]);
+        }
+
         return devices;
     }
 
@@ -1043,12 +1037,13 @@ public partial class USBDevice
     ///     An UsbDevice object representing the device if found. If
     ///     no device with the given GUID could be found null is returned.
     /// </returns>
-    [UsedImplicitly]
     public static USBDevice GetSingleDevice(Guid guid)
     {
-        var detailList = DeviceManagement.FindDevicesFromGuid(guid);
+        DeviceDetails[] detailList = DeviceManagement.FindDevicesFromGuid(guid);
         if (detailList.Length == 0)
+        {
             return null;
+        }
 
 
         return new USBDevice(detailList[0].DevicePath);
@@ -1063,7 +1058,6 @@ public partial class USBDevice
     ///     An UsbDevice object representing the device if found. If
     ///     no device with the given GUID could be found null is returned.
     /// </returns>
-    [UsedImplicitly]
     public static USBDevice GetSingleDevice(string guidString)
     {
         return GetSingleDevice(new Guid(guidString));
@@ -1074,7 +1068,6 @@ public partial class USBDevice
     /// </summary>
     /// <param name="path">The device path (symbolic link) to open.</param>
     /// <returns>a <see cref="USBDevice" /> object.</returns>
-    [UsedImplicitly]
     public static USBDevice GetSingleDeviceByPath(string path)
     {
         return new USBDevice(path);
@@ -1118,11 +1111,10 @@ public partial class USBDevice
     ///     than the requested number,
     ///     or it can be 0 (zero) if the end of the stream has been reached.
     /// </returns>
-    [UsedImplicitly]
     public Task<int> ControlTransferAsync(byte requestType, byte request, int value, int index, byte[] buffer,
         int length)
     {
-        var tcs = new TaskCompletionSource<int>();
+        TaskCompletionSource<int> tcs = new();
 
         BeginControlTransfer(requestType, request, value, index, buffer, length, iar =>
         {
@@ -1173,10 +1165,9 @@ public partial class USBDevice
     ///     than the requested number,
     ///     or it can be 0 (zero) if the end of the stream has been reached.
     /// </returns>
-    [UsedImplicitly]
     public Task<int> ControlTransferAsync(byte requestType, byte request, int value, int index, byte[] buffer)
     {
-        var tcs = new TaskCompletionSource<int>();
+        TaskCompletionSource<int> tcs = new();
 
         BeginControlTransfer(requestType, request, value, index, buffer, iar =>
         {
@@ -1220,10 +1211,9 @@ public partial class USBDevice
     ///     than the requested number,
     ///     or it can be 0 (zero) if the end of the stream has been reached.
     /// </returns>
-    [UsedImplicitly]
     public Task<int> ControlTransferAsync(byte requestType, byte request, int value, int index)
     {
-        var tcs = new TaskCompletionSource<int>();
+        TaskCompletionSource<int> tcs = new();
 
         BeginControlTransfer(requestType, request, value, index, iar =>
         {
@@ -1267,10 +1257,9 @@ public partial class USBDevice
     ///     than the requested number,
     ///     or it can be 0 (zero) if the end of the stream has been reached.
     /// </returns>
-    [UsedImplicitly]
     public Task<int> ControlInAsync(byte requestType, byte request, int value, int index, byte[] buffer, int length)
     {
-        var tcs = new TaskCompletionSource<int>();
+        TaskCompletionSource<int> tcs = new();
 
         BeginControlIn(requestType, request, value, index, buffer, length, iar =>
         {
@@ -1310,10 +1299,9 @@ public partial class USBDevice
     ///     than the requested number,
     ///     or it can be 0 (zero) if the end of the stream has been reached.
     /// </returns>
-    [UsedImplicitly]
     public Task<int> ControlInAsync(byte requestType, byte request, int value, int index, byte[] buffer)
     {
-        var tcs = new TaskCompletionSource<int>();
+        TaskCompletionSource<int> tcs = new();
 
         BeginControlIn(requestType, request, value, index, buffer, iar =>
         {
@@ -1352,10 +1340,9 @@ public partial class USBDevice
     ///     than the requested number,
     ///     or it can be 0 (zero) if the end of the stream has been reached.
     /// </returns>
-    [UsedImplicitly]
     public Task<int> ControlInAsync(byte requestType, byte request, int value, int index)
     {
-        var tcs = new TaskCompletionSource<int>();
+        TaskCompletionSource<int> tcs = new();
 
         BeginControlIn(requestType, request, value, index, iar =>
         {
@@ -1399,10 +1386,9 @@ public partial class USBDevice
     ///     than the requested number,
     ///     or it can be 0 (zero) if the end of the stream has been reached.
     /// </returns>
-    [UsedImplicitly]
     public Task<int> ControlOutAsync(byte requestType, byte request, int value, int index, byte[] buffer, int length)
     {
-        var tcs = new TaskCompletionSource<int>();
+        TaskCompletionSource<int> tcs = new();
 
         BeginControlOut(requestType, request, value, index, buffer, length, iar =>
         {
@@ -1442,10 +1428,9 @@ public partial class USBDevice
     ///     than the requested number,
     ///     or it can be 0 (zero) if the end of the stream has been reached.
     /// </returns>
-    [UsedImplicitly]
     public Task<int> ControlOutAsync(byte requestType, byte request, int value, int index, byte[] buffer)
     {
-        var tcs = new TaskCompletionSource<int>();
+        TaskCompletionSource<int> tcs = new();
 
         BeginControlOut(requestType, request, value, index, buffer, iar =>
         {
@@ -1484,10 +1469,9 @@ public partial class USBDevice
     ///     than the requested number,
     ///     or it can be 0 (zero) if the end of the stream has been reached.
     /// </returns>
-    [UsedImplicitly]
     public Task<int> ControlOutAsync(byte requestType, byte request, int value, int index)
     {
-        var tcs = new TaskCompletionSource<int>();
+        TaskCompletionSource<int> tcs = new();
 
         BeginControlOut(requestType, request, value, index, iar =>
         {

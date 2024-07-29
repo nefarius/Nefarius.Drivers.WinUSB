@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Windows.Win32;
@@ -23,6 +24,7 @@ namespace Nefarius.Drivers.WinUSB.API;
 /// <summary>
 ///     Wrapper for a WinUSB device dealing with the WinUSB and additional interface handles
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 internal partial class WinUSBDevice : IDisposable
 {
     private IntPtr[] _addInterfaces;

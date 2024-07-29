@@ -9,10 +9,13 @@
  * See http://www.lvr.com/winusb.htm for more information
  */
 
+using System.Diagnostics.CodeAnalysis;
+
 using Windows.Win32;
 
 namespace Nefarius.Drivers.WinUSB.API;
 
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 internal enum POLICY_TYPE : uint
 {
     SHORT_PACKET_TERMINATE = PInvoke.SHORT_PACKET_TERMINATE,
@@ -25,6 +28,7 @@ internal enum POLICY_TYPE : uint
     MAXIMUM_TRANSFER_SIZE = PInvoke.MAXIMUM_TRANSFER_SIZE
 }
 
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 internal enum POWER_POLICY_TYPE : uint
 {
     AUTO_SUSPEND = PInvoke.AUTO_SUSPEND,
