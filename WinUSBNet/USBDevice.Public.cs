@@ -9,6 +9,7 @@ namespace Nefarius.Drivers.WinUSB;
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 public partial class USBDevice
 {
     /// <summary>

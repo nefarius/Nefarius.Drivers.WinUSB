@@ -8,12 +8,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Nefarius.Drivers.WinUSB;
 
 /// <summary>
 ///     Collection of UsbInterface objects
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public sealed class USBInterfaceCollection : IEnumerable<USBInterface>
 {
     private readonly USBInterface[] _interfaces;
@@ -43,7 +46,7 @@ public sealed class USBInterfaceCollection : IEnumerable<USBInterface>
                     return iface;
             }
 
-            throw new IndexOutOfRangeException(string.Format("No interface with number {0} exists.", interfaceNumber));
+            throw new IndexOutOfRangeException($"No interface with number {interfaceNumber} exists.");
         }
     }
 

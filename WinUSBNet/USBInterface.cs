@@ -6,6 +6,8 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+
 using Windows.Win32.Devices.Usb;
 
 namespace Nefarius.Drivers.WinUSB;
@@ -13,6 +15,8 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     Represents a single USB interface from a USB device
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public sealed class USBInterface
 {
     internal USBInterface(USBDevice device, int interfaceIndex, USB_INTERFACE_DESCRIPTOR rawDesc,

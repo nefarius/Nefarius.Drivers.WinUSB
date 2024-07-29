@@ -7,6 +7,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
 using Windows.Win32.Devices.Usb;
 using Nefarius.Drivers.WinUSB.API;
 
@@ -17,6 +19,7 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     The UsbDevice class represents a single WinUSB device.
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 public partial class USBDevice : IDisposable
 {
     private bool _disposed;

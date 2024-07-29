@@ -6,6 +6,8 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+
 using Nefarius.Drivers.WinUSB.API;
 
 namespace Nefarius.Drivers.WinUSB;
@@ -13,6 +15,8 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     Describes the policy for a specific USB pipe
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public sealed class USBPipePolicy
 {
     private readonly USBDevice _device;

@@ -8,12 +8,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Nefarius.Drivers.WinUSB;
 
 /// <summary>
 ///     Collection of UsbPipe objects
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public sealed class USBPipeCollection : IEnumerable<USBPipe>
 {
     private readonly Dictionary<byte, USBPipe> _pipes;

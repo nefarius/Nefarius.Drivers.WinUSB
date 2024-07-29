@@ -5,6 +5,8 @@
  *  http://www.opensource.org/licenses/mit-license.php
  */
 
+using System.Diagnostics.CodeAnalysis;
+
 using Nefarius.Drivers.WinUSB.API;
 
 namespace Nefarius.Drivers.WinUSB;
@@ -14,6 +16,7 @@ namespace Nefarius.Drivers.WinUSB;
 ///     actual device descriptor. Device description and manufacturer will be the strings specified
 ///     in the .inf file. After a device is opened the actual device descriptor can be read as well.
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 public sealed class USBDeviceInfo
 {
     private readonly DeviceDetails _details;
