@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -147,7 +148,7 @@ internal partial class WinUSBDevice : IDisposable
         out WINUSB_PIPE_INFORMATION[] pipes)
     {
         USB_INTERFACE_DESCRIPTOR desc;
-        List<WINUSB_PIPE_INFORMATION> pipeList = new List<WINUSB_PIPE_INFORMATION>();
+        List<WINUSB_PIPE_INFORMATION> pipeList = new();
         BOOL success = PInvoke.WinUsb_QueryInterfaceSettings(InterfaceHandle(interfaceIndex), 0, &desc);
         if (!success)
         {
@@ -216,8 +217,12 @@ internal partial class WinUSBDevice : IDisposable
             _addInterfaces = interfaces.ToArray();
         }
 
-        // Bind handle (needed for overlapped I/O thread pool)
-        ThreadPool.BindHandle(_deviceHandle);
+        // TODO: IDK why but this causes a hang when debugging, deadlock?
+        if (!Debugger.IsAttached)
+        {
+            // Bind handle (needed for overlapped I/O thread pool)
+            ThreadPool.BindHandle(_deviceHandle);
+        }
         // TODO: bind interface handles as well? doesn't seem to be necessary
     }
 
