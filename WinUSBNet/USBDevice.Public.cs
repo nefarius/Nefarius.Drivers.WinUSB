@@ -1529,4 +1529,10 @@ public partial class USBDevice
             throw new USBException("Failed to retrieve string descriptor.", e);
         }
     }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return Descriptor.ToString();
+    }
 }

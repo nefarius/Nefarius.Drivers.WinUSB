@@ -115,4 +115,10 @@ public sealed class USBDeviceDescriptor
     ///     the value will be USBBaseClass.Unknown
     /// </summary>
     public USBBaseClass BaseClass { get; }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return FullName;
+    }
 }
