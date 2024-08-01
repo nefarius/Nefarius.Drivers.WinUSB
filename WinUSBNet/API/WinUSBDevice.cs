@@ -37,7 +37,7 @@ internal partial class WinUSBDevice : IDisposable
     private bool _disposed;
     private SafeHandle _winUsbHandle;
 
-    public int InterfaceCount => 1 + (_addInterfaces == null ? 0 : _addInterfaces.Length);
+    public int InterfaceCount => 1 + (_addInterfaces?.Length ?? 0);
 
     public void Dispose()
     {
