@@ -36,6 +36,7 @@ Microsoft Windows.
 
 - Migrate all buffers to Spans where possible
 - Migrate the old asynchronous APIs to `async`/`await` and Tasks
+- More/better tests 😇
 
 ## Features
 
