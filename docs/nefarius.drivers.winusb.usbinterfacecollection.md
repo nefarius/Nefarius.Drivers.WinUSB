@@ -5,7 +5,7 @@ Namespace: Nefarius.Drivers.WinUSB
 Collection of UsbInterface objects
 
 ```csharp
-public sealed class USBInterfaceCollection : System.Collections.Generic.IEnumerable`1[[Nefarius.Drivers.WinUSB.USBInterface, Nefarius.Drivers.WinUSB, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Collections.IEnumerable
+public sealed class USBInterfaceCollection : System.Collections.Generic.IEnumerable`1[[Nefarius.Drivers.WinUSB.USBInterface, Nefarius.Drivers.WinUSB, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Collections.IEnumerable
 ```
 
 Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBInterfaceCollection](./nefarius.drivers.winusb.usbinterfacecollection.md)<br>

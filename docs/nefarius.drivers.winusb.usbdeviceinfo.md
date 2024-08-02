@@ -52,7 +52,7 @@ public string Manufacturer { get; }
 
 ### <a id="properties-pid"/>**PID**
 
-Product ID (VID) of the USB device
+Product ID (PID) of the USB device
 
 ```csharp
 public int PID { get; }
