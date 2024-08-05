@@ -1109,8 +1109,8 @@ A task that represents the asynchronous output operation.
 Initiates a control transfer over the default control endpoint. This method allows both IN and OUT direction
  transfers, depending
  on the highest bit of the  parameter. Alternatively,
- [USBDevice.ControlIn(Byte, Byte, Int32, Int32, Span&lt;Byte&gt;, Int32)](./nefarius.drivers.winusb.usbdevice.md#controlinbyte-byte-int32-int32-spanbyte-int32) and
- [USBDevice.ControlOut(Byte, Byte, Int32, Int32, Span&lt;Byte&gt;, Int32)](./nefarius.drivers.winusb.usbdevice.md#controloutbyte-byte-int32-int32-spanbyte-int32) can be used for control transfers in a specific
+ [USBDevice.ControlInAsync(Byte, Byte, Int32, Int32, Byte[], Int32)](./nefarius.drivers.winusb.usbdevice.md#controlinasyncbyte-byte-int32-int32-byte-int32) and
+ [USBDevice.ControlOutAsync(Byte, Byte, Int32, Int32, Byte[], Int32)](./nefarius.drivers.winusb.usbdevice.md#controloutasyncbyte-byte-int32-int32-byte-int32) can be used for control transfers in a specific
  direction,
  which is the recommended way because
  it prevents using the wrong direction accidentally. Use the ControlTransfer method when the direction is not known
@@ -1154,8 +1154,8 @@ The number of bytes received from the device.
 Initiates a control transfer over the default control endpoint. This method allows both IN and OUT direction
  transfers, depending
  on the highest bit of the  parameter). Alternatively,
- [USBDevice.ControlIn(Byte, Byte, Int32, Int32, Int32)](./nefarius.drivers.winusb.usbdevice.md#controlinbyte-byte-int32-int32-int32) and
- [USBDevice.ControlOut(Byte, Byte, Int32, Int32, Span&lt;Byte&gt;)](./nefarius.drivers.winusb.usbdevice.md#controloutbyte-byte-int32-int32-spanbyte) can be used for control transfers in a specific direction,
+ [USBDevice.ControlInAsync(Byte, Byte, Int32, Int32, Byte[])](./nefarius.drivers.winusb.usbdevice.md#controlinasyncbyte-byte-int32-int32-byte) and
+ [USBDevice.ControlOutAsync(Byte, Byte, Int32, Int32, Byte[])](./nefarius.drivers.winusb.usbdevice.md#controloutasyncbyte-byte-int32-int32-byte) can be used for control transfers in a specific direction,
  which is the recommended way because
  it prevents using the wrong direction accidentally. Use the ControlTransfer method when the direction is not known
  at compile time.
@@ -1197,8 +1197,8 @@ The number of bytes received from the device.
 Initiates a control transfer without a data stage over the default control endpoint. This method allows both IN and
  OUT direction transfers, depending
  on the highest bit of the  parameter). Alternatively,
- [USBDevice.ControlIn(Byte, Byte, Int32, Int32)](./nefarius.drivers.winusb.usbdevice.md#controlinbyte-byte-int32-int32) and
- [USBDevice.ControlOut(Byte, Byte, Int32, Int32)](./nefarius.drivers.winusb.usbdevice.md#controloutbyte-byte-int32-int32) can be used for control transfers in a specific direction, which is
+ [USBDevice.ControlInAsync(Byte, Byte, Int32, Int32)](./nefarius.drivers.winusb.usbdevice.md#controlinasyncbyte-byte-int32-int32) and
+ [USBDevice.ControlOutAsync(Byte, Byte, Int32, Int32)](./nefarius.drivers.winusb.usbdevice.md#controloutasyncbyte-byte-int32-int32) can be used for control transfers in a specific direction, which is
  the recommended way because
  it prevents using the wrong direction accidentally. Use the ControlTransfer method when the direction is not known
  at compile time.
