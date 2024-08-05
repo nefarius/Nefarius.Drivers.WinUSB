@@ -17,6 +17,8 @@ namespace Nefarius.Drivers.WinUSB;
 /// </summary>
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public sealed class USBInterface
 {
     internal USBInterface(USBDevice device, int interfaceIndex, USB_INTERFACE_DESCRIPTOR rawDesc,
