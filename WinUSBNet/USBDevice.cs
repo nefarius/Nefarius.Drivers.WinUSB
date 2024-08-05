@@ -7,7 +7,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
 using Windows.Win32.Devices.Usb;
+
 using Nefarius.Drivers.WinUSB.API;
 
 [assembly: CLSCompliant(true)]
@@ -17,6 +20,7 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     The UsbDevice class represents a single WinUSB device.
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 public partial class USBDevice : IDisposable
 {
     private bool _disposed;
@@ -41,7 +45,9 @@ public partial class USBDevice : IDisposable
     protected virtual void Dispose(bool disposing)
     {
         if (_disposed)
+        {
             return;
+        }
 
         if (disposing)
         {
@@ -56,21 +62,23 @@ public partial class USBDevice : IDisposable
 
     private void InitializeInterfaces()
     {
-        var numInterfaces = InternalDevice.InterfaceCount;
+        int numInterfaces = InternalDevice.InterfaceCount;
 
-        var allPipes = new List<USBPipe>();
+        List<USBPipe> allPipes = new();
 
-        var interfaces = new USBInterface[numInterfaces];
+        USBInterface[] interfaces = new USBInterface[numInterfaces];
         // UsbEndpoint
-        for (var i = 0; i < numInterfaces; i++)
+        for (int i = 0; i < numInterfaces; i++)
         {
-            USB_INTERFACE_DESCRIPTOR descriptor;
-            WINUSB_PIPE_INFORMATION[] pipesInfo;
-            InternalDevice.GetInterfaceInfo(i, out descriptor, out pipesInfo);
-            var interfacePipes = new USBPipe[pipesInfo.Length];
-            for (var k = 0; k < pipesInfo.Length; k++)
+            InternalDevice.GetInterfaceInfo(
+                i,
+                out USB_INTERFACE_DESCRIPTOR descriptor,
+                out WINUSB_PIPE_INFORMATION[] pipesInfo
+            );
+            USBPipe[] interfacePipes = new USBPipe[pipesInfo.Length];
+            for (int k = 0; k < pipesInfo.Length; k++)
             {
-                var pipe = new USBPipe(this, pipesInfo[k]);
+                USBPipe pipe = new(this, pipesInfo[k]);
                 interfacePipes[k] = pipe;
                 allPipes.Add(pipe);
             }
@@ -78,7 +86,7 @@ public partial class USBDevice : IDisposable
             // TODO:
             //if (descriptor.iInterface != 0)
             //    _wuDevice.GetStringDescriptor(descriptor.iInterface);
-            var pipeCollection = new USBPipeCollection(interfacePipes);
+            USBPipeCollection pipeCollection = new(interfacePipes);
             interfaces[i] = new USBInterface(this, i, descriptor, pipeCollection);
         }
 
@@ -89,65 +97,88 @@ public partial class USBDevice : IDisposable
     private static void CheckControlParams(int value, int index, Span<byte> buffer, int length)
     {
         if (value is < ushort.MinValue or > ushort.MaxValue)
+        {
             throw new ArgumentOutOfRangeException(nameof(value), "Value parameter out of range.");
+        }
+
         if (index is < ushort.MinValue or > ushort.MaxValue)
+        {
             throw new ArgumentOutOfRangeException(nameof(index), "Index parameter out of range.");
+        }
+
         if (length > buffer.Length)
+        {
             throw new ArgumentOutOfRangeException(nameof(length),
                 "Length parameter is larger than the size of the buffer.");
+        }
+
         if (length > ushort.MaxValue)
+        {
             throw new ArgumentOutOfRangeException(nameof(length), "Length too large");
+        }
     }
-    
+
     private static void CheckIn(byte requestType)
     {
         if ((requestType & 0x80) == 0) // Host to device?
+        {
             throw new ArgumentException("Request type is not IN.");
+        }
     }
 
     private static void CheckOut(byte requestType)
     {
         if ((requestType & 0x80) == 0x80) // Device to host?
+        {
             throw new ArgumentException("Request type is not OUT.");
+        }
     }
 
     private void CheckNotDisposed()
     {
         if (_disposed)
+        {
             throw new ObjectDisposedException("USB device object has been disposed.");
+        }
     }
 
     private static USBDeviceDescriptor GetDeviceDescriptor(string devicePath)
     {
         try
         {
-            USBDeviceDescriptor descriptor;
-            using (var wuDevice = new WinUSBDevice())
+            using WinUSBDevice wuDevice = new();
+            wuDevice.OpenDevice(devicePath);
+            USB_DEVICE_DESCRIPTOR deviceDesc = wuDevice.GetDeviceDescriptor();
+
+            // Get first supported language ID
+            ushort[] langIDs = wuDevice.GetSupportedLanguageIDs();
+            ushort langID = 0;
+            if (langIDs.Length > 0)
             {
-                wuDevice.OpenDevice(devicePath);
-                var deviceDesc = wuDevice.GetDeviceDescriptor();
-
-                // Get first supported language ID
-                var langIDs = wuDevice.GetSupportedLanguageIDs();
-                ushort langID = 0;
-                if (langIDs.Length > 0)
-                    langID = langIDs[0];
-
-                string manufacturer = null, product = null, serialNumber = null;
-                byte idx = 0;
-                idx = deviceDesc.iManufacturer;
-                if (idx > 0)
-                    manufacturer = wuDevice.GetStringDescriptor(idx, langID);
-
-                idx = deviceDesc.iProduct;
-                if (idx > 0)
-                    product = wuDevice.GetStringDescriptor(idx, langID);
-
-                idx = deviceDesc.iSerialNumber;
-                if (idx > 0)
-                    serialNumber = wuDevice.GetStringDescriptor(idx, langID);
-                descriptor = new USBDeviceDescriptor(devicePath, deviceDesc, manufacturer, product, serialNumber);
+                langID = langIDs[0];
             }
+
+            string manufacturer = null, product = null, serialNumber = null;
+            byte idx = 0;
+            idx = deviceDesc.iManufacturer;
+            if (idx > 0)
+            {
+                manufacturer = wuDevice.GetStringDescriptor(idx, langID);
+            }
+
+            idx = deviceDesc.iProduct;
+            if (idx > 0)
+            {
+                product = wuDevice.GetStringDescriptor(idx, langID);
+            }
+
+            idx = deviceDesc.iSerialNumber;
+            if (idx > 0)
+            {
+                serialNumber = wuDevice.GetStringDescriptor(idx, langID);
+            }
+
+            USBDeviceDescriptor descriptor = new(devicePath, deviceDesc, manufacturer, product, serialNumber);
 
             return descriptor;
         }

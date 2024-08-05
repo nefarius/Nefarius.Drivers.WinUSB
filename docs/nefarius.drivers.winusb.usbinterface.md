@@ -12,67 +12,19 @@ Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) 
 
 ## Properties
 
-### **Pipes**
+### <a id="properties-alternatesetting"/>**AlternateSetting**
 
-Collection of pipes associated with this interface
+Interface alternate setting
 
 ```csharp
-public USBPipeCollection Pipes { get; }
+public byte AlternateSetting { get; set; }
 ```
 
 #### Property Value
 
-[USBPipeCollection](./nefarius.drivers.winusb.usbpipecollection.md)<br>
+[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
 
-### **Number**
-
-Interface number from the interface descriptor
-
-```csharp
-public int Number { get; }
-```
-
-#### Property Value
-
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-
-### **Device**
-
-USB device associated with this interface
-
-```csharp
-public USBDevice Device { get; }
-```
-
-#### Property Value
-
-[USBDevice](./nefarius.drivers.winusb.usbdevice.md)<br>
-
-### **InPipe**
-
-First IN direction pipe on this interface
-
-```csharp
-public USBPipe InPipe { get; }
-```
-
-#### Property Value
-
-[USBPipe](./nefarius.drivers.winusb.usbpipe.md)<br>
-
-### **OutPipe**
-
-First OUT direction pipe on this interface
-
-```csharp
-public USBPipe OutPipe { get; }
-```
-
-#### Property Value
-
-[USBPipe](./nefarius.drivers.winusb.usbpipe.md)<br>
-
-### **BaseClass**
+### <a id="properties-baseclass"/>**BaseClass**
 
 Interface class code. If the interface class does
  not match any of the USBBaseClass enumeration values
@@ -86,7 +38,7 @@ public USBBaseClass BaseClass { get; }
 
 [USBBaseClass](./nefarius.drivers.winusb.usbbaseclass.md)<br>
 
-### **ClassValue**
+### <a id="properties-classvalue"/>**ClassValue**
 
 Interface class code as defined in the interface descriptor
  This property can be used if the class type is not defined
@@ -100,19 +52,67 @@ public byte ClassValue { get; }
 
 [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
 
-### **SubClass**
+### <a id="properties-device"/>**Device**
 
-Interface subclass code
+USB device associated with this interface
 
 ```csharp
-public byte SubClass { get; }
+public USBDevice Device { get; }
 ```
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[USBDevice](./nefarius.drivers.winusb.usbdevice.md)<br>
 
-### **Protocol**
+### <a id="properties-inpipe"/>**InPipe**
+
+First IN direction pipe on this interface
+
+```csharp
+public USBPipe InPipe { get; }
+```
+
+#### Property Value
+
+[USBPipe](./nefarius.drivers.winusb.usbpipe.md)<br>
+
+### <a id="properties-number"/>**Number**
+
+Interface number from the interface descriptor
+
+```csharp
+public int Number { get; }
+```
+
+#### Property Value
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+
+### <a id="properties-outpipe"/>**OutPipe**
+
+First OUT direction pipe on this interface
+
+```csharp
+public USBPipe OutPipe { get; }
+```
+
+#### Property Value
+
+[USBPipe](./nefarius.drivers.winusb.usbpipe.md)<br>
+
+### <a id="properties-pipes"/>**Pipes**
+
+Collection of pipes associated with this interface
+
+```csharp
+public USBPipeCollection Pipes { get; }
+```
+
+#### Property Value
+
+[USBPipeCollection](./nefarius.drivers.winusb.usbpipecollection.md)<br>
+
+### <a id="properties-protocol"/>**Protocol**
 
 Interface protocol code
 
@@ -124,12 +124,12 @@ public byte Protocol { get; }
 
 [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
 
-### **AlternateSetting**
+### <a id="properties-subclass"/>**SubClass**
 
-Interface alternate setting
+Interface subclass code
 
 ```csharp
-public byte AlternateSetting { get; set; }
+public byte SubClass { get; }
 ```
 
 #### Property Value

@@ -14,27 +14,7 @@ Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.ru
 
 ## Properties
 
-### **TargetSite**
-
-```csharp
-public MethodBase TargetSite { get; }
-```
-
-#### Property Value
-
-[MethodBase](https://docs.microsoft.com/en-us/dotnet/api/system.reflection.methodbase)<br>
-
-### **Message**
-
-```csharp
-public string Message { get; }
-```
-
-#### Property Value
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
-### **Data**
+### <a id="properties-data"/>**Data**
 
 ```csharp
 public IDictionary Data { get; }
@@ -44,17 +24,7 @@ public IDictionary Data { get; }
 
 [IDictionary](https://docs.microsoft.com/en-us/dotnet/api/system.collections.idictionary)<br>
 
-### **InnerException**
-
-```csharp
-public Exception InnerException { get; }
-```
-
-#### Property Value
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
-### **HelpLink**
+### <a id="properties-helplink"/>**HelpLink**
 
 ```csharp
 public string HelpLink { get; set; }
@@ -64,17 +34,7 @@ public string HelpLink { get; set; }
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
-### **Source**
-
-```csharp
-public string Source { get; set; }
-```
-
-#### Property Value
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
-### **HResult**
+### <a id="properties-hresult"/>**HResult**
 
 ```csharp
 public int HResult { get; set; }
@@ -84,7 +44,37 @@ public int HResult { get; set; }
 
 [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 
-### **StackTrace**
+### <a id="properties-innerexception"/>**InnerException**
+
+```csharp
+public Exception InnerException { get; }
+```
+
+#### Property Value
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### <a id="properties-message"/>**Message**
+
+```csharp
+public string Message { get; }
+```
+
+#### Property Value
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### <a id="properties-source"/>**Source**
+
+```csharp
+public string Source { get; set; }
+```
+
+#### Property Value
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### <a id="properties-stacktrace"/>**StackTrace**
 
 ```csharp
 public string StackTrace { get; }
@@ -94,34 +84,12 @@ public string StackTrace { get; }
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
-## Constructors
-
-### **USBException(String)**
-
-Constructs a new USBException with the given message
+### <a id="properties-targetsite"/>**TargetSite**
 
 ```csharp
-public USBException(string message)
+public MethodBase TargetSite { get; }
 ```
 
-#### Parameters
+#### Property Value
 
-`message` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The message describing the exception
-
-### **USBException(String, Exception)**
-
-Constructs a new USBException with the given message and underlying exception
- that caused the USBException.
-
-```csharp
-public USBException(string message, Exception innerException)
-```
-
-#### Parameters
-
-`message` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The message describing the exception
-
-`innerException` [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-The underlying exception causing the USBException
+[MethodBase](https://docs.microsoft.com/en-us/dotnet/api/system.reflection.methodbase)<br>

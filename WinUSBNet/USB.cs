@@ -5,6 +5,8 @@
  *  http://www.opensource.org/licenses/mit-license.php
  */
 
+using System.Diagnostics.CodeAnalysis;
+
 using Windows.Win32.Devices.Usb;
 
 namespace Nefarius.Drivers.WinUSB;
@@ -12,6 +14,8 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     USB base class code enumeration, as defined in the USB specification
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public enum USBBaseClass
 {
     /// <summary>
@@ -81,6 +85,8 @@ public enum USBBaseClass
 /// <summary>
 ///     USB transfer type enumeration
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public enum USBTransferType
 {
     /// <summary>The pipe is a control transfer pipe</summary>

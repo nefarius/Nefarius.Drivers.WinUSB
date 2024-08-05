@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Windows.Win32.Devices.Usb;
 using Nefarius.Drivers.WinUSB.API;
@@ -16,6 +17,11 @@ namespace Nefarius.Drivers.WinUSB;
 ///     UsbPipe represents a single pipe on a WinUSB device. A pipe is connected
 ///     to a certain endpoint on the device and has a fixed direction (IN or OUT)
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+[SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
 public sealed class USBPipe
 {
     private readonly WINUSB_PIPE_INFORMATION _pipeInfo;
@@ -95,10 +101,8 @@ public sealed class USBPipe
 
         try
         {
-            uint bytesRead;
-
             Device.InternalDevice.ReadPipe(Interface.InterfaceIndex, _pipeInfo.PipeId, buffer, offset, length,
-                out bytesRead);
+                out uint bytesRead);
 
             return (int)bytesRead;
         }

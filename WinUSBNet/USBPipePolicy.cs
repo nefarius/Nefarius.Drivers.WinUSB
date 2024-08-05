@@ -6,6 +6,10 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+
+using Windows.Win32.Devices.Usb;
+
 using Nefarius.Drivers.WinUSB.API;
 
 namespace Nefarius.Drivers.WinUSB;
@@ -13,6 +17,8 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     Describes the policy for a specific USB pipe
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public sealed class USBPipePolicy
 {
     private readonly USBDevice _device;
@@ -40,12 +46,12 @@ public sealed class USBPipePolicy
         get
         {
             RequireDirectionIn();
-            return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.ALLOW_PARTIAL_READS);
+            return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.ALLOW_PARTIAL_READS);
         }
         set
         {
             RequireDirectionIn();
-            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.ALLOW_PARTIAL_READS, value);
+            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.ALLOW_PARTIAL_READS, value);
         }
     }
 
@@ -60,8 +66,8 @@ public sealed class USBPipePolicy
     /// </seealso>
     public bool AutoClearStall
     {
-        get => _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.AUTO_CLEAR_STALL);
-        set => _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.AUTO_CLEAR_STALL, value);
+        get => _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.AUTO_CLEAR_STALL);
+        set => _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.AUTO_CLEAR_STALL, value);
     }
 
     /// <summary>
@@ -77,12 +83,12 @@ public sealed class USBPipePolicy
         get
         {
             RequireDirectionIn();
-            return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.AUTO_FLUSH);
+            return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.AUTO_FLUSH);
         }
         set
         {
             RequireDirectionIn();
-            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.AUTO_FLUSH, value);
+            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.AUTO_FLUSH, value);
         }
     }
 
@@ -100,13 +106,13 @@ public sealed class USBPipePolicy
         get
         {
             RequireDirectionIn();
-            return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.IGNORE_SHORT_PACKETS);
+            return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.IGNORE_SHORT_PACKETS);
             ;
         }
         set
         {
             RequireDirectionIn();
-            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.IGNORE_SHORT_PACKETS, value);
+            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.IGNORE_SHORT_PACKETS, value);
         }
     }
 
@@ -122,12 +128,15 @@ public sealed class USBPipePolicy
     public int PipeTransferTimeout
     {
         get => (int)_device.InternalDevice.GetPipePolicyUInt(_interfaceIndex, _pipeID,
-            POLICY_TYPE.PIPE_TRANSFER_TIMEOUT);
+            WINUSB_PIPE_POLICY.PIPE_TRANSFER_TIMEOUT);
         set
         {
             if (value < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(value), "Pipe transfer timeout cannot be negative.");
-            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.PIPE_TRANSFER_TIMEOUT,
+            }
+
+            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.PIPE_TRANSFER_TIMEOUT,
                 (uint)value);
         }
     }
@@ -146,8 +155,8 @@ public sealed class USBPipePolicy
     /// </seealso>
     public bool RawIO
     {
-        get => _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, POLICY_TYPE.RAW_IO);
-        set => _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.RAW_IO, value);
+        get => _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.RAW_IO);
+        set => _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.RAW_IO, value);
     }
 
     /// <summary>
@@ -165,33 +174,30 @@ public sealed class USBPipePolicy
         {
             RequireDirectionOut();
             return _device.InternalDevice.GetPipePolicyBool(_interfaceIndex, _pipeID,
-                POLICY_TYPE.SHORT_PACKET_TERMINATE);
-            ;
+                WINUSB_PIPE_POLICY.SHORT_PACKET_TERMINATE);
         }
         set
         {
             RequireDirectionOut();
-            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, POLICY_TYPE.SHORT_PACKET_TERMINATE, value);
+            _device.InternalDevice.SetPipePolicy(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.SHORT_PACKET_TERMINATE, value);
         }
     }
 
     /// <summary>
-    /// Gets the maximum size of a USB transfer supported by WinUSB.
+    ///     Gets the maximum size of a USB transfer supported by WinUSB.
     /// </summary>
-    /// <seealso href="https://support.microsoft.com/en-us/help/832430/maximum-size-of-usb-transfers-on-various-operating-systems"/>
-    public int MaximumPacketSize
-    {
-        get
-        {
-            return (int)_device.InternalDevice.GetPipePolicyUInt(_interfaceIndex, _pipeID, POLICY_TYPE.MAXIMUM_TRANSFER_SIZE);
-        }
-    }
+    /// <seealso
+    ///     href="https://support.microsoft.com/en-us/help/832430/maximum-size-of-usb-transfers-on-various-operating-systems" />
+    public int MaximumPacketSize =>
+        (int)_device.InternalDevice.GetPipePolicyUInt(_interfaceIndex, _pipeID, WINUSB_PIPE_POLICY.MAXIMUM_TRANSFER_SIZE);
 
     private void RequireDirectionOut()
     {
         // Some policy types only apply specifically to OUT direction pipes
         if ((_pipeID & 0x80) != 0)
+        {
             throw new NotSupportedException("This policy type is only allowed on OUT direction pipes.");
+        }
     }
 
     private void RequireDirectionIn()
@@ -199,6 +205,8 @@ public sealed class USBPipePolicy
         // Some policy types only apply specifically to IN  direction pipes
         // This function checks for this.
         if ((_pipeID & 0x80) == 0)
+        {
             throw new NotSupportedException("This policy type is only allowed on IN direction pipes.");
+        }
     }
 }

@@ -6,6 +6,8 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+
 using Windows.Win32.Devices.Usb;
 
 namespace Nefarius.Drivers.WinUSB;
@@ -13,6 +15,10 @@ namespace Nefarius.Drivers.WinUSB;
 /// <summary>
 ///     USB device details
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 public sealed class USBDeviceDescriptor
 {
     internal USBDeviceDescriptor(string path, USB_DEVICE_DESCRIPTOR deviceDesc, string manufacturer, string product,
@@ -109,4 +115,10 @@ public sealed class USBDeviceDescriptor
     ///     the value will be USBBaseClass.Unknown
     /// </summary>
     public USBBaseClass BaseClass { get; }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return FullName;
+    }
 }

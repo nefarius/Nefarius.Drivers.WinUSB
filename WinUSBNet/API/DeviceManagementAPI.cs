@@ -10,7 +10,10 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+
+using Windows.Win32.Devices.DeviceAndDriverInstallation;
 
 namespace Nefarius.Drivers.WinUSB.API
 {
@@ -18,6 +21,7 @@ namespace Nefarius.Drivers.WinUSB.API
     /// API declarations relating to device management (SetupDixxx and
     /// RegisterDeviceNotification functions).
     /// </summary>
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal static partial class DeviceManagement
     {
         // from setupapi.h
@@ -48,21 +52,31 @@ namespace Nefarius.Drivers.WinUSB.API
         private static extern Int32 SetupDiDestroyDeviceInfoList(IntPtr DeviceInfoSet);
 
         [DllImport("setupapi.dll", SetLastError = true)]
-        private static extern bool SetupDiEnumDeviceInterfaces(IntPtr DeviceInfoSet, IntPtr DeviceInfoData, ref System.Guid InterfaceClassGuid, Int32 MemberIndex, ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData);
+        private static extern bool SetupDiEnumDeviceInterfaces(IntPtr DeviceInfoSet, IntPtr DeviceInfoData,
+            ref Guid InterfaceClassGuid, Int32 MemberIndex, ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData);
 
         [DllImport("setupapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool SetupDiGetDeviceRegistryProperty(IntPtr DeviceInfoSet, ref SP_DEVINFO_DATA DeviceInfoData, uint Property, out int PropertyRegDataType, byte[] PropertyBuffer, uint PropertyBufferSize, out UInt32 RequiredSize);
+        private static extern bool SetupDiGetDeviceRegistryProperty(IntPtr DeviceInfoSet,
+            ref SP_DEVINFO_DATA DeviceInfoData, SETUP_DI_REGISTRY_PROPERTY Property, out int PropertyRegDataType,
+            byte[] PropertyBuffer, uint PropertyBufferSize, out UInt32 RequiredSize);
 
         [DllImport("setupapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool SetupDiGetDeviceRegistryProperty(IntPtr DeviceInfoSet, ref SP_DEVINFO_DATA DeviceInfoData, uint Property, IntPtr PropertyRegDataType, IntPtr PropertyBuffer, uint PropertyBufferSize, out UInt32 RequiredSize);
+        private static extern bool SetupDiGetDeviceRegistryProperty(IntPtr DeviceInfoSet,
+            ref SP_DEVINFO_DATA DeviceInfoData, SETUP_DI_REGISTRY_PROPERTY Property, IntPtr PropertyRegDataType,
+            IntPtr PropertyBuffer, uint PropertyBufferSize, out UInt32 RequiredSize);
 
         [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        private static extern IntPtr SetupDiGetClassDevs(ref System.Guid ClassGuid, IntPtr Enumerator, IntPtr hwndParent, Int32 Flags);
+        private static extern IntPtr SetupDiGetClassDevs(ref Guid ClassGuid, IntPtr Enumerator, IntPtr hwndParent,
+            Int32 Flags);
 
         [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        private static extern bool SetupDiGetDeviceInterfaceDetail(IntPtr DeviceInfoSet, ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData, IntPtr DeviceInterfaceDetailData, Int32 DeviceInterfaceDetailDataSize, ref Int32 RequiredSize, ref SP_DEVINFO_DATA DeviceInfoData);
+        private static extern bool SetupDiGetDeviceInterfaceDetail(IntPtr DeviceInfoSet,
+            ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData, IntPtr DeviceInterfaceDetailData,
+            Int32 DeviceInterfaceDetailDataSize, ref Int32 RequiredSize, ref SP_DEVINFO_DATA DeviceInfoData);
 
         [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        private static extern bool SetupDiGetDeviceInterfaceDetail(IntPtr DeviceInfoSet, ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData, IntPtr DeviceInterfaceDetailData, Int32 DeviceInterfaceDetailDataSize, ref Int32 RequiredSize, IntPtr DeviceInfoData);
+        private static extern bool SetupDiGetDeviceInterfaceDetail(IntPtr DeviceInfoSet,
+            ref SP_DEVICE_INTERFACE_DATA DeviceInterfaceData, IntPtr DeviceInterfaceDetailData,
+            Int32 DeviceInterfaceDetailDataSize, ref Int32 RequiredSize, IntPtr DeviceInfoData);
     }
 }

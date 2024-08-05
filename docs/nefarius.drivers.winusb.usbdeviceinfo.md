@@ -14,43 +14,7 @@ Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) 
 
 ## Properties
 
-### **VID**
-
-Vendor ID (VID) of the USB device
-
-```csharp
-public int VID { get; }
-```
-
-#### Property Value
-
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-
-### **PID**
-
-Product ID (VID) of the USB device
-
-```csharp
-public int PID { get; }
-```
-
-#### Property Value
-
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-
-### **Manufacturer**
-
-Manufacturer of the device, as specified in the INF file (not the device descriptor)
-
-```csharp
-public string Manufacturer { get; }
-```
-
-#### Property Value
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
-### **DeviceDescription**
+### <a id="properties-devicedescription"/>**DeviceDescription**
 
 Description of the device, as specified in the INF file (not the device descriptor)
 
@@ -62,7 +26,7 @@ public string DeviceDescription { get; }
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
-### **DevicePath**
+### <a id="properties-devicepath"/>**DevicePath**
 
 Device pathname
 
@@ -73,3 +37,39 @@ public string DevicePath { get; }
 #### Property Value
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### <a id="properties-manufacturer"/>**Manufacturer**
+
+Manufacturer of the device, as specified in the INF file (not the device descriptor)
+
+```csharp
+public string Manufacturer { get; }
+```
+
+#### Property Value
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### <a id="properties-pid"/>**PID**
+
+Product ID (PID) of the USB device
+
+```csharp
+public int PID { get; }
+```
+
+#### Property Value
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+
+### <a id="properties-vid"/>**VID**
+
+Vendor ID (VID) of the USB device
+
+```csharp
+public int VID { get; }
+```
+
+#### Property Value
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>

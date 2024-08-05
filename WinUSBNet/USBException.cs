@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Nefarius.Drivers.WinUSB;
 
@@ -13,13 +14,14 @@ namespace Nefarius.Drivers.WinUSB;
 ///     Exception used by WinUSBNet to indicate errors. This is the
 ///     main exception to catch when using the library.
 /// </summary>
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 public sealed class USBException : Exception
 {
     /// <summary>
     ///     Constructs a new USBException with the given message
     /// </summary>
     /// <param name="message">The message describing the exception</param>
-    public USBException(string message)
+    internal USBException(string message)
         : base(message)
     {
     }
@@ -30,7 +32,7 @@ public sealed class USBException : Exception
     /// </summary>
     /// <param name="message">The message describing the exception</param>
     /// <param name="innerException">The underlying exception causing the USBException</param>
-    public USBException(string message, Exception innerException)
+    internal USBException(string message, Exception innerException)
         : base(message, innerException)
     {
     }

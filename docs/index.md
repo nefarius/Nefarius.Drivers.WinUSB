@@ -1,27 +1,27 @@
-# Nefarius.Drivers.WinUSB
+# Assembly Nefarius.Drivers.WinUSB
 
-## Nefarius.Drivers.WinUSB
+## Namespace Nefarius.Drivers.WinUSB
 
-[USBBaseClass](./nefarius.drivers.winusb.usbbaseclass.md)
+- [USBBaseClass](./nefarius.drivers.winusb.usbbaseclass.md)
 
-[USBDevice](./nefarius.drivers.winusb.usbdevice.md)
+- [USBDevice](./nefarius.drivers.winusb.usbdevice.md)
 
-[USBDeviceDescriptor](./nefarius.drivers.winusb.usbdevicedescriptor.md)
+- [USBDeviceDescriptor](./nefarius.drivers.winusb.usbdevicedescriptor.md)
 
-[USBDeviceInfo](./nefarius.drivers.winusb.usbdeviceinfo.md)
+- [USBDeviceInfo](./nefarius.drivers.winusb.usbdeviceinfo.md)
 
-[USBException](./nefarius.drivers.winusb.usbexception.md)
+- [USBException](./nefarius.drivers.winusb.usbexception.md)
 
-[USBInterface](./nefarius.drivers.winusb.usbinterface.md)
+- [USBInterface](./nefarius.drivers.winusb.usbinterface.md)
 
-[USBInterfaceCollection](./nefarius.drivers.winusb.usbinterfacecollection.md)
+- [USBInterfaceCollection](./nefarius.drivers.winusb.usbinterfacecollection.md)
 
-[USBPipe](./nefarius.drivers.winusb.usbpipe.md)
+- [USBPipe](./nefarius.drivers.winusb.usbpipe.md)
 
-[USBPipeCollection](./nefarius.drivers.winusb.usbpipecollection.md)
+- [USBPipeCollection](./nefarius.drivers.winusb.usbpipecollection.md)
 
-[USBPipePolicy](./nefarius.drivers.winusb.usbpipepolicy.md)
+- [USBPipePolicy](./nefarius.drivers.winusb.usbpipepolicy.md)
 
-[USBPowerPolicy](./nefarius.drivers.winusb.usbpowerpolicy.md)
+- [USBPowerPolicy](./nefarius.drivers.winusb.usbpowerpolicy.md)
 
-[USBTransferType](./nefarius.drivers.winusb.usbtransfertype.md)
+- [USBTransferType](./nefarius.drivers.winusb.usbtransfertype.md)
