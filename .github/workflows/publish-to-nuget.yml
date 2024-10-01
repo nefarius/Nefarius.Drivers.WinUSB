@@ -18,6 +18,10 @@ jobs:
         with:
           dotnet-version: 8.x
 
+      - name: Modify README.md for NuGet
+        run: |
+          sed -i 's/# <img[^>]*>/# /' README.md
+
       - name: Build
         run: dotnet build -c Release
 

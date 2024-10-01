@@ -11,6 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		license.txt = license.txt
+		Directory.Build.props = Directory.Build.props
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\publish-to-nuget.yml = .github\workflows\publish-to-nuget.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testapp", "testapp\testapp.csproj", "{52B37D85-5EBC-41CB-B78F-7C3D5971BEBC}"

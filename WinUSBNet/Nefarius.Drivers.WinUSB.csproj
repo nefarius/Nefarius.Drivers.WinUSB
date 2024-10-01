@@ -11,9 +11,6 @@
         <RepositoryUrl>https://github.com/nefarius/Nefarius.Drivers.WinUSB</RepositoryUrl>
         <Description>WinUSBNet is a .NET class library that provides easy access to the WinUSB API from C#, VB.NET and other .NET languages.</Description>
         <Platforms>AnyCPU;x64;x86</Platforms>
-        <OutputPath>$(SolutionDir)bin\</OutputPath>
-        <PackageIcon>NSS-128x128.png</PackageIcon>
-        <PackageIconUrl/>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
@@ -24,24 +21,8 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <!-- Docs and symbols generation -->
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    </PropertyGroup>
-
-    <PropertyGroup>
         <MinVerTagPrefix>v</MinVerTagPrefix>
     </PropertyGroup>
-
-    <ItemGroup>
-        <None Include="..\assets\NSS-128x128.png">
-            <Pack>True</Pack>
-            <PackagePath></PackagePath>
-        </None>
-    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="61.0.15-preview">
