@@ -95,7 +95,7 @@ internal partial class WinUSBDevice : IDisposable
             _addInterfaces = null;
         }
 
-        if (!_winUsbHandle.IsInvalid)
+        if (_winUsbHandle is { IsInvalid: false })
         {
             PInvoke.WinUsb_Free(_winUsbHandle.AsInterfaceHandle());
         }
