@@ -1,6 +1,6 @@
 # <img src="assets/NSS-128x128.png" align="left" />Nefarius.Drivers.WinUSB
 
-> *This is a fork of the fantastic [`MadWizard.WinUSBNet`](https://github.com/snikeguo/winusbnet) project by Thomas
+> *This is a fork of the fantastic [`WinUSBNet`](https://github.com/madwizard-thomas/winusbnet) project by Thomas
 Bleeker and contributors.*
 
 [![.NET](https://github.com/nefarius/Nefarius.Drivers.WinUSB/actions/workflows/build.yml/badge.svg)](https://github.com/nefarius/Nefarius.Drivers.WinUSB/actions/workflows/build.yml)
