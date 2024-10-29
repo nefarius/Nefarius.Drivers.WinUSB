@@ -166,9 +166,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBPipe.EndRead(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endreadiasyncresult) to retrieve the result of the operation. For every call to this method
  a matching call to
- [USBPipe.EndRead(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endreadiasyncresult) must be made. When  specifies a callback function, this
+ [USBPipe.EndRead(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endreadiasyncresult) must be made. When `userCallback` specifies a callback function, this
  function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -210,9 +210,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBPipe.EndWrite(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endwriteiasyncresult) to retrieve the result of the operation. For every call to this
  method a matching call to
- [USBPipe.EndWrite(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endwriteiasyncresult) must be made. When  specifies a callback function, this
+ [USBPipe.EndWrite(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endwriteiasyncresult) must be made. When `userCallback` specifies a callback function, this
  function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -313,7 +313,7 @@ public int Read(Span<Byte> buffer, int offset, int length)
 The buffer to read data into.
 
 `offset` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-The byte offset in  from which to begin writing data read from the pipe.
+The byte offset in `buffer` from which to begin writing data read from the pipe.
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 The maximum number of bytes to read, starting at offset
@@ -384,7 +384,7 @@ public void Write(Span<Byte> buffer, int offset, int length)
 The buffer to write data from.
 
 `offset` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-The byte offset in  from which to begin writing.
+The byte offset in `buffer` from which to begin writing.
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 The number of bytes to write, starting at offset

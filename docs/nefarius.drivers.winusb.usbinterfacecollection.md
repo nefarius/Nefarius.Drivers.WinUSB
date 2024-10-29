@@ -5,7 +5,7 @@ Namespace: Nefarius.Drivers.WinUSB
 Collection of UsbInterface objects
 
 ```csharp
-public sealed class USBInterfaceCollection : System.Collections.Generic.IEnumerable`1[[Nefarius.Drivers.WinUSB.USBInterface, Nefarius.Drivers.WinUSB, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Collections.IEnumerable
+public sealed class USBInterfaceCollection : System.Collections.Generic.IEnumerable`1[[Nefarius.Drivers.WinUSB.USBInterface, Nefarius.Drivers.WinUSB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Collections.IEnumerable
 ```
 
 Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBInterfaceCollection](./nefarius.drivers.winusb.usbinterfacecollection.md)<br>
@@ -28,7 +28,7 @@ public USBInterface Item { get; }
 ### <a id="methods-find"/>**Find(USBBaseClass)**
 
 Finds the first interface with that matches the device class
- given by the  parameter.
+ given by the `interfaceClass` parameter.
 
 ```csharp
 public USBInterface Find(USBBaseClass interfaceClass)
@@ -47,7 +47,7 @@ The first interface with the given interface class, or null
 ### <a id="methods-findall"/>**FindAll(USBBaseClass)**
 
 Finds all interfaces matching the device class given by the
-  parameter.
+ `interfaceClass` parameter.
 
 ```csharp
 public USBInterface[] FindAll(USBBaseClass interfaceClass)

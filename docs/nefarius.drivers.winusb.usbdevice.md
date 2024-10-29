@@ -109,7 +109,7 @@ Device path name of the USB device to create
 
 Initiates an asynchronous control transfer over the default control endpoint. The request should have an IN
  direction (specified by the highest bit
- of the  parameter).
+ of the `requestType` parameter).
 
 ```csharp
 public IAsyncResult BeginControlIn(byte requestType, byte request, int value, int index, Byte[] buffer, int length, AsyncCallback userCallback, object stateObject)
@@ -137,7 +137,7 @@ The buffer that will receive the data transferred.
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
- . The setup packet's length member will be set to this length.
+ `buffer`. The setup packet's length member will be set to this length.
 
 `userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
@@ -158,9 +158,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
- [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When  specifies a callback
+ [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -169,7 +169,7 @@ This method always completes immediately even if the operation is still pending.
 
 Initiates an asynchronous control transfer over the default control endpoint. The request should have an IN
  direction (specified by the highest bit
- of the  parameter).
+ of the `requestType` parameter).
 
 ```csharp
 public IAsyncResult BeginControlIn(byte requestType, byte request, int value, int index, Byte[] buffer, AsyncCallback userCallback, object stateObject)
@@ -215,9 +215,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
- [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When  specifies a callback
+ [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -225,7 +225,7 @@ This method always completes immediately even if the operation is still pending.
 ### <a id="methods-begincontrolin"/>**BeginControlIn(Byte, Byte, Int32, Int32, AsyncCallback, Object)**
 
 Initiates an asynchronous control transfer without a data stage over the default control endpoint.
- The request should have an IN direction (specified by the highest bit of the 
+ The request should have an IN direction (specified by the highest bit of the `requestType`
  parameter).
  The setup packets' length member will be set to zero.
 
@@ -269,9 +269,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
- [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When  specifies a callback
+ [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -280,7 +280,7 @@ This method always completes immediately even if the operation is still pending.
 
 Initiates an asynchronous control transfer over the default control endpoint. The request should have an OUT
  direction (specified by the highest bit
- of the  parameter).
+ of the `requestType` parameter).
 
 ```csharp
 public IAsyncResult BeginControlOut(byte requestType, byte request, int value, int index, Byte[] buffer, int length, AsyncCallback userCallback, object stateObject)
@@ -308,7 +308,7 @@ The buffer that contains the data to be transferred.
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
- . The setup packet's length member will be set to this length.
+ `buffer`. The setup packet's length member will be set to this length.
 
 `userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
@@ -329,9 +329,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
- [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When  specifies a callback
+ [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -340,7 +340,7 @@ This method always completes immediately even if the operation is still pending.
 
 Initiates an asynchronous control transfer over the default control endpoint. The request should have an OUT
  direction (specified by the highest bit
- of the  parameter).
+ of the `requestType` parameter).
 
 ```csharp
 public IAsyncResult BeginControlOut(byte requestType, byte request, int value, int index, Byte[] buffer, AsyncCallback userCallback, object stateObject)
@@ -386,9 +386,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
- [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When  specifies a callback
+ [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -396,7 +396,7 @@ This method always completes immediately even if the operation is still pending.
 ### <a id="methods-begincontrolout"/>**BeginControlOut(Byte, Byte, Int32, Int32, AsyncCallback, Object)**
 
 Initiates an asynchronous control transfer without a data stage over the default control endpoint.
- The request should have an OUT direction (specified by the highest bit of the 
+ The request should have an OUT direction (specified by the highest bit of the `requestType`
  parameter).
  The setup packets' length member will be set to zero.
 
@@ -440,9 +440,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
- [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When  specifies a callback
+ [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -451,7 +451,7 @@ This method always completes immediately even if the operation is still pending.
 
 Initiates an asynchronous control transfer over the default control endpoint. This method allows both IN and OUT
  direction transfers, depending
- on the highest bit of the  parameter. Alternatively,
+ on the highest bit of the `requestType` parameter. Alternatively,
  [USBDevice.BeginControlIn(Byte, Byte, Int32, Int32, Byte[], Int32, AsyncCallback, Object)](./nefarius.drivers.winusb.usbdevice.md#begincontrolinbyte-byte-int32-int32-byte-int32-asynccallback-object) and
  [USBDevice.BeginControlIn(Byte, Byte, Int32, Int32, Byte[], Int32, AsyncCallback, Object)](./nefarius.drivers.winusb.usbdevice.md#begincontrolinbyte-byte-int32-int32-byte-int32-asynccallback-object) can be used for asynchronous
  control transfers in a specific direction, which is
@@ -488,7 +488,7 @@ The data to transfer in the data stage of the control. When the transfer is in t
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
- . The setup packet's length member will be set to this length.
+ `buffer`. The setup packet's length member will be set to this length.
 
 `userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
@@ -509,9 +509,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
- [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When  specifies a callback
+ [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -520,7 +520,7 @@ This method always completes immediately even if the operation is still pending.
 
 Initiates an asynchronous control transfer over the default control endpoint. This method allows both IN and OUT
  direction transfers, depending
- on the highest bit of the  parameter. Alternatively,
+ on the highest bit of the `requestType` parameter. Alternatively,
  [USBDevice.BeginControlIn(Byte, Byte, Int32, Int32, Byte[], Int32, AsyncCallback, Object)](./nefarius.drivers.winusb.usbdevice.md#begincontrolinbyte-byte-int32-int32-byte-int32-asynccallback-object) and
  [USBDevice.BeginControlIn(Byte, Byte, Int32, Int32, Byte[], Int32, AsyncCallback, Object)](./nefarius.drivers.winusb.usbdevice.md#begincontrolinbyte-byte-int32-int32-byte-int32-asynccallback-object) can be used for asynchronous
  control transfers in a specific direction, which is
@@ -575,9 +575,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
- [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When  specifies a callback
+ [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -586,7 +586,7 @@ This method always completes immediately even if the operation is still pending.
 
 Initiates an asynchronous control transfer without a data stage over the default control endpoint. This method
  allows both IN and OUT direction transfers, depending
- on the highest bit of the  parameter. Alternatively,
+ on the highest bit of the `requestType` parameter. Alternatively,
  [USBDevice.BeginControlIn(Byte, Byte, Int32, Int32, Byte[], Int32, AsyncCallback, Object)](./nefarius.drivers.winusb.usbdevice.md#begincontrolinbyte-byte-int32-int32-byte-int32-asynccallback-object) and
  [USBDevice.BeginControlIn(Byte, Byte, Int32, Int32, Byte[], Int32, AsyncCallback, Object)](./nefarius.drivers.winusb.usbdevice.md#begincontrolinbyte-byte-int32-int32-byte-int32-asynccallback-object) can be used for asynchronous
  control transfers in a specific direction, which is
@@ -633,9 +633,9 @@ This method always completes immediately even if the operation is still pending.
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
- [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When  specifies a callback
+ [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
-  parameter can be used to pass user-defined information to this callback or the
+ `stateObject` parameter can be used to pass user-defined information to this callback or the
  [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
  also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
@@ -644,7 +644,7 @@ This method always completes immediately even if the operation is still pending.
 
 Initiates a control transfer over the default control endpoint. The request should have an IN direction (specified
  by the highest bit
- of the  parameter). A buffer to receive the data is automatically created by this
+ of the `requestType` parameter). A buffer to receive the data is automatically created by this
  method.
 
 ```csharp
@@ -678,7 +678,7 @@ A buffer containing the data transferred.
 
 **Remarks:**
 
-This routine initially allocates a buffer to hold the  bytes of data expected from the
+This routine initially allocates a buffer to hold the `length` bytes of data expected from the
  device.
  If the device responds with less data than expected, this routine will allocate a smaller buffer to copy and return
  only the bytes actually received.
@@ -687,7 +687,7 @@ This routine initially allocates a buffer to hold the  bytes of data expected fr
 
 Initiates a control transfer over the default control endpoint. The request should have an IN direction (specified
  by the highest bit
- of the  parameter).
+ of the `requestType` parameter).
 
 ```csharp
 public int ControlIn(byte requestType, byte request, int value, int index, Span<Byte> buffer, int length)
@@ -716,7 +716,7 @@ The buffer that will receive the data transferred.
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 Length of the data to transfer. The length member of the setup packet will be set to this length. The buffer
  specified
- by the  parameter should have at least this length.
+ by the `buffer` parameter should have at least this length.
 
 #### Returns
 
@@ -726,7 +726,7 @@ The number of bytes received from the device.
 
 Initiates a control transfer over the default control endpoint. The request should have an IN direction (specified
  by the highest bit
- of the  parameter). The length of buffer given by the 
+ of the `requestType` parameter). The length of buffer given by the `buffer`
  parameter will dictate
  the number of bytes that are transferred and the value of the setup packet's length member.
 
@@ -763,7 +763,7 @@ The number of bytes received from the device.
 
 Initiates a control transfer without a data stage over the default control endpoint. The request should have an IN
  direction (specified by the highest bit
- of the  parameter). The setup packets' length member will be set to zero.
+ of the `requestType` parameter). The setup packets' length member will be set to zero.
 
 ```csharp
 public void ControlIn(byte requestType, byte request, int value, int index)
@@ -789,7 +789,7 @@ The index member in the setup packet. Its meaning depends on the request. Index 
 ### <a id="methods-controlinasync"/>**ControlInAsync(Byte, Byte, Int32, Int32, Byte[], Int32)**
 
 Asynchronously issue a sequence of bytes input operation over the default control endpoint.
- The request should have an IN direction (specified by the highest bit of the 
+ The request should have an IN direction (specified by the highest bit of the `requestType`
  parameter).
 
 ```csharp
@@ -817,7 +817,7 @@ The buffer that will receive the data transferred.
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
- . The setup packet's length member will be set to this length.
+ `buffer`. The setup packet's length member will be set to this length.
 
 #### Returns
 
@@ -830,7 +830,7 @@ A task that represents the asynchronous input operation.
 ### <a id="methods-controlinasync"/>**ControlInAsync(Byte, Byte, Int32, Int32, Byte[])**
 
 Asynchronously issue a sequence of bytes input operation over the default control endpoint.
- The request should have an IN direction (specified by the highest bit of the 
+ The request should have an IN direction (specified by the highest bit of the `requestType`
  parameter).
 
 ```csharp
@@ -867,7 +867,7 @@ A task that represents the asynchronous input operation.
 ### <a id="methods-controlinasync"/>**ControlInAsync(Byte, Byte, Int32, Int32)**
 
 Asynchronously issue a sequence of bytes input operation without a data stage over the default control endpoint.
- The request should have an IN direction (specified by the highest bit of the 
+ The request should have an IN direction (specified by the highest bit of the `requestType`
  parameter).
 
 ```csharp
@@ -902,7 +902,7 @@ A task that represents the asynchronous input operation.
 
 Initiates a control transfer over the default control endpoint. The request should have an OUT direction (specified
  by the highest bit
- of the  parameter).
+ of the `requestType` parameter).
 
 ```csharp
 public void ControlOut(byte requestType, byte request, int value, int index, Span<Byte> buffer, int length)
@@ -929,7 +929,7 @@ The index member in the setup packet. Its meaning depends on the request. Index 
 A buffer containing the data to transfer in the data stage.
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-Length of the data to transfer. Only the first  bytes of  will
+Length of the data to transfer. Only the first `length` bytes of `buffer` will
  be transferred.
  The setup packet's length parameter is set to this length.
 
@@ -937,7 +937,7 @@ Length of the data to transfer. Only the first  bytes of  will
 
 Initiates a control transfer over the default control endpoint. The request should have an OUT direction (specified
  by the highest bit
- of the  parameter).
+ of the `requestType` parameter).
 
 ```csharp
 public void ControlOut(byte requestType, byte request, int value, int index, Span<Byte> buffer)
@@ -969,7 +969,7 @@ A buffer containing the data to transfer in the data stage. The complete buffer 
 
 Initiates a control transfer without a data stage over the default control endpoint. The request should have an OUT
  direction (specified by the highest bit
- of the  parameter. The setup packets' length member will be set to zero.
+ of the `requestType` parameter. The setup packets' length member will be set to zero.
 
 ```csharp
 public void ControlOut(byte requestType, byte request, int value, int index)
@@ -995,7 +995,7 @@ The index member in the setup packet. Its meaning depends on the request. Index 
 ### <a id="methods-controloutasync"/>**ControlOutAsync(Byte, Byte, Int32, Int32, Byte[], Int32)**
 
 Asynchronously issue a sequence of bytes output operation over the default control endpoint.
- The request should have an OUT direction (specified by the highest bit of the 
+ The request should have an OUT direction (specified by the highest bit of the `requestType`
  parameter).
 
 ```csharp
@@ -1023,7 +1023,7 @@ The buffer that contains the data to be transferred.
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
- . The setup packet's length member will be set to this length.
+ `buffer`. The setup packet's length member will be set to this length.
 
 #### Returns
 
@@ -1036,7 +1036,7 @@ A task that represents the asynchronous output operation.
 ### <a id="methods-controloutasync"/>**ControlOutAsync(Byte, Byte, Int32, Int32, Byte[])**
 
 Asynchronously issue a sequence of bytes output operation over the default control endpoint.
- The request should have an OUT direction (specified by the highest bit of the 
+ The request should have an OUT direction (specified by the highest bit of the `requestType`
  parameter).
 
 ```csharp
@@ -1073,7 +1073,7 @@ A task that represents the asynchronous output operation.
 ### <a id="methods-controloutasync"/>**ControlOutAsync(Byte, Byte, Int32, Int32)**
 
 Asynchronously issue a sequence of bytes output operation without a data stage over the default control endpoint.
- The request should have an OUT direction (specified by the highest bit of the 
+ The request should have an OUT direction (specified by the highest bit of the `requestType`
  parameter).
 
 ```csharp
@@ -1108,7 +1108,7 @@ A task that represents the asynchronous output operation.
 
 Initiates a control transfer over the default control endpoint. This method allows both IN and OUT direction
  transfers, depending
- on the highest bit of the  parameter. Alternatively,
+ on the highest bit of the `requestType` parameter. Alternatively,
  [USBDevice.ControlInAsync(Byte, Byte, Int32, Int32, Byte[], Int32)](./nefarius.drivers.winusb.usbdevice.md#controlinasyncbyte-byte-int32-int32-byte-int32) and
  [USBDevice.ControlOutAsync(Byte, Byte, Int32, Int32, Byte[], Int32)](./nefarius.drivers.winusb.usbdevice.md#controloutasyncbyte-byte-int32-int32-byte-int32) can be used for control transfers in a specific
  direction,
@@ -1142,7 +1142,7 @@ The data to transfer in the data stage of the control. When the transfer is in t
  written to this buffer. For an OUT direction transfer the contents of the buffer are written sent through the pipe.
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-Length of the data to transfer. Must be equal to or less than the length of .
+Length of the data to transfer. Must be equal to or less than the length of `buffer`.
  The setup packet's length member will be set to this length.
 
 #### Returns
@@ -1153,7 +1153,7 @@ The number of bytes received from the device.
 
 Initiates a control transfer over the default control endpoint. This method allows both IN and OUT direction
  transfers, depending
- on the highest bit of the  parameter). Alternatively,
+ on the highest bit of the `requestType` parameter). Alternatively,
  [USBDevice.ControlInAsync(Byte, Byte, Int32, Int32, Byte[])](./nefarius.drivers.winusb.usbdevice.md#controlinasyncbyte-byte-int32-int32-byte) and
  [USBDevice.ControlOutAsync(Byte, Byte, Int32, Int32, Byte[])](./nefarius.drivers.winusb.usbdevice.md#controloutasyncbyte-byte-int32-int32-byte) can be used for control transfers in a specific direction,
  which is the recommended way because
@@ -1196,7 +1196,7 @@ The number of bytes received from the device.
 
 Initiates a control transfer without a data stage over the default control endpoint. This method allows both IN and
  OUT direction transfers, depending
- on the highest bit of the  parameter). Alternatively,
+ on the highest bit of the `requestType` parameter). Alternatively,
  [USBDevice.ControlInAsync(Byte, Byte, Int32, Int32)](./nefarius.drivers.winusb.usbdevice.md#controlinasyncbyte-byte-int32-int32) and
  [USBDevice.ControlOutAsync(Byte, Byte, Int32, Int32)](./nefarius.drivers.winusb.usbdevice.md#controloutasyncbyte-byte-int32-int32) can be used for control transfers in a specific direction, which is
  the recommended way because
@@ -1227,7 +1227,7 @@ The index member in the setup packet. Its meaning depends on the request. Index 
 
 Asynchronously issue a sequence of bytes IO over the default control endpoint.
  This method allows both IN and OUT direction transfers, depending on the highest bit of the
-  parameter.
+ `requestType` parameter.
  Alternatively, [USBDevice.ControlInAsync(Byte, Byte, Int32, Int32, Byte[], Int32)](./nefarius.drivers.winusb.usbdevice.md#controlinasyncbyte-byte-int32-int32-byte-int32)
  and [USBDevice.ControlOutAsync(Byte, Byte, Int32, Int32, Byte[], Int32)](./nefarius.drivers.winusb.usbdevice.md#controloutasyncbyte-byte-int32-int32-byte-int32) can be used for asynchronous control transfers in
  a specific direction,
@@ -1263,7 +1263,7 @@ The data to transfer in the data stage of the control. When the transfer is in t
 
 `length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
- . The setup packet's length member will be set to this length.
+ `buffer`. The setup packet's length member will be set to this length.
 
 #### Returns
 
@@ -1277,7 +1277,7 @@ A task that represents the asynchronous read operation.
 
 Asynchronously issue a sequence of bytes IO over the default control endpoint.
  This method allows both IN and OUT direction transfers, depending on the highest bit of the
-  parameter.
+ `requestType` parameter.
  Alternatively, [USBDevice.ControlInAsync(Byte, Byte, Int32, Int32, Byte[])](./nefarius.drivers.winusb.usbdevice.md#controlinasyncbyte-byte-int32-int32-byte)
  and [USBDevice.ControlOutAsync(Byte, Byte, Int32, Int32, Byte[])](./nefarius.drivers.winusb.usbdevice.md#controloutasyncbyte-byte-int32-int32-byte) can be used for asynchronous control transfers in a
  specific direction,
@@ -1323,7 +1323,7 @@ A task that represents the asynchronous read operation.
 
 Asynchronously issue a sequence of bytes IO without a data stage over the default control endpoint.
  This method allows both IN and OUT direction transfers, depending on the highest bit of the
-  parameter.
+ `requestType` parameter.
  Alternatively, [USBDevice.ControlInAsync(Byte, Byte, Int32, Int32)](./nefarius.drivers.winusb.usbdevice.md#controlinasyncbyte-byte-int32-int32)
  and [USBDevice.ControlOutAsync(Byte, Byte, Int32, Int32)](./nefarius.drivers.winusb.usbdevice.md#controloutasyncbyte-byte-int32-int32) can be used for asynchronous control transfers in a specific
  direction,
