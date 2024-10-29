@@ -1,8 +1,5 @@
 # <img src="assets/NSS-128x128.png" align="left" />Nefarius.Drivers.WinUSB
 
-> *This is a fork of the fantastic [`WinUSBNet`](https://github.com/madwizard-thomas/winusbnet) project by Thomas
-Bleeker and contributors.*
-
 [![.NET](https://github.com/nefarius/Nefarius.Drivers.WinUSB/actions/workflows/build.yml/badge.svg)](https://github.com/nefarius/Nefarius.Drivers.WinUSB/actions/workflows/build.yml)
 ![.NET 4.7.2](https://img.shields.io/badge/.NET-4.7.2-blue)
 ![.NET 4.8](https://img.shields.io/badge/.NET-4.8-blue)
@@ -12,6 +9,9 @@ Bleeker and contributors.*
 
 Managed wrapper for the [WinUSB APIs](https://learn.microsoft.com/en-us/windows-hardware/drivers/usbcon/winusb) on
 Microsoft Windows.
+
+> *This is a fork of the fantastic [`WinUSBNet`](https://github.com/madwizard-thomas/winusbnet) project by Thomas
+Bleeker and contributors.*
 
 ## Changes of this fork
 
