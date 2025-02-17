@@ -126,7 +126,7 @@ public sealed class USBPipe
                 "Length of data to read is outside the buffer boundaries.");
     }
 
-    private void CheckWriteParams(Span<byte> buffer, int offset, int length)
+    private void CheckWriteParams(ReadOnlySpan<byte> buffer, int offset, int length)
     {
         if (!IsOut)
             throw new NotSupportedException("Cannot write to a pipe with IN direction.");
@@ -235,7 +235,7 @@ public sealed class USBPipe
     ///     Writes data from a buffer to the pipe.
     /// </summary>
     /// <param name="buffer">The buffer to write data from. The complete buffer will be written to the device.</param>
-    public void Write(Span<byte> buffer)
+    public void Write(ReadOnlySpan<byte> buffer)
     {
         Write(buffer, 0, buffer.Length);
     }
@@ -246,7 +246,7 @@ public sealed class USBPipe
     /// <param name="buffer">The buffer to write data from.</param>
     /// <param name="offset">The byte offset in <paramref name="buffer" /> from which to begin writing.</param>
     /// <param name="length">The number of bytes to write, starting at offset</param>
-    public void Write(Span<byte> buffer, int offset, int length)
+    public void Write(ReadOnlySpan<byte> buffer, int offset, int length)
     {
         CheckWriteParams(buffer, offset, length);
 
