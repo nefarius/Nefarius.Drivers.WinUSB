@@ -95,17 +95,50 @@ internal static partial class DeviceManagement
         string[] hardwareIDs =
             GetMultiStringProperty(deviceInfoSet, deviceInfoData, SETUP_DI_REGISTRY_PROPERTY.SPDRP_HARDWAREID);
 
-        Regex regex = new("^USB\\\\VID_([0-9A-F]{4})&PID_([0-9A-F]{4})", RegexOptions.IgnoreCase);
+        Regex vidRegex = new("VID_([0-9A-F]{4})", RegexOptions.IgnoreCase);
+        Regex pidRegex = new("PID_([0-9A-F]{4})", RegexOptions.IgnoreCase);
+
         bool foundVidPid = false;
-        foreach (string hardwareID in hardwareIDs)
+        foreach (string idString in hardwareIDs)
         {
-            Match match = regex.Match(hardwareID);
-            if (match.Success)
+            if (!idString.StartsWith("USB\\"))
             {
-                details.VID = ushort.Parse(match.Groups[1].Value, NumberStyles.AllowHexSpecifier);
-                details.PID = ushort.Parse(match.Groups[2].Value, NumberStyles.AllowHexSpecifier);
-                foundVidPid = true;
-                break;
+                continue;
+            }
+
+            string hardwareID = idString.Substring("USB\\".Length);
+
+            // The expected format here is `USB\VID_1234&PID_5678&...`.
+            // This is not guaranteed for all USB devices, however. There might be additional
+            // leading info which breaks a more naive check, such as this case seen in the wild:
+            // `USB\ASMEDIAUSBD_HubSS&VER01166101&VID_0424&PID_5807&...`
+            // So we split the string and check each component separately.
+
+            foreach (string component in hardwareID.Split('&'))
+            {
+                if (details.VID == 0)
+                {
+                    Match match = vidRegex.Match(hardwareID);
+                    if (match.Success)
+                    {
+                        details.VID = ushort.Parse(match.Groups[1].Value, NumberStyles.AllowHexSpecifier);
+                    }
+                }
+
+                if (details.PID == 0)
+                {
+                    Match match = pidRegex.Match(hardwareID);
+                    if (match.Success)
+                    {
+                        details.PID = ushort.Parse(match.Groups[1].Value, NumberStyles.AllowHexSpecifier);
+                    }
+                }
+
+                if (details.VID != 0 && details.PID != 0)
+                {
+                    foundVidPid = true;
+                    break;
+                }
             }
         }
 
