@@ -248,7 +248,7 @@ internal partial class WinUSBDevice
             throw APIException.Win32("Failed to abort pipe on WinUSB device.");
     }
 
-    public unsafe void WritePipe(int interfaceIndex, byte pipeId, Span<byte> buffer, int offset, int length)
+    public unsafe void WritePipe(int interfaceIndex, byte pipeId, ReadOnlySpan<byte> buffer, int offset, int length)
     {
         uint bytesWritten;
         bool success;
