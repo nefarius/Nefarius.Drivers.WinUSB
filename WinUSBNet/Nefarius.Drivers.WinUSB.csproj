@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Copyright>Copyright © 2010-2020 by Thomas Bleeker (MadWizard.org), 2022-2024 Benjamin "Nefarius" Höglinger-Stelzer</Copyright>
+        <Copyright>Copyright © 2010-2020 by Thomas Bleeker (MadWizard.org), 2022-2025 Benjamin "Nefarius" Höglinger-Stelzer</Copyright>
         <Company>Nefarius Software Solutions e.U.</Company>
         <Authors>Thomas Bleeker, Benjamin "Nefarius" Höglinger-Stelzer</Authors>
     </PropertyGroup>
@@ -32,11 +32,11 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.151">
+        <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.198">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="System.Memory" Version="4.5.5"/>
-        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0"/>
+        <PackageReference Include="System.Memory" Version="4.6.3" />
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
     </ItemGroup>
 
 </Project>

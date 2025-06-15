@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
+        <RollForward>LatestMajor</RollForward>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="4.0.1" />
+      <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="5.1.0" />
     </ItemGroup>
 
 </Project>
