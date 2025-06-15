@@ -357,30 +357,30 @@ Resets the pipe to clear a stall condition.
 public void Reset()
 ```
 
-### <a id="methods-write"/>**Write(Span&lt;Byte&gt;)**
+### <a id="methods-write"/>**Write(ReadOnlySpan&lt;Byte&gt;)**
 
 Writes data from a buffer to the pipe.
 
 ```csharp
-public void Write(Span<Byte> buffer)
+public void Write(ReadOnlySpan<Byte> buffer)
 ```
 
 #### Parameters
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [ReadOnlySpan&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.readonlyspan-1)<br>
 The buffer to write data from. The complete buffer will be written to the device.
 
-### <a id="methods-write"/>**Write(Span&lt;Byte&gt;, Int32, Int32)**
+### <a id="methods-write"/>**Write(ReadOnlySpan&lt;Byte&gt;, Int32, Int32)**
 
 Writes data from a buffer to the pipe.
 
 ```csharp
-public void Write(Span<Byte> buffer, int offset, int length)
+public void Write(ReadOnlySpan<Byte> buffer, int offset, int length)
 ```
 
 #### Parameters
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [ReadOnlySpan&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.readonlyspan-1)<br>
 The buffer to write data from.
 
 `offset` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
