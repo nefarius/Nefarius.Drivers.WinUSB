@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 
 using Windows.Win32.Devices.DeviceAndDriverInstallation;
 using Windows.Win32.Foundation;
@@ -95,10 +94,8 @@ internal static partial class DeviceManagement
         string[] hardwareIDs =
             GetMultiStringProperty(deviceInfoSet, deviceInfoData, SETUP_DI_REGISTRY_PROPERTY.SPDRP_HARDWAREID);
 
-        Regex vidRegex = new("VID_([0-9A-F]{4})", RegexOptions.IgnoreCase);
-        Regex pidRegex = new("PID_([0-9A-F]{4})", RegexOptions.IgnoreCase);
-
-        bool foundVidPid = false;
+        bool foundVid = false;
+        bool foundPid = false;
         foreach (string idString in hardwareIDs)
         {
             if (!idString.StartsWith("USB\\"))
@@ -114,35 +111,34 @@ internal static partial class DeviceManagement
             // `USB\ASMEDIAUSBD_HubSS&VER01166101&VID_0424&PID_5807&...`
             // So we split the string and check each component separately.
 
+            static void ParseHardwareId(string component, string prefix, ref ushort result, ref bool found)
+            {
+                if (found || !component.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
+                string digits = component.Substring(prefix.Length);
+                if (ushort.TryParse(digits, NumberStyles.AllowHexSpecifier, null, out ushort vid))
+                {
+                    result = vid;
+                    found = true;
+                }
+            }
+
             foreach (string component in hardwareID.Split('&'))
             {
-                if (details.VID == 0)
-                {
-                    Match match = vidRegex.Match(hardwareID);
-                    if (match.Success)
-                    {
-                        details.VID = ushort.Parse(match.Groups[1].Value, NumberStyles.AllowHexSpecifier);
-                    }
-                }
+                ParseHardwareId(component, "VID_", ref details.VID, ref foundVid);
+                ParseHardwareId(component, "PID_", ref details.PID, ref foundPid);
 
-                if (details.PID == 0)
+                if (foundVid && foundPid)
                 {
-                    Match match = pidRegex.Match(hardwareID);
-                    if (match.Success)
-                    {
-                        details.PID = ushort.Parse(match.Groups[1].Value, NumberStyles.AllowHexSpecifier);
-                    }
-                }
-
-                if (details.VID != 0 && details.PID != 0)
-                {
-                    foundVidPid = true;
                     break;
                 }
             }
         }
 
-        if (!foundVidPid)
+        if (!foundVid || !foundPid)
         {
             throw new APIException("Failed to find VID and PID for USB device. No hardware ID could be parsed.");
         }
