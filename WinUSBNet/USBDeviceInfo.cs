@@ -51,4 +51,10 @@ public sealed class USBDeviceInfo
     ///     Device pathname
     /// </summary>
     public string DevicePath => _details.DevicePath;
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return $"{Manufacturer} - {DeviceDescription} (VID: {VID:X4}, PID: {PID:X4})";
+    }
 }

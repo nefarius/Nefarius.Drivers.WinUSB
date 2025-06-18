@@ -103,7 +103,7 @@ internal static partial class DeviceManagement
                 continue;
             }
 
-            string hardwareID = idString.Substring("USB\\".Length);
+            string hardwareId = idString.Substring("USB\\".Length);
 
             // The expected format here is `USB\VID_1234&PID_5678&...`.
             // This is not guaranteed for all USB devices, however. There might be additional
@@ -126,7 +126,7 @@ internal static partial class DeviceManagement
                 }
             }
 
-            foreach (string component in hardwareID.Split('&'))
+            foreach (string component in hardwareId.Split('&'))
             {
                 ParseHardwareId(component, "VID_", ref details.VID, ref foundVid);
                 ParseHardwareId(component, "PID_", ref details.PID, ref foundPid);

@@ -1,6 +1,15 @@
 ﻿using Nefarius.Drivers.WinUSB;
 using Nefarius.Utilities.DeviceManagement.PnP;
 
+var allDevices = USBDevice.GetDevices(DeviceInterfaceIds.UsbDevice);
+
+foreach (USBDeviceInfo deviceInfo in allDevices)
+{
+    Console.WriteLine(deviceInfo);
+}
+
+return;
+
 // DualSense under WinUSB via Zadig
 Guid guid = Guid.Parse("{BF36F972-4F08-4AC9-A1B1-74D6BF7402E0}");
 
