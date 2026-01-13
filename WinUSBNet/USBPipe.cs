@@ -132,7 +132,7 @@ public sealed class USBPipe
             throw new NotSupportedException("Cannot write to a pipe with IN direction.");
 
         var bufferLength = buffer.Length;
-        if (offset < 0 || offset >= bufferLength)
+        if (offset < 0 || ((bufferLength > 0 && offset >= bufferLength)))
             throw new ArgumentOutOfRangeException(nameof(offset),
                 "Offset of data to write is outside the buffer boundaries.");
         if (length < 0 || offset + length > bufferLength)
