@@ -26,10 +26,10 @@
 
     <!-- Win32 Metadata -->
     <ItemGroup>
-        <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.272">
+        <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.273">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="69.0.7-preview">
+        <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="70.0.11-preview">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.Windows.WDK.Win32Metadata" Version="0.13.25-experimental">
