@@ -8,7 +8,7 @@ USB device details
 public sealed class USBDeviceDescriptor
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBDeviceDescriptor](./nefarius.drivers.winusb.usbdevicedescriptor.md)
+Inheritance [Object](https://learn.microsoft.com/dotnet/api/system.object) → [USBDeviceDescriptor](./nefarius.drivers.winusb.usbdevicedescriptor.md)
 
 ## Properties
 
@@ -38,7 +38,7 @@ public byte ClassValue { get; }
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 
 ### <a id="properties-fullname"/>**FullName**
 
@@ -51,7 +51,7 @@ public string FullName { get; }
 
 #### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+[String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 
 ### <a id="properties-manufacturer"/>**Manufacturer**
 
@@ -63,7 +63,7 @@ public string Manufacturer { get; }
 
 #### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+[String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 
 ### <a id="properties-pathname"/>**PathName**
 
@@ -75,7 +75,7 @@ public string PathName { get; }
 
 #### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+[String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 
 ### <a id="properties-pid"/>**PID**
 
@@ -87,7 +87,7 @@ public int PID { get; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 
 ### <a id="properties-product"/>**Product**
 
@@ -99,7 +99,7 @@ public string Product { get; }
 
 #### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+[String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 
 ### <a id="properties-protocol"/>**Protocol**
 
@@ -111,7 +111,7 @@ public byte Protocol { get; }
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 
 ### <a id="properties-serialnumber"/>**SerialNumber**
 
@@ -123,7 +123,7 @@ public string SerialNumber { get; }
 
 #### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+[String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 
 ### <a id="properties-subclass"/>**SubClass**
 
@@ -135,7 +135,7 @@ public byte SubClass { get; }
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 
 ### <a id="properties-vid"/>**VID**
 
@@ -147,7 +147,7 @@ public int VID { get; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 
 ## Methods
 
@@ -159,4 +159,4 @@ public string ToString()
 
 #### Returns
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)
+[String](https://learn.microsoft.com/dotnet/api/system.string)

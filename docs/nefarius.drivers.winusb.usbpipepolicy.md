@@ -8,7 +8,7 @@ Describes the policy for a specific USB pipe
 public sealed class USBPipePolicy
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBPipePolicy](./nefarius.drivers.winusb.usbpipepolicy.md)
+Inheritance [Object](https://learn.microsoft.com/dotnet/api/system.object) → [USBPipePolicy](./nefarius.drivers.winusb.usbpipepolicy.md)
 
 ## Properties
 
@@ -23,7 +23,7 @@ public bool AllowPartialReads { get; set; }
 
 #### Property Value
 
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+[Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>
 
 ### <a id="properties-autoclearstall"/>**AutoClearStall**
 
@@ -37,7 +37,7 @@ public bool AutoClearStall { get; set; }
 
 #### Property Value
 
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+[Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>
 
 ### <a id="properties-autoflush"/>**AutoFlush**
 
@@ -50,7 +50,7 @@ public bool AutoFlush { get; set; }
 
 #### Property Value
 
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+[Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>
 
 ### <a id="properties-ignoreshortpackets"/>**IgnoreShortPackets**
 
@@ -64,7 +64,7 @@ public bool IgnoreShortPackets { get; set; }
 
 #### Property Value
 
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+[Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>
 
 ### <a id="properties-maximumpacketsize"/>**MaximumPacketSize**
 
@@ -76,7 +76,7 @@ public int MaximumPacketSize { get; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 
 ### <a id="properties-pipetransfertimeout"/>**PipeTransferTimeout**
 
@@ -90,7 +90,7 @@ public int PipeTransferTimeout { get; set; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 
 ### <a id="properties-rawio"/>**RawIO**
 
@@ -107,7 +107,7 @@ public bool RawIO { get; set; }
 
 #### Property Value
 
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+[Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>
 
 ### <a id="properties-shortpacketterminate"/>**ShortPacketTerminate**
 
@@ -121,4 +121,4 @@ public bool ShortPacketTerminate { get; set; }
 
 #### Property Value
 
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+[Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>

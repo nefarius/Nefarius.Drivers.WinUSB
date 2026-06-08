@@ -10,7 +10,7 @@ Gives information about a device. This information is retrieved using the setup 
 public sealed class USBDeviceInfo
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBDeviceInfo](./nefarius.drivers.winusb.usbdeviceinfo.md)
+Inheritance [Object](https://learn.microsoft.com/dotnet/api/system.object) → [USBDeviceInfo](./nefarius.drivers.winusb.usbdeviceinfo.md)
 
 ## Properties
 
@@ -24,7 +24,7 @@ public string DeviceDescription { get; }
 
 #### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+[String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 
 ### <a id="properties-devicepath"/>**DevicePath**
 
@@ -36,7 +36,7 @@ public string DevicePath { get; }
 
 #### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+[String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 
 ### <a id="properties-manufacturer"/>**Manufacturer**
 
@@ -48,7 +48,7 @@ public string Manufacturer { get; }
 
 #### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+[String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 
 ### <a id="properties-pid"/>**PID**
 
@@ -60,7 +60,7 @@ public int PID { get; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 
 ### <a id="properties-vid"/>**VID**
 
@@ -72,7 +72,7 @@ public int VID { get; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 
 ## Methods
 
@@ -84,4 +84,4 @@ public string ToString()
 
 #### Returns
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)
+[String](https://learn.microsoft.com/dotnet/api/system.string)

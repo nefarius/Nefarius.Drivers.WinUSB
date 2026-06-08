@@ -8,7 +8,7 @@ Represents a single USB interface from a USB device
 public sealed class USBInterface
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBInterface](./nefarius.drivers.winusb.usbinterface.md)
+Inheritance [Object](https://learn.microsoft.com/dotnet/api/system.object) → [USBInterface](./nefarius.drivers.winusb.usbinterface.md)
 
 ## Properties
 
@@ -22,7 +22,7 @@ public byte AlternateSetting { get; set; }
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 
 ### <a id="properties-baseclass"/>**BaseClass**
 
@@ -50,7 +50,7 @@ public byte ClassValue { get; }
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 
 ### <a id="properties-device"/>**Device**
 
@@ -86,7 +86,7 @@ public int Number { get; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 
 ### <a id="properties-outpipe"/>**OutPipe**
 
@@ -122,7 +122,7 @@ public byte Protocol { get; }
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 
 ### <a id="properties-subclass"/>**SubClass**
 
@@ -134,4 +134,4 @@ public byte SubClass { get; }
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>

@@ -8,7 +8,7 @@ Describes the power policy for a USB device
 public sealed class USBPowerPolicy
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBPowerPolicy](./nefarius.drivers.winusb.usbpowerpolicy.md)
+Inheritance [Object](https://learn.microsoft.com/dotnet/api/system.object) → [USBPowerPolicy](./nefarius.drivers.winusb.usbpowerpolicy.md)
 
 ## Properties
 
@@ -24,7 +24,7 @@ public bool AutoSuspend { get; set; }
 
 #### Property Value
 
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+[Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>
 
 ### <a id="properties-suspenddelay"/>**SuspendDelay**
 
@@ -36,4 +36,4 @@ public int SuspendDelay { get; set; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>

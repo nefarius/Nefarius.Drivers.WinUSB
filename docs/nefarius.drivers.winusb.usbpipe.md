@@ -9,7 +9,7 @@ UsbPipe represents a single pipe on a WinUSB device. A pipe is connected
 public sealed class USBPipe
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBPipe](./nefarius.drivers.winusb.usbpipe.md)
+Inheritance [Object](https://learn.microsoft.com/dotnet/api/system.object) → [USBPipe](./nefarius.drivers.winusb.usbpipe.md)
 
 ## Properties
 
@@ -23,7 +23,7 @@ public byte Address { get; }
 
 #### Property Value
 
-[Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+[Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 
 ### <a id="properties-device"/>**Device**
 
@@ -59,7 +59,7 @@ public bool IsIn { get; }
 
 #### Property Value
 
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+[Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>
 
 ### <a id="properties-isout"/>**IsOut**
 
@@ -71,7 +71,7 @@ public bool IsOut { get; }
 
 #### Property Value
 
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+[Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>
 
 ### <a id="properties-maximumpacketsize"/>**MaximumPacketSize**
 
@@ -83,7 +83,7 @@ public int MaximumPacketSize { get; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 
 ### <a id="properties-policy"/>**Policy**
 
@@ -139,38 +139,38 @@ public IAsyncResult BeginRead(Byte[] buffer, int offset, int length, AsyncCallba
 
 #### Parameters
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 Buffer that will receive the data read from the pipe.
 
-`offset` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`offset` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Byte offset within the buffer at which to begin writing the data received.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer.
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the operation is complete. Can be null
  if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous operation, which could still be pending.
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous operation, which could still be pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBPipe.EndRead(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endreadiasyncresult) to retrieve the result of the operation. For every call to this method
  a matching call to
  [USBPipe.EndRead(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endreadiasyncresult) must be made. When `userCallback` specifies a callback function, this
  function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-beginwrite"/>**BeginWrite(Byte[], Int32, Int32, AsyncCallback, Object)**
@@ -183,38 +183,38 @@ public IAsyncResult BeginWrite(Byte[] buffer, int offset, int length, AsyncCallb
 
 #### Parameters
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 Buffer that contains the data to write to the pipe.
 
-`offset` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`offset` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Byte offset within the buffer from which to begin writing.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer.
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the operation is complete. Can be null
  if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous operation, which could still be pending.
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous operation, which could still be pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBPipe.EndWrite(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endwriteiasyncresult) to retrieve the result of the operation. For every call to this
  method a matching call to
  [USBPipe.EndWrite(IAsyncResult)](./nefarius.drivers.winusb.usbpipe.md#endwriteiasyncresult) must be made. When `userCallback` specifies a callback function, this
  function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-endread"/>**EndRead(IAsyncResult)**
@@ -227,8 +227,8 @@ public int EndRead(IAsyncResult asyncResult)
 
 #### Parameters
 
-`asyncResult` [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)<br>
-The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous operation,
+`asyncResult` [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)<br>
+The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous operation,
  as returned by [USBPipe.BeginRead(Byte[], Int32, Int32, AsyncCallback, Object)](./nefarius.drivers.winusb.usbpipe.md#beginreadbyte-int32-int32-asynccallback-object).
 
 #### Returns
@@ -255,8 +255,8 @@ public int EndWrite(IAsyncResult asyncResult)
 
 #### Parameters
 
-`asyncResult` [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)<br>
-The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous operation,
+`asyncResult` [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)<br>
+The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous operation,
  as returned by [USBPipe.BeginWrite(Byte[], Int32, Int32, AsyncCallback, Object)](./nefarius.drivers.winusb.usbpipe.md#beginwritebyte-int32-int32-asynccallback-object).
 
 #### Returns
@@ -291,7 +291,7 @@ public int Read(Span<Byte> buffer)
 
 #### Parameters
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [Span](https://learn.microsoft.com/dotnet/api/system.span-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 The buffer to read data into. The maximum number of bytes that will be read is specified by the
  length of the buffer.
 
@@ -309,13 +309,13 @@ public int Read(Span<Byte> buffer, int offset, int length)
 
 #### Parameters
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [Span](https://learn.microsoft.com/dotnet/api/system.span-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 The buffer to read data into.
 
-`offset` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`offset` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The byte offset in `buffer` from which to begin writing data read from the pipe.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The maximum number of bytes to read, starting at offset
 
 #### Returns
@@ -332,13 +332,13 @@ public Task<Int32> ReadAsync(Byte[] buffer, int offset, int length)
 
 #### Parameters
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 Buffer that will receive the data read from the pipe.
 
-`offset` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`offset` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Byte offset within the buffer at which to begin writing the data received.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer.
 
 #### Returns
@@ -367,7 +367,7 @@ public void Write(ReadOnlySpan<Byte> buffer)
 
 #### Parameters
 
-`buffer` [ReadOnlySpan&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.readonlyspan-1)<br>
+`buffer` [ReadOnlySpan](https://learn.microsoft.com/dotnet/api/system.readonlyspan-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 The buffer to write data from. The complete buffer will be written to the device.
 
 ### <a id="methods-write"/>**Write(ReadOnlySpan&lt;Byte&gt;, Int32, Int32)**
@@ -380,13 +380,13 @@ public void Write(ReadOnlySpan<Byte> buffer, int offset, int length)
 
 #### Parameters
 
-`buffer` [ReadOnlySpan&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.readonlyspan-1)<br>
+`buffer` [ReadOnlySpan](https://learn.microsoft.com/dotnet/api/system.readonlyspan-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 The buffer to write data from.
 
-`offset` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`offset` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The byte offset in `buffer` from which to begin writing.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The number of bytes to write, starting at offset
 
 ### <a id="methods-writeasync"/>**WriteAsync(Byte[], Int32, Int32)**
@@ -399,13 +399,13 @@ public Task<Int32> WriteAsync(Byte[] buffer, int offset, int length)
 
 #### Parameters
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 Buffer that will receive the data read from the pipe.
 
-`offset` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`offset` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Byte offset within the buffer at which to begin writing the data received.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer.
 
 #### Returns

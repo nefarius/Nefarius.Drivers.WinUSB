@@ -8,8 +8,8 @@ The UsbDevice class represents a single WinUSB device.
 public class USBDevice : System.IDisposable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBDevice](./nefarius.drivers.winusb.usbdevice.md)<br>
-Implements [IDisposable](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable)
+Inheritance [Object](https://learn.microsoft.com/dotnet/api/system.object) → [USBDevice](./nefarius.drivers.winusb.usbdevice.md)<br>
+Implements [IDisposable](https://learn.microsoft.com/dotnet/api/system.idisposable)
 
 ## Properties
 
@@ -25,7 +25,7 @@ public int ControlPipeTimeout { get; set; }
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+[Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 
 ### <a id="properties-descriptor"/>**Descriptor**
 
@@ -100,7 +100,7 @@ public USBDevice(string devicePathName)
 
 #### Parameters
 
-`devicePathName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+`devicePathName` [String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 Device path name of the USB device to create
 
 ## Methods
@@ -117,52 +117,52 @@ public IAsyncResult BeginControlIn(byte requestType, byte request, int value, in
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the IN direction (highest bit
  set).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The buffer that will receive the data transferred.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
  `buffer`. The setup packet's length member will be set to this length.
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
  be null if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
  pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
  [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-begincontrolin"/>**BeginControlIn(Byte, Byte, Int32, Int32, Byte[], AsyncCallback, Object)**
@@ -177,49 +177,49 @@ public IAsyncResult BeginControlIn(byte requestType, byte request, int value, in
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the IN direction (highest bit
  set).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The buffer that will receive the data transferred. The setup packet's length member will be set to
  the length of this buffer.
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
  be null if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
  pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
  [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-begincontrolin"/>**BeginControlIn(Byte, Byte, Int32, Int32, AsyncCallback, Object)**
@@ -235,45 +235,45 @@ public IAsyncResult BeginControlIn(byte requestType, byte request, int value, in
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the IN direction (highest bit
  set).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
  be null if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
  pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
  [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-begincontrolout"/>**BeginControlOut(Byte, Byte, Int32, Int32, Byte[], Int32, AsyncCallback, Object)**
@@ -288,52 +288,52 @@ public IAsyncResult BeginControlOut(byte requestType, byte request, int value, i
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the OUT direction (highest bit
  cleared).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The buffer that contains the data to be transferred.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
  `buffer`. The setup packet's length member will be set to this length.
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
  be null if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
  pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
  [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-begincontrolout"/>**BeginControlOut(Byte, Byte, Int32, Int32, Byte[], AsyncCallback, Object)**
@@ -348,49 +348,49 @@ public IAsyncResult BeginControlOut(byte requestType, byte request, int value, i
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the OUT direction (highest bit
  cleared).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The buffer that contains the data to be transferred. The setup packet's length member will be set
  to the length of this buffer.
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
  be null if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
  pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
  [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-begincontrolout"/>**BeginControlOut(Byte, Byte, Int32, Int32, AsyncCallback, Object)**
@@ -406,45 +406,45 @@ public IAsyncResult BeginControlOut(byte requestType, byte request, int value, i
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the OUT direction (highest bit
  cleared).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
  be null if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
  pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
  [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-begincontroltransfer"/>**BeginControlTransfer(Byte, Byte, Int32, Int32, Byte[], Int32, AsyncCallback, Object)**
@@ -465,55 +465,55 @@ public IAsyncResult BeginControlTransfer(byte requestType, byte request, int val
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The data to transfer in the data stage of the control. When the transfer is in the IN direction the data received
  will be
  written to this buffer. For an OUT direction transfer the contents of the buffer are written sent through the pipe.
  Note: This buffer is not allowed
  to change for the duration of the asynchronous operation.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
  `buffer`. The setup packet's length member will be set to this length.
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
  be null if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
  pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
  [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-begincontroltransfer"/>**BeginControlTransfer(Byte, Byte, Int32, Int32, Byte[], AsyncCallback, Object)**
@@ -534,21 +534,21 @@ public IAsyncResult BeginControlTransfer(byte requestType, byte request, int val
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The data to transfer in the data stage of the control. When the transfer is in the IN direction the data received
  will be
  written to this buffer. For an OUT direction transfer the contents of the buffer are written sent through the pipe.
@@ -556,30 +556,30 @@ The data to transfer in the data stage of the control. When the transfer is in t
  be set to the length of this buffer. Note: This buffer is not allowed to change for the duration of the
  asynchronous operation.
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
  be null if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
  pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
  [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-begincontroltransfer"/>**BeginControlTransfer(Byte, Byte, Int32, Int32, AsyncCallback, Object)**
@@ -600,44 +600,44 @@ public IAsyncResult BeginControlTransfer(byte requestType, byte request, int val
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`userCallback` [AsyncCallback](https://docs.microsoft.com/en-us/dotnet/api/system.asynccallback)<br>
+`userCallback` [AsyncCallback](https://learn.microsoft.com/dotnet/api/system.asynccallback)<br>
 An optional asynchronous callback, to be called when the control transfer is complete. Can
  be null if no callback is required.
 
-`stateObject` [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)<br>
+`stateObject` [Object](https://learn.microsoft.com/dotnet/api/system.object)<br>
 A user-provided object that distinguishes this particular asynchronous operation. Can be null
  if not required.
 
 #### Returns
 
-An [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
+An [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous control transfer, which could still be
  pending.
 
 **Remarks:**
 
-This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
+This method always completes immediately even if the operation is still pending. The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
  object returned represents the operation
  and must be passed to [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) to retrieve the result of the operation. For every call to
  this method a matching call to
  [USBDevice.EndControlTransfer(IAsyncResult)](./nefarius.drivers.winusb.usbdevice.md#endcontroltransferiasyncresult) must be made. When `userCallback` specifies a callback
  function, this function will be called when the operation is completed. The optional
  `stateObject` parameter can be used to pass user-defined information to this callback or the
- [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult). The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)
- also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
+ [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult). The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)
+ also provides an event handle ([IAsyncResult.AsyncWaitHandle](https://learn.microsoft.com/dotnet/api/system.iasyncresult.asyncwaithandle)) that will be triggered when the
  operation is complete as well.
 
 ### <a id="methods-controlin"/>**ControlIn(Byte, Byte, Int32, Int32, Int32)**
@@ -653,22 +653,22 @@ public Byte[] ControlIn(byte requestType, byte request, int value, int index, in
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the IN direction (highest bit
  set).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. A buffer will be created with this length and the length member of the setup packet
  will be set to this length.
 
@@ -695,25 +695,25 @@ public int ControlIn(byte requestType, byte request, int value, int index, Span<
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the IN direction (highest bit
  set).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [Span](https://learn.microsoft.com/dotnet/api/system.span-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 The buffer that will receive the data transferred.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. The length member of the setup packet will be set to this length. The buffer
  specified
  by the `buffer` parameter should have at least this length.
@@ -736,22 +736,22 @@ public int ControlIn(byte requestType, byte request, int value, int index, Span<
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the IN direction (highest bit
  set).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [Span](https://learn.microsoft.com/dotnet/api/system.span-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 The buffer that will receive the data transferred. The length of this buffer will be the number of
  bytes transferred.
 
@@ -771,18 +771,18 @@ public void ControlIn(byte requestType, byte request, int value, int index)
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the IN direction (highest bit
  set).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
@@ -798,24 +798,24 @@ public Task<Int32> ControlInAsync(byte requestType, byte request, int value, int
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The buffer that will receive the data transferred.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
  `buffer`. The setup packet's length member will be set to this length.
 
@@ -839,21 +839,21 @@ public Task<Int32> ControlInAsync(byte requestType, byte request, int value, int
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The buffer that will receive the data transferred.
 
 #### Returns
@@ -876,17 +876,17 @@ public Task<Int32> ControlInAsync(byte requestType, byte request, int value, int
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
@@ -910,25 +910,25 @@ public void ControlOut(byte requestType, byte request, int value, int index, Spa
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the OUT direction (highest bit
  cleared).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [Span](https://learn.microsoft.com/dotnet/api/system.span-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 A buffer containing the data to transfer in the data stage.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. Only the first `length` bytes of `buffer` will
  be transferred.
  The setup packet's length parameter is set to this length.
@@ -945,22 +945,22 @@ public void ControlOut(byte requestType, byte request, int value, int index, Spa
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the OUT direction (highest bit
  cleared).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [Span](https://learn.microsoft.com/dotnet/api/system.span-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 A buffer containing the data to transfer in the data stage. The complete buffer is transferred. The setup packet's
  length
  parameter is set to the length of this buffer.
@@ -977,18 +977,18 @@ public void ControlOut(byte requestType, byte request, int value, int index)
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type. The request type must specify the OUT direction (highest bit
  cleared).
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
@@ -1004,24 +1004,24 @@ public Task<Int32> ControlOutAsync(byte requestType, byte request, int value, in
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The buffer that contains the data to be transferred.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
  `buffer`. The setup packet's length member will be set to this length.
 
@@ -1045,21 +1045,21 @@ public Task<Int32> ControlOutAsync(byte requestType, byte request, int value, in
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The buffer that contains the data to be transferred.
 
 #### Returns
@@ -1082,17 +1082,17 @@ public Task<Int32> ControlOutAsync(byte requestType, byte request, int value, in
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
@@ -1122,26 +1122,26 @@ public int ControlTransfer(byte requestType, byte request, int value, int index,
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [Span](https://learn.microsoft.com/dotnet/api/system.span-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 The data to transfer in the data stage of the control. When the transfer is in the IN direction the data received
  will be
  written to this buffer. For an OUT direction transfer the contents of the buffer are written sent through the pipe.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of `buffer`.
  The setup packet's length member will be set to this length.
 
@@ -1166,21 +1166,21 @@ public int ControlTransfer(byte requestType, byte request, int value, int index,
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Span&lt;Byte&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.span-1)<br>
+`buffer` [Span](https://learn.microsoft.com/dotnet/api/system.span-1)<[Byte](https://learn.microsoft.com/dotnet/api/system.byte)><br>
 The data to transfer in the data stage of the control. When the transfer is in the IN direction the data received
  will be
  written to this buffer. For an OUT direction transfer the contents of the buffer are written sent through the pipe.
@@ -1209,17 +1209,17 @@ public void ControlTransfer(byte requestType, byte request, int value, int index
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
@@ -1240,28 +1240,28 @@ public Task<Int32> ControlTransferAsync(byte requestType, byte request, int valu
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The data to transfer in the data stage of the control. When the transfer is in the IN direction the data received
  will be
  written to this buffer. For an OUT direction transfer the contents of the buffer are written sent through the pipe.
  Note: This buffer is not allowed
  to change for the duration of the asynchronous operation.
 
-`length` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`length` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 Length of the data to transfer. Must be equal to or less than the length of
  `buffer`. The setup packet's length member will be set to this length.
 
@@ -1290,21 +1290,21 @@ public Task<Int32> ControlTransferAsync(byte requestType, byte request, int valu
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
-`buffer` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`buffer` [Byte[]](https://learn.microsoft.com/dotnet/api/system.byte[])<br>
 The data to transfer in the data stage of the control. When the transfer is in the IN direction the data received
  will be
  written to this buffer. For an OUT direction transfer the contents of the buffer are written sent through the pipe.
@@ -1336,17 +1336,17 @@ public Task<Int32> ControlTransferAsync(byte requestType, byte request, int valu
 
 #### Parameters
 
-`requestType` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`requestType` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet request type.
 
-`request` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`request` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The setup packet device request.
 
-`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`value` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The value member in the setup packet. Its meaning depends on the request. Value should be between
  zero and 65535 (0xFFFF).
 
-`index` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`index` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 The index member in the setup packet. Its meaning depends on the request. Index should be between
  zero and 65535 (0xFFFF).
 
@@ -1368,7 +1368,7 @@ protected void Dispose(bool disposing)
 
 #### Parameters
 
-`disposing` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`disposing` [Boolean](https://learn.microsoft.com/dotnet/api/system.boolean)<br>
 Indicates whether Dispose was called manually (true) or by
  the garbage collector (false) via the destructor.
 
@@ -1393,8 +1393,8 @@ public int EndControlTransfer(IAsyncResult asyncResult)
 
 #### Parameters
 
-`asyncResult` [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult)<br>
-The [IAsyncResult](https://docs.microsoft.com/en-us/dotnet/api/system.iasyncresult) object representing the asynchronous operation,
+`asyncResult` [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult)<br>
+The [IAsyncResult](https://learn.microsoft.com/dotnet/api/system.iasyncresult) object representing the asynchronous operation,
  as returned by one of the ControlIn, ControlOut or ControlTransfer methods.
 
 #### Returns
@@ -1431,7 +1431,7 @@ public static USBDeviceInfo[] GetDevices(string guidString)
 
 #### Parameters
 
-`guidString` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+`guidString` [String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 The GUID string that the device should match.
  The format of this string may be any format accepted by the constructor
  of the System.Guid class
@@ -1452,7 +1452,7 @@ public static USBDeviceInfo[] GetDevices(Guid guid)
 
 #### Parameters
 
-`guid` [Guid](https://docs.microsoft.com/en-us/dotnet/api/system.guid)<br>
+`guid` [Guid](https://learn.microsoft.com/dotnet/api/system.guid)<br>
 The GUID that the device should match.
 
 #### Returns
@@ -1472,7 +1472,7 @@ public static USBDevice GetSingleDevice(Guid guid)
 
 #### Parameters
 
-`guid` [Guid](https://docs.microsoft.com/en-us/dotnet/api/system.guid)<br>
+`guid` [Guid](https://learn.microsoft.com/dotnet/api/system.guid)<br>
 The GUID that the device should match.
 
 #### Returns
@@ -1491,7 +1491,7 @@ public static USBDevice GetSingleDevice(string guidString)
 
 #### Parameters
 
-`guidString` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+`guidString` [String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 The GUID string that the device should match.
 
 #### Returns
@@ -1509,7 +1509,7 @@ public static USBDevice GetSingleDeviceByPath(string path)
 
 #### Parameters
 
-`path` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+`path` [String](https://learn.microsoft.com/dotnet/api/system.string)<br>
 The device path (symbolic link) to open.
 
 #### Returns
@@ -1526,11 +1526,11 @@ public string GetStringDescriptor(byte index, int languageId)
 
 #### Parameters
 
-`index` [Byte](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
+`index` [Byte](https://learn.microsoft.com/dotnet/api/system.byte)<br>
 The descriptor index. For an explanation of the descriptor index, see the Universal Serial Bus
- specification ().
+ specification ([www.usb.org](www.usb.org)).
 
-`languageId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`languageId` [Int32](https://learn.microsoft.com/dotnet/api/system.int32)<br>
 A value that specifies the language identifier. languageID should be between zero and 65535
  (0xFFFF).
 
@@ -1548,7 +1548,7 @@ public Int32[] GetSupportedLanguageIDs()
 
 #### Returns
 
-[Int32[]](https://docs.microsoft.com/en-us/dotnet/api/system.int32)
+[Int32[]](https://learn.microsoft.com/dotnet/api/system.int32[])
 
 ### <a id="methods-tostring"/>**ToString()**
 
@@ -1558,4 +1558,4 @@ public string ToString()
 
 #### Returns
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)
+[String](https://learn.microsoft.com/dotnet/api/system.string)

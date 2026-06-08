@@ -5,11 +5,12 @@ Namespace: Nefarius.Drivers.WinUSB
 Collection of UsbPipe objects
 
 ```csharp
-public sealed class USBPipeCollection : System.Collections.Generic.IEnumerable`1[[Nefarius.Drivers.WinUSB.USBPipe, Nefarius.Drivers.WinUSB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Collections.IEnumerable
+public sealed class USBPipeCollection : System.Collections.Generic.IEnumerable<Nefarius.Drivers.WinUSB.USBPipe>, System.Collections.IEnumerable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [USBPipeCollection](./nefarius.drivers.winusb.usbpipecollection.md)<br>
-Implements [IEnumerable&lt;USBPipe&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1), [IEnumerable](https://docs.microsoft.com/en-us/dotnet/api/system.collections.ienumerable)
+Inheritance [Object](https://learn.microsoft.com/dotnet/api/system.object) → [USBPipeCollection](./nefarius.drivers.winusb.usbpipecollection.md)<br>
+Implements [IEnumerable](https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1)<[USBPipe](./nefarius.drivers.winusb.usbpipe.md)>, [IEnumerable](https://learn.microsoft.com/dotnet/api/system.collections.ienumerable)<br>
+Attributes [DefaultMemberAttribute](https://learn.microsoft.com/dotnet/api/system.reflection.defaultmemberattribute)
 
 ## Properties
 
