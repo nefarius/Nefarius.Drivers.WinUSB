@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="5.2.0" />
+      <PackageReference Include="Nefarius.Utilities.DeviceManagement" Version="6.0.0" />
     </ItemGroup>
 
 </Project>
